@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--
+      보안 정책을 HTML 안에 넣어둡니다.
+      Netlify 는 netlify.toml, Cloudflare Pages 는 _headers 로 헤더를 줄 수 있지만
+      Cloud Run(구글 AI Studio 배포)처럼 헤더를 설정할 수 없는 곳도 있습니다.
+      meta 로 넣어두면 어디에 올리든 이 정책은 따라갑니다.
+      (frame-ancestors 는 meta 로 전달되지 않으므로 헤더 쪽에만 둡니다)
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <script>
+      /* 통합 전에 사주 앱 주소로 공유된 결과 링크(?d=...&c=...&g=...)를 /saju/ 로 넘겨줍니다.
+         이게 없으면 카카오톡 등으로 이미 퍼진 결과 링크가 결과 대신 홈으로 떨어집니다.
+         React 가 뜨기 전에 실행되도록 head 최상단에 둡니다. */
+      (function () {
+        var q = location.search;
+        if (!q) return;
+        try {
+          var p = new URLSearchParams(q);
+          if (p.has('d') && p.has('c')) {
+            location.replace('/saju/' + q + location.hash);
+          }
+        } catch (e) {}
+      })();
+    </script>
+
+    <title>UNVEIL | 사주오행·별자리·탄생석으로 찾는 나의 원석</title>
+    <meta
+      name="description"
+      content="사주오행·별자리·탄생석으로 나와 연결되는 의미와 원석을 찾고, 현재 판매 중인 원석팔찌 실물을 확인해보세요."
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="UNVEIL" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:title" content="UNVEIL | 사주오행·별자리·탄생석으로 찾는 나의 원석" />
+    <meta
+      property="og:description"
+      content="사주오행·별자리·탄생석으로 나와 연결되는 의미와 원석을 찾고, 현재 판매 중인 원석팔찌 실물을 확인해보세요."
+    />
+    <!-- 상대 경로로 두면 배포 도메인이 정해지지 않아도 정상 동작합니다. -->
+    <meta property="og:image" content="/images/hero-bracelet.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta name="theme-color" content="#07111F" />
+    <link rel="manifest" href="/manifest.json" />
+    <!-- 탭 아이콘. SVG 를 지원하는 브라우저는 favicon.svg 를, 나머지는 .ico 를 씁니다. -->
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="UNVEIL" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

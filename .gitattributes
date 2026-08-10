@@ -1,0 +1,9 @@
+# 줄바꿈을 저장소에서는 LF 로 통일합니다.
+# 윈도우에서 작업해도 리눅스 빌드 서버(Cloud Run, Netlify)와 diff 가 어긋나지 않습니다.
+* text=auto eol=lf
+
+# 이미지·아이콘은 바이너리이므로 손대지 않습니다.
+*.png binary
+*.webp binary
+*.ico binary
+*.jpg binary

@@ -1,0 +1,33 @@
+# 정적 호스팅용 HTTP 헤더 설정
+#
+# 이 파일을 읽는 곳 : Cloudflare Pages, Netlify
+# 이 파일을 무시하는 곳 : Cloud Run (구글 AI Studio 배포)
+#
+# Cloud Run 에서는 헤더를 설정할 수 없으므로, 핵심 정책인 CSP 는
+# index.html 과 saju/zodiac/birthstone 의 <head> 안에 meta 태그로도 넣어두었습니다.
+# 그래서 어디에 올려도 CSP 는 적용되고, 이 파일을 읽는 곳에서는 아래 항목이 더 얹힙니다.
+#
+# 나중에 Cloudflare Pages 로 옮기면 별도 작업 없이 그대로 동작합니다.
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Cross-Origin-Opener-Policy: same-origin
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; form-action 'self'
+
+# 서비스워커와 매니페스트는 캐시하면 업데이트가 안 걸립니다.
+/sw.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/manifest.json
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Vite 가 만드는 파일명에는 해시가 붙으므로 영구 캐시가 안전합니다.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/images/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800

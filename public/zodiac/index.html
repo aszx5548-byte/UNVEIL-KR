@@ -1,0 +1,923 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 호스팅이 헤더를 못 주는 곳(Cloud Run 등)에서도 정책이 적용되도록 HTML 안에 둡니다. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+</head><body>
+<title>별자리 운세 | UNVEIL</title>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0b0912">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="UNVEIL">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+  :root{
+    --ink:#0b0912;
+    --surface:#161220;
+    --surface-2:#1e1830;
+    --line:#332b48;
+    --gold-line: rgba(200,162,74,0.28);
+    --text:#ece3d4;
+    --text-muted:#9d93b0;
+    --gold:#c8a24a;
+    --gold-bright:#e9c876;
+    --gold-soft: rgba(200,162,74,0.14);
+    --serif:"Noto Serif KR","Nanum Myeongjo","AppleMyungjo","Batang","BatangChe",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    color-scheme: dark;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--ink);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    min-height:100vh;
+  }
+  #stars{
+    position:fixed; inset:0; width:100%; height:100%;
+    z-index:0; pointer-events:none;
+  }
+  .veil{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(200,162,74,0.10), transparent 60%),
+      radial-gradient(ellipse 80% 60% at 50% 100%, rgba(95,90,160,0.12), transparent 65%);
+  }
+  .app{
+    position:relative; z-index:1;
+    max-width:640px;
+    margin:0 auto;
+    padding:56px 20px 80px;
+  }
+  /* ---------- Header ---------- */
+  .hero{ text-align:center; margin-bottom:40px; }
+  .mark{ width:40px; height:40px; margin:0 auto 18px; opacity:0.9; }
+  .eyebrow{
+    font-size:11px; letter-spacing:0.22em; text-transform:uppercase;
+    color:var(--gold); font-weight:600; margin-bottom:14px;
+  }
+  .tagline{
+    color:var(--text-muted); font-size:15px; font-weight:400; margin:0;
+    text-wrap:balance;
+  }
+  .install-btn{
+    display:inline-flex; align-items:center; gap:8px;
+    background:transparent; border:1px solid var(--gold-line);
+    color:var(--text-muted); font-family:var(--sans); font-size:12.5px;
+    padding:9px 16px; border-radius:999px; cursor:pointer;
+    margin-top:18px;
+    transition:border-color .15s, color .15s, background .15s;
+  }
+  .install-btn svg{ width:15px; height:15px; }
+  .install-btn:hover, .install-btn:focus-visible{ border-color:var(--gold); color:var(--gold-bright); background:var(--gold-soft); }
+  .install-btn:disabled{ opacity:0.6; cursor:default; }
+  .install-ios-tip{
+    max-width:320px; margin:12px auto 0; padding:12px 16px;
+    border:1px solid var(--gold-line); border-radius:12px;
+    background:rgba(255,255,255,0.02); color:var(--text-muted);
+    font-size:12.5px; line-height:1.7; text-align:left;
+  }
+  /* ---------- Panels ---------- */
+  .panel{
+    background:linear-gradient(180deg,var(--surface),var(--surface-2));
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:28px 24px;
+    position:relative;
+    box-shadow:0 20px 60px -30px rgba(0,0,0,0.7);
+  }
+  .panel::before{
+    content:""; position:absolute; left:24px; right:24px; top:0; height:1px;
+    background:linear-gradient(90deg,transparent,var(--gold-line),transparent);
+  }
+  .panel + .panel{ margin-top:18px; }
+  .section-label{
+    font-family:var(--serif); font-weight:400;
+    font-size:13px; letter-spacing:0.14em;
+    color:var(--gold-bright);
+    display:flex; align-items:center; gap:10px;
+    margin:0 0 18px;
+  }
+  .section-label::before, .section-label::after{
+    content:""; height:1px; flex:1; background:var(--line);
+  }
+  /* ---------- Form ---------- */
+  .field{ margin-bottom:0; }
+  .field label{
+    display:block; font-size:11px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--text-muted); margin-bottom:8px;
+  }
+  input.input{
+    width:100%; appearance:none;
+    background:rgba(255,255,255,0.03);
+    border:1px solid var(--line);
+    border-radius:10px;
+    color:var(--text);
+    font-family:var(--sans);
+    font-size:16px;
+    padding:12px 14px;
+    font-variant-numeric:tabular-nums;
+    letter-spacing:0.04em;
+  }
+  input.input:focus{ outline:2px solid var(--gold); outline-offset:1px; border-color:var(--gold); }
+  .field-hint{ font-size:12px; color:var(--text-muted); margin:8px 2px 0; font-variant-numeric:tabular-nums; }
+  .field-hint.error{ color:#d98066; }
+  .submit-btn{
+    width:100%; margin-top:22px;
+    background:linear-gradient(180deg,var(--gold-bright),var(--gold));
+    color:#241a08; border:none; border-radius:12px;
+    font-family:var(--serif); font-size:16px; font-weight:600; letter-spacing:0.04em;
+    padding:15px 0; cursor:pointer;
+    box-shadow:0 12px 28px -12px rgba(200,162,74,0.55);
+    transition:transform .15s, box-shadow .15s, filter .15s;
+  }
+  .submit-btn:hover{ filter:brightness(1.06); transform:translateY(-1px); }
+  .submit-btn:active{ transform:translateY(0); }
+  .submit-btn:focus-visible{ outline:2px solid var(--gold-bright); outline-offset:2px; }
+  .hint{ font-size:12px; color:var(--text-muted); margin-top:10px; text-align:center; }
+  /* ---------- Result ---------- */
+  #resultPanel{ display:none; opacity:0; transform:translateY(10px); transition:opacity .5s ease, transform .5s ease; }
+  #resultPanel.show{ display:block; opacity:1; transform:translateY(0); }
+  .result-caption{
+    text-align:center; color:var(--text-muted); font-size:13px;
+    margin:-8px 0 22px; font-variant-numeric:tabular-nums;
+  }
+  .zodiac-badge-wrap{ text-align:center; margin-bottom:6px; }
+  .zodiac-orb{ width:150px; height:110px; margin:0 auto 10px; }
+  .zodiac-orb svg{ width:100%; height:100%; overflow:visible; }
+  .zodiac-orb .tw{ animation:twinkle 2.2s ease-in-out infinite; }
+  @keyframes twinkle{ 0%,100%{ opacity:0.55; } 50%{ opacity:1; } }
+  @media (prefers-reduced-motion: reduce){ .zodiac-orb .tw{ animation:none; opacity:1; } }
+  .zodiac-name{ font-family:var(--serif); font-size:22px; color:var(--gold-bright); margin:0 0 4px; letter-spacing:0.02em; }
+  .zodiac-period{ font-size:13px; color:var(--text-muted); margin:0; font-variant-numeric:tabular-nums; }
+  .gemstones{ display:flex; flex-direction:column; gap:14px; }
+  .gem-intro{ text-align:center; color:var(--text-muted); font-size:12.5px; margin:-10px 0 4px; line-height:1.7; }
+  .gem-card{
+    position:relative;
+    background:rgba(255,255,255,0.025); border:1px solid var(--line);
+    border-radius:14px; padding:16px;
+  }
+  .stone-row{ display:flex; gap:16px; align-items:flex-start; }
+  .orb{ flex:none; width:68px; height:68px; margin-top:2px; border-radius:50%; }
+  .gem-tier{
+    display:inline-block; font-size:10px; font-weight:600; letter-spacing:0.04em;
+    padding:2px 9px; border-radius:999px; margin:0 0 6px; border:1px solid var(--line); color:var(--text-muted);
+  }
+  .gem-tier.tier-main{ border-color:var(--gold); color:var(--gold-bright); background:var(--gold-soft); }
+  .gem-tier.tier-premium{ border-color:#8f7fc4; color:#c3b6ea; background:rgba(143,127,196,0.14); }
+  .gem-name{ font-family:var(--serif); font-size:16px; color:var(--gold-bright); margin:0 0 6px; letter-spacing:0.02em; display:block; }
+  .gem-desc{ font-size:13.5px; color:var(--text-muted); margin:0; line-height:1.7; }
+  .fortune-personality{ font-size:14.5px; color:var(--text); line-height:1.85; margin:0 0 10px; }
+  .fortune-personality:last-child{ margin-bottom:0; }
+  .trait-tags{ display:flex; flex-wrap:wrap; gap:7px; margin:0 0 16px; }
+  .trait-tag{
+    font-size:11.5px; color:var(--gold-bright); border:1px solid var(--gold-line);
+    border-radius:999px; padding:4px 12px; background:var(--gold-soft);
+  }
+  .trait-list{ display:flex; flex-direction:column; gap:8px; margin-top:14px; }
+  .trait-item{
+    background:rgba(255,255,255,0.025); border:1px solid var(--line);
+    border-radius:12px; padding:12px 14px;
+  }
+  .trait-label{ font-family:var(--serif); font-size:12.5px; color:var(--gold-bright); margin:0 0 4px; }
+  .trait-text{ font-size:13px; color:var(--text-muted); line-height:1.6; margin:0; }
+  .fortune-list{ display:flex; flex-direction:column; gap:8px; }
+  .fortune-item{ background:rgba(255,255,255,0.025); border:1px solid var(--line); border-radius:12px; padding:12px 14px; }
+  .fortune-head{ display:flex; justify-content:space-between; align-items:center; gap:10px; margin:0 0 4px; }
+  .fortune-label{ font-family:var(--serif); font-size:13.5px; color:var(--gold-bright); }
+  .fortune-stars{ font-size:11px; color:var(--gold); letter-spacing:1px; flex:none; }
+  .fortune-text{ font-size:13px; color:var(--text-muted); line-height:1.6; margin:0; }
+  .bridge-link{ display:inline-block; font-size:13px; color:var(--gold-bright); text-decoration:none; border-bottom:1px solid var(--gold-line); padding-bottom:2px; }
+  .bridge-link:hover{ border-color:var(--gold); }
+  @media (prefers-reduced-motion: no-preference){ html{ scroll-behavior:smooth; } }
+  .cta-wrap{ text-align:center; margin-top:24px; }
+  .cta-btn{
+    display:inline-flex; align-items:center; gap:8px;
+    background:transparent; border:1px solid var(--gold);
+    color:var(--gold-bright); font-family:var(--serif); font-size:15px;
+    padding:13px 26px; border-radius:999px; cursor:pointer;
+    transition:background .15s, color .15s;
+  }
+  .cta-btn:hover{ background:var(--gold-soft); }
+  .cta-btn:focus-visible{ outline:2px solid var(--gold-bright); outline-offset:2px; }
+  .contact-box{ display:none; margin-top:16px; flex-direction:column; gap:10px; }
+  .contact-box.show{ display:flex; }
+  .contact-link{
+    display:flex; align-items:center; gap:12px; text-align:left;
+    color:var(--text); text-decoration:none;
+    border:1px solid var(--gold-line); border-radius:12px;
+    padding:11px 14px; background:rgba(255,255,255,0.02);
+    transition:background .15s, border-color .15s;
+  }
+  .contact-link:hover{ background:var(--gold-soft); border-color:var(--gold); }
+  .contact-link:focus-visible{ outline:2px solid var(--gold-bright); outline-offset:2px; }
+  .contact-icon{
+    flex:none; width:36px; height:36px; border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--gold-soft); color:var(--gold-bright);
+  }
+  .contact-icon svg{ width:18px; height:18px; }
+  .contact-icon-store{ background:rgba(3,199,90,0.14); color:#4fd881; }
+  .contact-text{ flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
+  .contact-label{ font-size:13.5px; color:var(--text); font-family:var(--serif); }
+  .contact-desc{ font-size:11.5px; color:var(--text-muted); line-height:1.5; }
+  .contact-right{ flex:none; display:flex; flex-direction:column; align-items:flex-end; gap:4px; max-width:104px; }
+  .contact-url-mini{
+    font-size:9.5px; color:var(--text-muted); opacity:0.75; font-variant-numeric:tabular-nums;
+    max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  .contact-arrow{ flex:none; color:var(--text-muted); font-size:14px; }
+  .reset-link{
+    display:block; text-align:center; margin-top:22px; color:var(--text-muted);
+    font-size:12.5px; text-decoration:underline; text-underline-offset:3px; cursor:pointer;
+    background:none; border:none; width:100%; font-family:var(--sans);
+  }
+  .reset-link:hover{ color:var(--gold-bright); }
+  footer.disclaimer{
+    margin-top:34px; padding-top:20px; border-top:1px solid var(--line);
+    text-align:center; color:var(--text-muted); font-size:11.5px; line-height:1.8;
+  }
+  @media (prefers-reduced-motion: reduce){
+    #resultPanel{ transition:none; }
+    .submit-btn{ transition:none; }
+  }
+  /* ===== 통합 사이트: 홈으로 돌아가기 ===== */
+  .home-link{
+    display:inline-flex; align-items:center; gap:7px;
+    margin:0 0 22px; padding:8px 15px 8px 11px;
+    border:1px solid var(--gold-line); border-radius:999px;
+    background:var(--gold-soft); color:var(--gold);
+    font-family:var(--sans); font-size:12px; font-weight:600;
+    letter-spacing:.14em; text-decoration:none; white-space:nowrap;
+    transition:opacity .2s ease, transform .2s ease;
+  }
+  .home-link:hover{ opacity:.78; transform:translateX(-2px); }
+  .home-link svg{ width:13px; height:13px; flex:none; }
+</style>
+
+<canvas id="stars"></canvas>
+<div class="veil"></div>
+
+<div class="app">
+  <a class="home-link" href="/">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
+    <span>UNVEIL 홈</span>
+  </a>
+  <header class="hero">
+    <svg class="mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M26 8a15 15 0 1 0 0 32 11.5 11.5 0 1 1 0-32Z" fill="#e9c876" opacity="0.95"/>
+      <path d="M38 10l1.6 4 4 1.6-4 1.6-1.6 4-1.6-4-4-1.6 4-1.6Z" fill="#c8a24a"/>
+    </svg>
+    <div class="eyebrow">ASTROLOGY · 별자리 운세 가이드</div>
+    <h1 class="tagline">태어난 별자리로 알아보는 나의 기질과 오늘의 운세</h1>
+    <button type="button" class="install-btn" id="installBtn" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 19h14"></path></svg>
+      <span>홈 화면에 추가하기</span>
+    </button>
+    <p class="install-ios-tip" id="installIosTip" hidden>
+      Safari 화면의 공유 아이콘(네모 안에 위쪽 화살표)을 누른 뒤 "홈 화면에 추가"를 선택해주세요.
+    </p>
+  </header>
+
+  <section class="panel" id="formPanel">
+    <h2 class="section-label">태어난 날을 알려주세요</h2>
+    <form id="zodiacForm">
+      <div class="field">
+        <label for="birthDateText">태어난 날 (양력 8자리)</label>
+        <input type="text" class="input" id="birthDateText" inputmode="numeric" autocomplete="off"
+          placeholder="예: 19970407" maxlength="10" />
+        <p class="field-hint" id="dateHint" aria-live="polite"></p>
+      </div>
+      <button type="submit" class="submit-btn">내 별자리 원석 찾기</button>
+      <p class="hint">입력한 정보는 이 브라우저 안에서만 계산되며 저장되지 않아요</p>
+    </form>
+  </section>
+
+  <section class="panel" id="resultPanel">
+    <p class="result-caption" id="resultCaption"></p>
+
+    <div class="zodiac-badge-wrap">
+      <div class="zodiac-orb" id="zodiacOrb"></div>
+      <p class="zodiac-name" id="zodiacName"></p>
+      <p class="zodiac-period" id="zodiacPeriod"></p>
+    </div>
+
+    <p style="text-align:center;margin:20px 0 4px;"><a href="#sec-gems" class="bridge-link" id="gemTeaserLink"></a></p>
+
+    <h2 class="section-label" style="margin-top:32px;">당신의 별자리 기질</h2>
+    <div id="personalityBlock"></div>
+
+    <h2 class="section-label" style="margin-top:32px;">오늘의 운세</h2>
+    <p class="result-caption" id="fortuneCaption"></p>
+    <div class="fortune-list" id="fortuneList"></div>
+
+    <h2 class="section-label" id="sec-gems" style="margin-top:32px;">그대의 별자리가 품은 원석</h2>
+    <p class="gem-intro" id="gemIntro"></p>
+    <div class="gemstones" id="gemstones"></div>
+
+    <div class="cta-wrap">
+      <button type="button" class="cta-btn" id="ctaBtn">나에게 맞는 원석 아이템 찾기 →</button>
+      <div class="contact-box" id="contactBox">
+        <a class="contact-link" href="https://smartstore.naver.com/unveil_store" target="_blank" rel="noopener noreferrer">
+          <span class="contact-icon contact-icon-store" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg></span>
+          <span class="contact-text">
+            <span class="contact-label">네이버 스마트스토어에서 구매하기</span>
+            <span class="contact-desc">추천받은 원석의 팔찌·목걸이 상품을 확인해보세요.</span>
+          </span>
+          <span class="contact-right">
+            <span class="contact-url-mini">smartstore.naver.com</span>
+            <span class="contact-arrow" aria-hidden="true">↗</span>
+          </span>
+        </a>
+        <a class="contact-link" href="https://litt.ly/unveil" target="_blank" rel="noopener noreferrer">
+          <span class="contact-icon contact-icon-link" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></span>
+          <span class="contact-text">
+            <span class="contact-label">원석 큐레이션 페이지 보기</span>
+            <span class="contact-desc">별자리별 원석의 의미와 선택 방법을 확인해보세요.</span>
+          </span>
+          <span class="contact-right">
+            <span class="contact-url-mini">litt.ly/unveil</span>
+            <span class="contact-arrow" aria-hidden="true">↗</span>
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <button type="button" class="reset-link" id="resetBtn">← 다시 찾아보기</button>
+  </section>
+
+  <footer class="disclaimer">
+    이 콘텐츠는 서양 점성술의 탄생석 전승과 상징적 의미를 참고용으로 재구성한 내용입니다.<br/>
+    원석의 가격·구성은 판매 시점과 옵션에 따라 달라질 수 있으며, 의학·재정적 판단의 근거로 사용하지 마세요.
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  if(document.documentElement.lang !== 'ko') document.documentElement.lang = 'ko';
+
+  /* ================= "홈 화면에 추가" 설치 버튼 ================= */
+  var deferredInstallPrompt = null;
+  function isStandaloneMode(){
+    return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+  }
+  function isIOSDevice(){
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  }
+  function isAndroidDevice(){
+    return /Android/i.test(navigator.userAgent);
+  }
+  window.addEventListener('beforeinstallprompt', function(e){
+    e.preventDefault();
+    deferredInstallPrompt = e;
+    if(!isAndroidDevice()) return;
+    var btn = document.getElementById('installBtn');
+    if(btn && !isStandaloneMode()) btn.hidden = false;
+  });
+  window.addEventListener('appinstalled', function(){
+    deferredInstallPrompt = null;
+    var btn = document.getElementById('installBtn');
+    var tip = document.getElementById('installIosTip');
+    if(btn) btn.hidden = true;
+    if(tip) tip.hidden = true;
+  });
+
+  /* ================= 별자리 데이터 ================= */
+  var ZODIACS = [
+    {name:'염소자리', range:'12/22 ~ 1/19', startM:12,startD:22, endM:1,endD:19,
+      trad:'가넷', rec:'로즈쿼츠',
+      trait:'책임감과 인내심이 남다른 별자리예요. 목표를 향해 묵묵히 걸어가는 끈기가 있고, 겉으로는 차분해 보이지만 내면에는 확실한 야망이 자리하고 있어요. 신뢰를 소중히 여기고, 스스로 세운 기준에 엄격한 편이에요. 흙의 별자리답게 현실적인 감각이 뛰어나고, 시간과 절제를 상징하는 토성의 영향으로 무엇이든 차근차근 쌓아올리는 힘을 지녔어요. 관계에서도 화려한 말보다 꾸준한 행동으로 신뢰를 보여주는 편이라, 가까워지기까지는 시간이 걸리지만 한번 마음을 열면 오래도록 곁을 지켜요. 인정받는 것보다 스스로 떳떳한지가 더 중요한 사람이라, 결국 자기만의 기준을 완성해나가는 과정에서 진짜 만족을 느껴요.',
+      desc:'굳은 인내와 책임감의 별자리에 깊고 진한 붉은빛으로 뿌리내린 힘과 꾸준한 열정을 더해주는 원석이에요.',
+      recDesc:'부드러운 분홍빛으로 따뜻한 위로와 다정함을 전하는 원석이에요. 엄격한 기준으로 스스로를 몰아붙이기 쉬운 염소자리에게, 자신을 다정하게 다독일 수 있는 여유를 더해줘요.',
+      keywords:'책임감·끈기·신중함·야망',
+      strength:'한번 마음먹은 목표는 끝까지 해내는 뚝심이 있어요.',
+      weakness:'스스로에게 너무 엄격해서 쉽게 지칠 수 있어요.',
+      caution:'가끔은 계획 없이 흘러가는 것도 괜찮다는 걸 떠올려보세요.'},
+    {name:'물병자리', range:'1/20 ~ 2/18', startM:1,startD:20, endM:2,endD:18,
+      trad:'자수정', rec:'라브라도라이트',
+      trait:'독립적이고 개성이 뚜렷한 별자리예요. 틀에 얽매이기보다 자신만의 방식을 찾아가는 걸 좋아하고, 새로운 아이디어와 변화에 민감하게 반응해요. 사람들과 잘 어울리면서도 마음 한켠에는 자유로움을 늘 간직하고 있어요. 공기의 별자리라 생각의 흐름이 자유롭고, 혁신과 변화를 상징하는 천왕성의 기운으로 늘 한 발 앞선 시각을 갖고 있어요. 관계에서도 소유하거나 얽매이기보다 서로의 다름을 존중하는 쪽을 선호해서, 친구 같은 편안한 관계를 오래 유지하는 편이에요. 인정보다 자기 생각이 옳다고 느껴지는 순간에 더 큰 확신을 얻는 사람이라, 세상에 조금이라도 새로운 관점을 더하는 데서 의미를 찾아요.',
+      desc:'자유롭고 독창적인 별자리에 맑은 보랏빛으로 마음을 진정시키고 통찰을 밝혀주는 원석이에요.',
+      recDesc:'보는 각도에 따라 신비로운 푸른빛이 번뜩이는 원석이에요. 틀에 얽매이지 않고 늘 새로운 시각으로 세상을 보는 물병자리의 독창성과 잘 어울리는, 변화무쌍하고 신비로운 기운을 담고 있어요.',
+      keywords:'독립성·창의력·자유로움·통찰력',
+      strength:'남들과 다른 시각으로 새로운 답을 찾아내는 힘이 있어요.',
+      weakness:'정에 이끌리기보다 냉정해 보여서 오해를 사기도 해요.',
+      caution:'가까운 사람에게는 마음을 조금 더 자주 표현해보세요.'},
+    {name:'물고기자리', range:'2/19 ~ 3/20', startM:2,startD:19, endM:3,endD:20,
+      trad:'아쿠아마린', rec:'백옥',
+      trait:'감수성이 풍부하고 상상력이 뛰어난 별자리예요. 타인의 감정에 쉽게 공감하고, 예술적이거나 몽상적인 세계에 끌리는 편이에요. 마음이 여려 쉽게 흔들리기도 하지만, 그만큼 깊고 따뜻한 위로를 건넬 줄 알아요. 물의 별자리답게 감정의 결이 섬세하고, 경계를 흐리는 해왕성의 영향으로 현실과 상상을 자유롭게 넘나드는 감각을 지녔어요. 관계에서는 상대의 마음을 먼저 헤아리느라 자신의 필요는 뒤로 미루기 쉬워서, 배려가 일방적으로 흐르지 않도록 균형을 신경 써야 해요. 논리적인 설명보다 마음으로 통하는 순간에 살아있음을 느끼는 사람이라, 누군가에게 위로가 되어줄 때 가장 깊은 만족을 얻어요.',
+      desc:'감성이 풍부한 별자리에 바다를 닮은 청록빛으로 마음의 파도를 가라앉히고 직관을 맑게 해주는 원석이에요.',
+      recDesc:'은은한 우윳빛으로 맑고 순수한 기운을 담은 원석이에요. 감정의 파도에 쉽게 흔들리는 물고기자리에게, 마음을 깨끗하게 정돈해주는 고요한 평온을 더해줘요.',
+      keywords:'감수성·상상력·공감능력·다정함',
+      strength:'타인의 마음을 깊이 이해하고 다정하게 품어줄 줄 알아요.',
+      weakness:'감정에 쉽게 휩쓸려서 현실적인 판단이 흐려질 때가 있어요.',
+      caution:'남을 챙기는 만큼 스스로도 잘 챙기고 있는지 돌아보세요.'},
+    {name:'양자리', range:'3/21 ~ 4/19', startM:3,startD:21, endM:4,endD:19,
+      trad:'다이아몬드', rec:'레드재스퍼', main:'백수정',
+      trait:'추진력과 열정이 넘치는 별자리예요. 생각한 것은 바로 행동으로 옮기는 편이고, 새로운 도전 앞에서 오히려 눈이 빛나요. 솔직하고 직설적인 성격 덕분에 곁에 있으면 에너지가 느껴지는 사람이에요. 불의 별자리 중에서도 가장 먼저 타오르는 별자리답게, 전쟁과 용기를 상징하는 화성의 기운을 받아 망설임 없이 앞장서는 힘을 지녔어요. 관계에서도 계산하기보다 직진하는 편이라 호불호가 분명하게 드러나고, 마음을 정하면 숨기지 않고 바로 표현하는 스타일이에요. 안주하는 것보다 새로운 걸 쟁취하는 과정에서 살아있음을 느끼는 사람이라, 늘 다음 목표가 있어야 스스로 동기부여가 돼요.',
+      desc:'도전적이고 열정 넘치는 별자리에 맑고 강한 빛으로 흔들림 없는 용기와 추진력을 더해주는 원석이에요.',
+      mainDesc:'맑고 순수한 흰빛으로 모든 기운을 증폭시키는 원석이에요. 거침없이 나아가는 양자리의 추진력에 잡념 없는 깨끗한 집중력을 더해줘요.',
+      recDesc:'단단하고 붉은 대지의 기운을 품은 원석이에요. 거침없이 내달리는 양자리에게, 끝까지 밀어붙일 수 있는 근본적인 지구력과 뚝심을 더해줘요.',
+      keywords:'추진력·열정·솔직함·도전정신',
+      strength:'망설이지 않고 바로 행동으로 옮기는 실행력이 있어요.',
+      weakness:'성급하게 밀어붙이다 주변을 놓칠 때가 있어요.',
+      caution:'시작한 만큼 끝까지 지켜보는 인내심도 함께 길러보세요.'},
+    {name:'황소자리', range:'4/20 ~ 5/20', startM:4,startD:20, endM:5,endD:20,
+      trad:'에메랄드', rec:'유나카이트', main:'그린아벤추린',
+      trait:'안정과 편안함을 중요하게 여기는 별자리예요. 한번 마음먹은 것은 꾸준히 지켜나가는 뚝심이 있고, 좋아하는 것에 대한 취향이 확고해요. 느긋해 보이지만 내면은 단단하고, 소중한 사람에게는 한없이 다정해요. 흙의 별자리라 오감으로 느껴지는 현실적인 안정감을 중요하게 여기고, 아름다움과 풍요를 상징하는 금성의 영향으로 좋은 것을 알아보는 감각이 남달라요. 관계에서는 서두르지 않고 천천히 신뢰를 쌓아가는 편이라, 한번 마음을 주면 쉽게 바뀌지 않는 깊고 안정적인 유대를 만들어요. 변화 자체보다 지켜낸 것의 가치를 더 크게 여기는 사람이라, 소중한 것을 오래 지켜냈을 때 가장 큰 뿌듯함을 느껴요.',
+      desc:'안정과 풍요를 추구하는 별자리에 짙은 초록빛으로 성장과 조화의 기운을 불어넣어주는 원석이에요.',
+      mainDesc:'반짝이는 은빛 입자를 머금은 초록빛 원석이에요. 안정을 중시하는 황소자리에게 편안함 속에서도 새로운 기회를 알아보는 행운의 감각을 더해줘요.',
+      recDesc:'초록과 분홍이 어우러진 균형의 원석이에요. 한번 정한 것을 우직하게 지켜내는 황소자리에게, 마음의 여유와 성장을 함께 붙잡을 수 있는 조화를 더해줘요.',
+      keywords:'안정감·끈기·신뢰감·여유',
+      strength:'한번 정한 것을 꾸준히 지켜내는 뚝심이 있어요.',
+      weakness:'고집이 세서 변화가 필요한 순간에도 버티려 해요.',
+      caution:'익숙한 방식만 고집하지 말고 가끔은 새로운 시도도 해보세요.'},
+    {name:'쌍둥이자리', range:'5/21 ~ 6/21', startM:5,startD:21, endM:6,endD:21,
+      trad:'진주', rec:'제브라스톤', main:'문스톤',
+      trait:'호기심 많고 대화를 즐기는 별자리예요. 다양한 관심사를 넘나들며 새로운 정보를 흡수하는 걸 좋아하고, 재치 있는 말솜씨로 분위기를 이끌어요. 상황에 따라 유연하게 대처하는 순발력도 큰 장점이에요. 공기의 별자리답게 생각의 속도가 빠르고, 소통과 정보를 상징하는 수성의 영향으로 말과 글로 자신을 표현하는 데 능숙해요. 관계에서는 대화가 잘 통하는 사람에게 특히 끌리고, 지적인 자극을 주고받을 수 있는 사이일수록 오래 흥미를 유지해요. 한 곳에 머무르기보다 늘 새로운 정보와 사람을 만나는 데서 활력을 얻는 사람이라, 배움과 대화가 끊이지 않을 때 가장 생기 있어요.',
+      desc:'소통과 재치가 넘치는 별자리에 은은한 광택으로 순수함과 균형 잡힌 마음을 지켜주는 원석이에요.',
+      mainDesc:'은은하게 빛나는 문스톤은 변화하는 달의 결을 닮은 원석이에요. 하루에도 여러 모습을 보여주는 쌍둥이자리의 다채로운 매력에, 감정의 균형을 잡아주는 차분함을 더해줘요.',
+      recDesc:'검고 흰 줄무늬가 대비를 이루는 원석이에요. 하루에도 여러 얼굴을 보여주는 쌍둥이자리의 양면성에, 서로 다른 모습을 자연스럽게 아우르는 균형을 더해줘요.',
+      keywords:'호기심·재치·순발력·사교성',
+      strength:'다양한 상황에 빠르게 적응하고 재치있게 풀어가요.',
+      weakness:'관심사가 자주 바뀌어서 한 가지에 오래 집중하기 어려워해요.',
+      caution:'시작한 일은 끝까지 마무리하는 습관을 조금씩 길러보세요.'},
+    {name:'게자리', range:'6/22 ~ 7/22', startM:6,startD:22, endM:7,endD:22,
+      trad:'루비', rec:'하울라이트', main:'카넬리안',
+      trait:'정이 많고 보호본능이 강한 별자리예요. 가까운 사람을 살뜰하게 챙기고, 가정이나 익숙한 공간에서 편안함을 느껴요. 감정 기복이 있는 편이지만, 그만큼 진심을 다해 마음을 표현할 줄 알아요. 물의 별자리라 감정의 흐름에 민감하고, 감정과 무의식을 상징하는 달의 영향으로 그날그날의 기분이 컨디션에 크게 작용해요. 관계에서는 자신이 받은 만큼 더 크게 돌려주려는 편이라, 신뢰가 쌓인 사람에게는 가족처럼 깊은 애정을 쏟아요. 인정보다 정서적인 안전함을 더 중요하게 여기는 사람이라, 편안하게 마음을 나눌 수 있는 사람과 공간이 있을 때 가장 안정을 느껴요.',
+      desc:'따뜻하고 정 많은 별자리에 붉은 생명력으로 활력과 애정을 북돋아주는 원석이에요.',
+      mainDesc:'따뜻한 주황빛으로 활력과 용기를 불어넣는 원석이에요. 다정하지만 감정 기복에 지치기 쉬운 게자리에게, 스스로를 먼저 다독일 수 있는 단단한 생기를 더해줘요.',
+      recDesc:'부드러운 흰빛에 잔잔한 무늬가 감도는 원석이에요. 감정 기복이 잦은 게자리에게, 마음을 가라앉히고 차분한 인내심을 채워주는 진정의 기운을 더해줘요.',
+      keywords:'다정함·보호본능·섬세함·가정적',
+      strength:'가까운 사람을 살뜰하게 챙기는 따뜻한 마음이 있어요.',
+      weakness:'감정 기복이 있어서 기분에 따라 태도가 달라지기도 해요.',
+      caution:'서운한 마음이 쌓이기 전에 조금씩 표현해보세요.'},
+    {name:'사자자리', range:'7/23 ~ 8/22', startM:7,startD:23, endM:8,endD:22,
+      trad:'페리도트', rec:'무카이트', main:'타이거아이',
+      trait:'자신감 넘치고 존재감이 뚜렷한 별자리예요. 주목받는 자리에서 오히려 빛을 발하고, 통 크고 당당한 태도로 주변에 활력을 불어넣어요. 자존심이 강한 만큼 인정받고 싶은 마음도 크지만, 그만큼 베푸는 데도 아낌없어요. 불의 별자리답게 존재 자체로 주변을 밝히는 힘이 있고, 태양이 상징하는 중심의 기운을 받아 자연스럽게 시선을 끄는 매력을 지녔어요. 관계에서는 아낌없이 마음을 표현하고 주변을 챙기는 편이라, 곁에 있는 사람들에게 든든한 존재로 기억되는 경우가 많아요. 묵묵히 하는 것보다 자신의 노력이 눈에 보이게 인정받을 때 더 크게 힘이 나는 사람이라, 존재감을 드러낼 무대가 있어야 진가를 발휘해요.',
+      desc:'당당하고 빛나는 별자리에 밝은 연둣빛으로 긍정과 자신감을 더해주는 원석이에요.',
+      mainDesc:'황금빛과 갈색이 어우러져 반짝이는 원석이에요. 당당한 사자자리의 카리스마에, 어떤 순간에도 흔들리지 않는 용기와 자기 확신을 더해줘요.',
+      recDesc:'따뜻한 붉은빛과 노란빛이 뒤섞인 대지의 원석이에요. 무대 위에서 빛나는 사자자리에게, 어떤 상황도 유연하게 받아들이는 여유로운 포용력을 더해줘요.',
+      keywords:'자신감·카리스마·리더십·관대함',
+      strength:'당당한 태도로 주변에 활력을 불어넣는 힘이 있어요.',
+      weakness:'자존심이 강해서 지는 것을 잘 받아들이지 못해요.',
+      caution:'주목받지 못하는 순간에도 흔들리지 않는 법을 연습해보세요.'},
+    {name:'처녀자리', range:'8/23 ~ 9/22', startM:8,startD:23, endM:9,endD:22,
+      trad:'사파이어', rec:'소달라이트', main:'라피스라줄리',
+      trait:'세심하고 분석적인 별자리예요. 작은 디테일도 놓치지 않는 꼼꼼함이 있고, 완벽을 추구하는 만큼 스스로에게도 엄격한 편이에요. 실용적인 조언과 헌신적인 도움으로 주변 사람들에게 든든한 존재가 되어줘요. 흙의 별자리라 현실적이고 체계적인 사고를 하고, 분석과 논리를 상징하는 수성의 영향으로 복잡한 것을 정리하는 능력이 뛰어나요. 관계에서는 말보다 실질적인 도움으로 마음을 표현하는 편이라, 겉으로 티는 안 나도 누구보다 세심하게 상대를 챙기고 있어요. 인정받는 것보다 스스로 납득할 만큼 완성도를 높이는 데서 더 큰 성취감을 느끼는 사람이라, 기준에 도달했을 때 비로소 마음이 놓여요.',
+      desc:'세심하고 신중한 별자리에 깊은 푸른빛으로 명료한 판단력과 진실함을 더해주는 원석이에요.',
+      mainDesc:'깊은 청금빛으로 지혜와 통찰을 상징하는 원석이에요. 완벽을 추구하느라 스스로를 몰아붙이기 쉬운 처녀자리에게, 진짜 중요한 것을 가려보는 여유로운 시야를 더해줘요.',
+      recDesc:'차분한 남색으로 이성적인 사고를 돕는 원석이에요. 세심하게 분석하는 처녀자리에게, 생각을 명료하게 정리하고 침착하게 표현할 수 있는 힘을 더해줘요.',
+      keywords:'세심함·분석력·성실함·완벽주의',
+      strength:'작은 디테일까지 놓치지 않는 꼼꼼함으로 신뢰를 얻어요.',
+      weakness:'완벽을 추구하다 스스로를 너무 몰아붙일 때가 있어요.',
+      caution:'완벽하지 않아도 충분히 잘하고 있다는 걸 잊지 마세요.'},
+    {name:'천칭자리', range:'9/23 ~ 10/22', startM:9,startD:23, endM:10,endD:22,
+      trad:'오팔', rec:'핑크제브라재스퍼', main:'로도나이트',
+      trait:'균형과 조화를 중시하는 별자리예요. 다투는 것을 싫어하고 늘 공정한 시선으로 상황을 바라보려 해요. 세련된 감각과 사교성을 갖췄고, 관계 속에서 편안한 분위기를 만드는 데 탁월해요. 공기의 별자리답게 관계 속 미묘한 흐름을 잘 읽고, 아름다움과 관계를 상징하는 금성의 영향으로 조화로운 분위기를 만드는 감각이 뛰어나요. 관계에서는 혼자보다 함께일 때 더 완전해진다고 느끼는 편이라, 파트너나 친구와의 균형 잡힌 유대를 유독 소중히 여겨요. 일방적인 결정보다 함께 합의해서 만든 결과에서 더 큰 만족을 느끼는 사람이라, 주변과의 조화가 곧 스스로의 평온으로 이어져요.',
+      desc:'균형과 아름다움을 사랑하는 별자리에 은은하게 빛나는 색채로 조화와 영감을 불어넣어주는 원석이에요.',
+      mainDesc:'짙은 분홍빛에 검은 무늬가 감도는 원석이에요. 균형과 조화를 중시하는 천칭자리에게, 관계 속에서도 스스로를 먼저 아끼는 균형 잡힌 사랑을 더해줘요.',
+      recDesc:'분홍과 흰빛이 리듬감 있게 어우러진 원석이에요. 늘 조화를 살피는 천칭자리에게, 대비되는 것들 사이에서도 편안한 균형을 찾아내는 감각을 더해줘요.',
+      keywords:'균형감·조화·사교성·공정함',
+      strength:'어떤 관계에서도 균형 잡힌 시선으로 조화를 만들어내요.',
+      weakness:'다투는 걸 피하려다 정작 자기 의견을 미루기도 해요.',
+      caution:'모두를 만족시키려 하기보다 내 마음도 먼저 살펴보세요.'},
+    {name:'전갈자리', range:'10/23 ~ 11/22', startM:10,startD:23, endM:11,endD:22,
+      trad:'토파즈', rec:'실버흑요석', main:'시트린',
+      trait:'깊이 있고 강렬한 매력을 지닌 별자리예요. 한번 관심을 가진 것에는 끝까지 파고드는 집중력이 있고, 겉으로 드러내지 않아도 내면에는 뜨거운 열정이 자리하고 있어요. 신뢰를 쌓는 데는 시간이 걸리지만, 한번 믿으면 누구보다 진실해요. 물의 별자리라 감정의 깊이가 남다르고, 변화와 재생을 상징하는 명왕성의 영향으로 위기 속에서도 스스로를 다시 일으키는 힘을 지녔어요. 관계에서는 얕은 친분보다 깊은 신뢰를 원하는 편이라, 마음을 여는 데 시간이 걸리지만 일단 믿음이 생기면 무엇보다 헌신적이에요. 표면적인 것보다 본질을 꿰뚫었을 때 진짜 만족을 느끼는 사람이라, 깊이 파고들 대상이 있을 때 가장 몰입하고 살아있음을 느껴요.',
+      desc:'강렬하고 깊이 있는 별자리에 맑은 빛으로 집중력과 내면의 힘을 더해주는 원석이에요.',
+      mainDesc:'맑은 황금빛으로 밝은 활력과 자신감을 담은 원석이에요. 깊고 강렬하지만 자신을 잘 드러내지 않는 전갈자리에게, 마음을 조금 더 가볍고 환하게 열어볼 용기를 더해줘요.',
+      recDesc:'검은 바탕에 은빛 광채가 감도는 원석이에요. 내면이 깊은 전갈자리에게, 스스로를 지키면서도 진실을 꿰뚫어보는 강인한 통찰을 더해줘요.',
+      keywords:'집중력·통찰력·카리스마·진실함',
+      strength:'한번 마음먹으면 끝까지 파고드는 몰입력이 있어요.',
+      weakness:'경계심이 강해서 마음을 여는 데 오래 걸려요.',
+      caution:'모든 걸 혼자 짊어지지 말고 가끔은 곁을 내어줘 보세요.'},
+    {name:'사수자리', range:'11/23 ~ 12/21', startM:11,startD:23, endM:12,endD:21,
+      trad:'탄자나이트', rec:'셰브론자수정', main:'유퍼라이트',
+      trait:'자유롭고 낙천적인 별자리예요. 넓은 세상과 새로운 경험을 향한 호기심이 크고, 틀에 갇히기보다 늘 다음 여정을 꿈꿔요. 솔직하고 유쾌한 성격 덕분에 함께 있으면 마음이 편해지는 사람이에요. 불의 별자리답게 마음이 향하는 곳으로 거침없이 나아가고, 확장과 행운을 상징하는 목성의 영향으로 늘 더 넓은 세상을 향한 갈증을 지녔어요. 관계에서는 얽매이기보다 각자의 자유를 존중하는 편을 선호해서, 서로에게 여유를 주는 사이일수록 편안하게 오래 이어가요. 안정보다 새로운 경험 자체에서 삶의 의미를 찾는 사람이라, 배우고 탐험할 것이 남아있는 한 지치지 않고 나아가요.',
+      desc:'자유롭고 탐구심 많은 별자리에 신비로운 보랏빛 청색으로 통찰과 변화의 용기를 더해주는 원석이에요.',
+      mainDesc:'신비로운 빛깔이 감도는 원석이에요. 늘 새로운 지평을 향해 나아가는 사수자리에게, 낯선 곳에서도 편안함을 느끼게 하는 자유로운 확장의 기운을 더해줘요.',
+      recDesc:'자수정의 보랏빛에 하얀 줄무늬가 화살처럼 새겨진 원석이에요. 모험을 즐기는 사수자리에게, 자유로운 여정 속에서도 방향을 잃지 않는 통찰을 더해줘요.',
+      keywords:'자유로움·낙천성·모험심·솔직함',
+      strength:'어떤 상황에서도 긍정적인 면을 찾아내는 힘이 있어요.',
+      weakness:'자유를 중시하다 보니 약속이나 책임을 가볍게 여길 때가 있어요.',
+      caution:'즉흥적인 결정 전에 한 번쯤 신중하게 생각해보세요.'}
+  ];
+
+  function dateVal(m,d){ return m*100+d; }
+  function inRange(val, startVal, endVal){
+    if(startVal <= endVal) return val>=startVal && val<=endVal;
+    return val>=startVal || val<=endVal;
+  }
+  function findZodiac(m,d){
+    var val = dateVal(m,d);
+    for(var i=0;i<ZODIACS.length;i++){
+      var z = ZODIACS[i];
+      if(inRange(val, dateVal(z.startM,z.startD), dateVal(z.endM,z.endD))) return z;
+    }
+    return null;
+  }
+
+  /* ================= 데칸 (별자리 구간 내 초반/중반/후반) ================= */
+  var MONTH_CUM = [0,31,59,90,120,151,181,212,243,273,304,334];
+  function approxDOY(m,d){ return MONTH_CUM[m-1] + d; }
+  function signSpanDays(z){
+    if(z.startM <= z.endM) return approxDOY(z.endM,z.endD) - approxDOY(z.startM,z.startD) + 1;
+    return (365 - approxDOY(z.startM,z.startD)) + approxDOY(z.endM,z.endD) + 1;
+  }
+  function signDayOffset(z,m,d){
+    if(z.startM <= z.endM) return approxDOY(m,d) - approxDOY(z.startM,z.startD);
+    if(m >= z.startM) return approxDOY(m,d) - approxDOY(z.startM,z.startD);
+    return (365 - approxDOY(z.startM,z.startD)) + approxDOY(m,d);
+  }
+  function decanIndex(z,m,d){
+    var span = signSpanDays(z);
+    var off = signDayOffset(z,m,d);
+    var idx = Math.floor(off / span * 3);
+    return Math.min(2, Math.max(0, idx));
+  }
+  var DECAN_NOTE = [
+    '지금은 이 별자리의 기운이 가장 순수하고 강하게 드러나는 시기라, 위 성향이 또렷하게 나타나는 편이에요.',
+    '지금은 이 별자리의 기운이 안정적으로 자리 잡는 시기라, 위 성향에 신중함과 균형감이 더해져요.',
+    '지금은 다음 별자리로 넘어가기 직전 시기라, 위 성향에 유연함과 확장하려는 힘이 더해져요.'
+  ];
+
+  /* ================= 오늘의 운세 (날짜 시드 로테이션) ================= */
+  function hashStr(s){
+    var h = 5381;
+    for(var i=0;i<s.length;i++){ h = ((h*33) ^ s.charCodeAt(i)) >>> 0; }
+    return h;
+  }
+  function starStr(score){
+    var s = '';
+    for(var i=0;i<5;i++) s += (i<score ? '★' : '☆');
+    return s;
+  }
+  var FORTUNE_LABELS = {total:'총운', love:'애정운', money:'금전운', career:'직업운', health:'건강운'};
+  var FORTUNE_ORDER = ['total','love','money','career','health'];
+  var FORTUNE_BANK = {
+    total:[
+      '차분하게 하루를 시작하면 예상보다 술술 풀리는 하루예요. 급하게 서두르지 말고 순서대로 하나씩 처리해보세요.',
+      '작은 결정 하나가 생각보다 큰 흐름을 바꿔놓을 수 있어요. 고민되는 선택이 있다면 오늘 마음이 가는 쪽을 따라가 보세요.',
+      '무리하지 않고 페이스를 지키는 게 오늘의 핵심이에요. 컨디션이 처지면 억지로 끌고 가지 말고 잠시 쉬어가세요.',
+      '주변 사람의 말 한마디에서 뜻밖의 힌트를 얻을 수 있어요. 평소보다 주변 이야기에 귀 기울여보면 도움이 될 거예요.',
+      '평소보다 직감이 예리해지는 날이니 믿어봐도 좋아요. 애매할 땐 논리보다 첫 느낌을 따라가 보세요.',
+      '새로운 시도를 해보기에 나쁘지 않은 흐름이 흐르고 있어요. 미뤄왔던 일이 있다면 오늘 가볍게 시작해보세요.',
+      '속도보다 방향이 중요한 하루, 서두르지 않아도 괜찮아요. 지금 가는 길이 맞는지 잠깐 점검하고 가는 것도 좋아요.',
+      '미뤄뒀던 일을 매듭짓기에 좋은 기운이 감돌아요. 끝내지 못한 일 하나만 골라 오늘 마무리해보세요.',
+      '생각을 정리할 조용한 시간이 필요한 하루예요. 혼자만의 시간을 잠깐이라도 따로 떼어두세요.',
+      '뜻밖의 좋은 소식이 슬쩍 찾아올 수 있어요. 평소 안 열어보던 연락도 오늘은 한번 확인해보세요.',
+      '완벽하지 않아도 괜찮은, 여유가 필요한 하루예요. 스스로에게 너무 엄격한 기준을 들이대지 마세요.',
+      '평소 하던 대로만 해도 중심이 잘 잡히는 날이에요. 굳이 무리해서 바꾸려 하지 말고 루틴을 지켜보세요.',
+      '낯선 상황에서도 의외로 침착하게 대처할 수 있어요. 당황스러운 순간이 와도 한 박자 쉬고 반응해보세요.',
+      '오늘의 선택이 며칠 뒤 좋은 결과로 돌아올 수 있어요. 당장 티가 안 나도 꾸준히 하던 걸 계속 이어가세요.',
+      '혼자만의 시간이 오늘따라 더 큰 힘이 되어줄 거예요. 약속을 무리하게 잡기보다 나를 위한 시간을 남겨두세요.',
+      '작은 변화 하나로 분위기를 전환하기 좋은 날이에요. 책상 정리처럼 사소한 것부터 바꿔보는 것도 좋아요.'
+    ],
+    love:[
+      '솔직한 한마디가 관계를 한층 편안하게 만들어줘요. 마음에 담아둔 말이 있다면 오늘 슬쩍 꺼내보세요.',
+      '혼자만의 시간을 존중받고 싶은 마음이 커지는 날이에요. 거리를 두고 싶다면 솔직하게 표현해도 괜찮아요.',
+      '먼저 건네는 안부가 예상 밖의 좋은 반응을 얻을 수 있어요. 궁금했던 사람에게 오늘 먼저 연락해보세요.',
+      '썸이 있다면 눈빛만으로도 분위기가 무르익을 수 있어요. 말보다 표정과 태도로 마음을 보여줘 보세요.',
+      '사소한 오해는 짧은 대화로 금방 풀릴 수 있어요. 마음에 걸리는 게 있다면 미루지 말고 짚고 넘어가세요.',
+      '표현하지 않으면 상대는 모른다는 걸 떠올려보세요. 고맙거나 좋았던 마음을 오늘은 말로 전해보세요.',
+      '커플이라면 함께 보내는 소소한 일상이 힘이 되는 날이에요. 거창한 이벤트보다 같이 밥 한 끼 먹는 시간을 가져보세요.',
+      '새로운 인연의 실마리가 뜻밖의 자리에서 나타날 수 있어요. 낯선 자리라도 마음을 살짝 열어두고 가보세요.',
+      '마음의 여유가 매력으로 비치는 하루예요. 잘 보이려 애쓰기보다 편안한 모습 그대로 보여주세요.',
+      '지나친 기대보다는 있는 그대로를 즐기는 게 좋아요. 결과를 미리 재단하지 말고 지금 순간에 집중해보세요.',
+      '다정한 말 한마디가 하루 종일 여운을 남길 수 있어요. 작은 칭찬이나 격려를 아끼지 말고 건네보세요.',
+      '밀당보다는 담백한 태도가 더 잘 통하는 날이에요. 재지 말고 생각하는 바를 편하게 이야기해보세요.',
+      '오래된 인연에게서 반가운 연락이 올 수 있어요. 문득 떠오르는 사람이 있다면 먼저 안부를 물어보세요.',
+      '혼자여도 충분히 충만한 기분을 느낄 수 있는 하루예요. 누군가와 함께가 아니어도 스스로를 잘 챙겨주세요.',
+      '작은 배려가 관계를 한 뼘 더 가깝게 만들어줘요. 당연하게 여기던 것에 오늘은 한 번 더 고마움을 표현해보세요.',
+      '감정을 너무 서두르지 않아도 괜찮은 흐름이에요. 확신이 안 서면 지금은 마음이 흘러가는 대로 지켜보세요.'
+    ],
+    money:[
+      '충동적인 지출은 잠시 미뤄두는 게 좋은 하루예요. 사고 싶은 게 생기면 하루 정도 미뤄두고 다시 생각해보세요.',
+      '예상치 못한 곳에서 자잘한 이득이 생길 수 있어요. 포인트나 할인 혜택 같은 걸 한번 챙겨보세요.',
+      '계획했던 지출이라면 편안하게 진행해도 좋아요. 미리 생각해둔 일이라면 망설이지 말고 진행하세요.',
+      '돈보다 시간을 아끼는 선택이 결국 더 이득일 수 있어요. 무리하게 아끼기보다 효율적인 쪽을 선택해보세요.',
+      '작은 절약이 쌓여 뿌듯함으로 돌아오는 날이에요. 오늘 지출을 가볍게 기록해보는 것도 좋아요.',
+      '투자나 큰 결정은 오늘보다 며칠 뒤가 더 나아요. 큰돈이 걸린 결정이라면 오늘은 서명을 미뤄두세요.',
+      '정리하다 보면 잊고 있던 소소한 여윳돈을 발견할 수 있어요. 안 쓰는 물건이나 계좌를 한번 정리해보세요.',
+      '필요한 것과 원하는 것을 구분해보면 도움이 되는 하루예요. 장바구니에 담아두고 정말 필요한지 한 번 더 물어보세요.',
+      '지출보다 저축 쪽으로 마음이 기우는 날이에요. 이번 기회에 소액이라도 따로 떼어 모아보세요.',
+      '주변 사람과의 돈 문제는 명확하게 짚고 넘어가는 게 좋아요. 빌려주거나 빌린 돈이 있다면 오늘 정리해보세요.',
+      '꼼꼼히 따져보는 습관이 좋은 결과로 이어질 수 있어요. 결제하기 전에 조건을 한 번 더 확인해보세요.',
+      '작은 사치가 오늘만큼은 괜찮은 위로가 되어줄 거예요. 너무 애쓰지 말고 소소한 것 하나쯤은 나를 위해 써보세요.',
+      '수입보다 지출 흐름을 점검해보기 좋은 타이밍이에요. 이번 달 카드 내역을 한번 훑어보세요.',
+      '믿을 만한 사람의 조언이 든든한 힌트가 될 수 있어요. 혼자 결정하기 어렵다면 주변에 슬쩍 물어보세요.',
+      '여유가 생기더라도 계획 없는 지출은 조심하세요. 생각지 못한 돈이 들어와도 바로 쓰지 말고 며칠 묵혀두세요.',
+      '차근차근 쌓아온 것들이 안정감으로 느껴지는 날이에요. 그동안 해온 것들을 오늘은 스스로 인정해주세요.'
+    ],
+    career:[
+      '묵묵히 해온 노력이 슬슬 눈에 띄기 시작하는 시기예요. 티 안 나도 하던 대로 꾸준히 이어가세요.',
+      '협업에서 의외의 좋은 아이디어가 나올 수 있어요. 혼자 고민하지 말고 동료에게 의견을 물어보세요.',
+      '혼자 끌어안지 말고 도움을 요청해도 괜찮은 날이에요. 막히는 부분이 있다면 오늘은 솔직하게 도움을 청해보세요.',
+      '꼼꼼하게 점검할수록 실수를 줄일 수 있는 하루예요. 제출하기 전에 한 번 더 검토하는 시간을 가지세요.',
+      '새로운 업무나 역할 제안이 들어올 수 있어요. 부담스러워도 일단 열린 마음으로 들어보세요.',
+      '속도보다 완성도에 집중하는 게 유리한 흐름이에요. 빨리 끝내는 것보다 제대로 마무리하는 데 집중하세요.',
+      '상사나 동료와의 대화에서 뜻밖의 실마리를 얻을 수 있어요. 가벼운 대화라도 흘려듣지 말고 메모해두세요.',
+      '미뤄둔 일을 정리하기에 집중력이 잘 붙는 날이에요. 할 일 목록을 만들어서 하나씩 지워나가 보세요.',
+      '작은 성과라도 스스로를 인정해주는 게 필요한 하루예요. 잘한 일이 있다면 스스로에게 인색하게 굴지 마세요.',
+      '무리한 욕심보다 지금의 페이스를 지키는 게 좋아요. 한 번에 다 하려 하지 말고 우선순위부터 정하세요.',
+      '낯선 업무도 의외로 잘 풀려나갈 수 있는 기운이에요. 익숙하지 않은 일이라도 일단 부딪혀보세요.',
+      '회의나 발표 자리에서 준비한 만큼 빛을 발할 수 있어요. 중요한 자리가 있다면 오늘 한 번 더 준비해보세요.',
+      '동료와의 협력이 예상보다 큰 힘이 되어줄 거예요. 혼자 하기 버거운 일은 나눠서 진행해보세요.',
+      '휴식도 업무의 일부라는 걸 떠올려도 좋은 날이에요. 짧게라도 쉬는 시간을 스스로에게 허락해주세요.',
+      '작은 아이디어 하나가 좋은 흐름의 시작이 될 수 있어요. 떠오른 생각은 사소해도 일단 적어두세요.',
+      '차분히 우선순위를 정리하면 하루가 한결 수월해져요. 할 일이 많다면 순서부터 먼저 정리해보세요.'
+    ],
+    health:[
+      '무리한 일정보다는 몸의 신호에 귀 기울여보세요. 피곤하면 일정을 무리해서 채우지 말고 줄여보세요.',
+      '가벼운 스트레칭이 하루의 컨디션을 바꿔줄 수 있어요. 자기 전이나 아침에 5분만 몸을 풀어주세요.',
+      '충분한 수분 섭취가 오늘따라 큰 도움이 될 거예요. 물 한 잔을 평소보다 더 챙겨 마셔보세요.',
+      '평소보다 일찍 잠자리에 드는 게 좋은 선택이 될 수 있어요. 오늘만큼은 스마트폰을 내려놓고 일찍 누워보세요.',
+      '긴장한 어깨와 목을 풀어주는 시간이 필요한 하루예요. 틈틈이 어깨를 돌리거나 목을 가볍게 풀어주세요.',
+      '소화가 편한 음식으로 속을 다스리기 좋은 날이에요. 자극적인 음식보다는 부드러운 음식을 선택해보세요.',
+      '잠깐의 산책이 머리를 맑게 해줄 수 있어요. 짬을 내서 10분이라도 밖에 나가 걸어보세요.',
+      '눈의 피로가 쌓이기 쉬우니 중간중간 쉬어가세요. 화면을 보다가 잠깐씩 먼 곳을 바라봐주세요.',
+      '몸보다 마음의 피로가 더 클 수 있는 하루예요. 몸을 쉬는 것만큼 마음을 쉬게 해주는 것도 신경 써보세요.',
+      '규칙적인 리듬을 지키는 것만으로도 컨디션이 안정돼요. 식사나 취침 시간을 평소 리듬대로 지켜보세요.',
+      '카페인이나 자극적인 음식은 평소보다 줄여보세요. 커피 한 잔 정도는 오늘 물이나 차로 바꿔보세요.',
+      '작은 통증도 무시하지 말고 가볍게 살펴보는 게 좋아요. 며칠째 신경 쓰이는 곳이 있다면 오늘 한번 챙겨보세요.',
+      '햇볕을 쬐며 걷는 시간이 활력을 채워줄 거예요. 잠깐이라도 햇빛 아래 나가 있는 시간을 가져보세요.',
+      '깊게 숨을 고르는 것만으로도 마음이 편안해지는 날이에요. 답답할 땐 잠깐 멈춰서 깊게 숨을 쉬어보세요.',
+      '오늘은 몸이 원하는 만큼 쉬어주는 것도 필요해요. 억지로 뭔가 하려 하지 말고 몸이 원하는 대로 따라주세요.',
+      '가벼운 스트레칭이나 운동이 좋은 활력소가 될 수 있어요. 숨이 살짝 찰 정도로 가볍게 몸을 움직여보세요.'
+    ]
+  };
+
+  /* ================= Date helpers ================= */
+  function pad2(n){ return (n<10?'0':'')+n; }
+  function todayYMD(){
+    var d = new Date(Date.now() + 9*3600*1000);
+    return {y:d.getUTCFullYear(), m:d.getUTCMonth()+1, d:d.getUTCDate()};
+  }
+  function daysInMonth(y,m){
+    var dim = [31,(y%4===0&&(y%100!==0||y%400===0))?29:28,31,30,31,30,31,31,30,31,30,31];
+    return dim[m-1];
+  }
+  function formatDateDigits(raw){
+    var digits = raw.replace(/\D/g,'').slice(0,8);
+    var parts = [];
+    if(digits.length>0) parts.push(digits.slice(0,4));
+    if(digits.length>4) parts.push(digits.slice(4,6));
+    if(digits.length>6) parts.push(digits.slice(6,8));
+    return parts.join('-');
+  }
+  function parseDateDigits(value){
+    var digits = (value||'').replace(/\D/g,'');
+    if(digits.length !== 8) return null;
+    return {y:+digits.slice(0,4), m:+digits.slice(4,6), d:+digits.slice(6,8)};
+  }
+  function validateYMD(p){
+    var today = todayYMD();
+    if(!p) return '생년월일 8자리를 입력해주세요 (예: 19970407)';
+    if(p.y < 1900 || p.y > today.y) return '1900~'+today.y+'년 사이로 입력해주세요';
+    if(p.m < 1 || p.m > 12) return '존재하지 않는 월이에요';
+    var maxDay = daysInMonth(p.y, p.m);
+    if(p.d < 1 || p.d > maxDay) return '존재하지 않는 날짜예요';
+    if(p.y===today.y && (p.m>today.m || (p.m===today.m && p.d>today.d))) return '아직 오지 않은 날짜예요';
+    return '';
+  }
+
+  /* ================= Render ================= */
+  var GEM_COLOR = {
+    '가넷':['#5c1414','#d4674a'], '자수정':['#2a1a40','#8f7fc4'], '아쿠아마린':['#0f3230','#9fdde3'], '다이아몬드':['#3a3a40','#f5f6fa'],
+    '에메랄드':['#0a2e18','#3f9e5c'], '진주':['#c9b896','#fdf8ec'], '루비':['#4a0e14','#e0384f'], '페리도트':['#2c3410','#a8c94a'],
+    '사파이어':['#0a1a40','#3a6fd8'], '오팔':['#c9c4d4','#f0ecf5'], '토파즈':['#5c3a0a','#e9a23c'], '탄자나이트':['#1a1040','#6a5acd'],
+    '로즈쿼츠':['#5a2a3a','#f0b8c8'], '라브라도라이트':['#1c2620','#4a5850'], '백수정':['#3a3a3e','#eef0f4'],
+    '문스톤':['#3a3d52','#e8e4f0'], '카넬리안':['#5c2410','#e8763c'],
+    '라피스라줄리':['#0a1a4a','#3452a8'], '시트린':['#5c4008','#f0c04a'],
+    '백옥':['#8a8570','#f5f0e0'], '레드재스퍼':['#5c1c10','#b8543a'], '그린아벤추린':['#0f3d24','#5ec98a'],
+    '유나카이트':['#2a4a2a','#a8d888'], '제브라스톤':['#1a1a1c','#e8e6e0'], '하울라이트':['#8a8a8a','#f0eee8'],
+    '타이거아이':['#4a2e08','#c9863a'], '무카이트':['#5c2418','#d4826a'], '소달라이트':['#0a1830','#3858a0'],
+    '로도나이트':['#4a1020','#d4708a'], '핑크제브라재스퍼':['#5a2838','#e8a8bc'], '실버흑요석':['#0f0f12','#8a8a92'],
+    '유퍼라이트':['#1c1840','#8a7ac9'], '셰브론자수정':['#2a1a40','#a89ad0']
+  };
+  function gemOrbStyle(name){
+    var g = GEM_COLOR[name] || ['#3a3a40','#cfcfcf'];
+    return 'background:radial-gradient(circle at 32% 28%, '+g[1]+', '+g[0]+' 78%);' +
+      'box-shadow:inset -4px -4px 10px rgba(0,0,0,0.3), inset 3px 3px 6px rgba(255,255,255,0.2);';
+  }
+
+  /* ================= 별자리 실제 항성 배치(근사) · 낫/주전자/갈고리 등 통용 연결 패턴 ================= */
+  var CONSTELLATION_ART = {
+    '염소자리':{stars:[{x:12,y:22,r:1.6},{x:20,y:32,r:1.6},{x:42,y:46,r:1.5},{x:64,y:36,r:1.6},{x:80,y:16,r:2.2,b:1}],lines:[[0,1],[1,2],[2,3],[3,4]]},
+    '물병자리':{stars:[{x:22,y:14,r:2.0,b:1},{x:48,y:10,r:2.0},{x:36,y:30,r:1.6},{x:30,y:48,r:1.5},{x:38,y:62,r:1.4},{x:50,y:48,r:1.4}],lines:[[0,2],[1,2],[2,3],[3,4],[2,5]]},
+    '물고기자리':{stars:[{x:8,y:48,r:1.4},{x:4,y:38,r:1.4},{x:14,y:32,r:1.4},{x:18,y:44,r:1.4},{x:45,y:38,r:1.9,b:1},{x:64,y:24,r:1.5},{x:80,y:10,r:1.7}],lines:[[0,1],[1,2],[2,3],[3,0],[3,4],[4,5],[5,6]]},
+    '양자리':{stars:[{x:70,y:18,r:2.4,b:1},{x:42,y:32,r:1.8},{x:30,y:38,r:1.6},{x:16,y:50,r:1.3}],lines:[[0,1],[1,2],[2,3]]},
+    '황소자리':{stars:[{x:45,y:40,r:2.8,b:1},{x:30,y:28,r:1.7},{x:36,y:50,r:1.6},{x:15,y:10,r:2.0},{x:70,y:14,r:1.7}],lines:[[1,0],[0,2],[1,3],[0,4]]},
+    '쌍둥이자리':{stars:[{x:20,y:8,r:2.1,b:1},{x:40,y:6,r:2.3,b:1},{x:17,y:30,r:1.5},{x:14,y:50,r:1.4},{x:42,y:32,r:1.5},{x:47,y:52,r:1.4}],lines:[[0,2],[2,3],[1,4],[4,5]]},
+    '게자리':{stars:[{x:40,y:28,r:1.7},{x:14,y:14,r:1.5},{x:66,y:18,r:1.6},{x:44,y:54,r:1.6,b:1}],lines:[[1,0],[0,2],[0,3]]},
+    '사자자리':{stars:[{x:14,y:52,r:2.6,b:1},{x:16,y:38,r:1.7},{x:24,y:24,r:1.8},{x:19,y:14,r:1.5},{x:52,y:20,r:1.9},{x:78,y:30,r:2.1,b:1}],lines:[[0,1],[1,2],[2,3],[0,4],[4,5]]},
+    '처녀자리':{stars:[{x:48,y:58,r:2.6,b:1},{x:39,y:40,r:1.6},{x:53,y:24,r:1.6},{x:34,y:14,r:1.4},{x:64,y:10,r:1.5}],lines:[[0,1],[1,2],[2,3],[2,4]]},
+    '천칭자리':{stars:[{x:40,y:8,r:1.7},{x:18,y:30,r:1.6},{x:64,y:27,r:2.0,b:1},{x:38,y:55,r:1.5}],lines:[[0,1],[0,2],[2,3]]},
+    '전갈자리':{stars:[{x:10,y:14,r:1.6},{x:20,y:9,r:1.5},{x:14,y:29,r:2.6,b:1},{x:28,y:43,r:1.6},{x:43,y:52,r:1.5},{x:55,y:48,r:1.5},{x:64,y:38,r:1.6},{x:71,y:22,r:1.9}],lines:[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7]]},
+    '사수자리':{stars:[{x:33,y:9,r:1.6},{x:58,y:14,r:1.7},{x:63,y:34,r:1.5},{x:48,y:44,r:1.9},{x:14,y:38,r:2.2,b:1},{x:24,y:19,r:1.7}],lines:[[0,5],[5,4],[4,3],[3,2],[2,1],[1,0]]}
+  };
+  function renderConstellationSVG(z){
+    var art = CONSTELLATION_ART[z.name];
+    var svg = '<svg viewBox="0 0 90 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">';
+    art.lines.forEach(function(ln){
+      var a = art.stars[ln[0]], b = art.stars[ln[1]];
+      svg += '<line x1="'+a.x+'" y1="'+a.y+'" x2="'+b.x+'" y2="'+b.y+'" stroke="#c8a24a" stroke-width="0.7" opacity="0.6"/>';
+    });
+    art.stars.forEach(function(s, i){
+      var cls = s.b ? ' class="tw"' : '';
+      var fill = s.b ? '#fff6df' : '#e9c876';
+      var delay = s.b ? ' style="animation-delay:'+(i*0.5)+'s"' : '';
+      svg += '<circle cx="'+s.x+'" cy="'+s.y+'" r="'+s.r+'" fill="'+fill+'"'+cls+delay+'/>';
+    });
+    svg += '</svg>';
+    return svg;
+  }
+
+  function renderResult(z, p){
+    document.getElementById('resultCaption').textContent = p.y+'.'+pad2(p.m)+'.'+pad2(p.d)+' 생';
+
+    document.getElementById('zodiacOrb').innerHTML = renderConstellationSVG(z);
+    document.getElementById('zodiacName').textContent = z.name;
+    document.getElementById('zodiacPeriod').textContent = z.range;
+    document.getElementById('gemTeaserLink').textContent = z.name+'에 어울리는 원석 보러가기 ↓';
+
+    var decanIdx = decanIndex(z, p.m, p.d);
+    var tagsHtml = z.keywords.split('·').map(function(k){ return '<span class="trait-tag">'+k+'</span>'; }).join('');
+    document.getElementById('personalityBlock').innerHTML =
+      '<div class="trait-tags">'+tagsHtml+'</div>' +
+      '<p class="fortune-personality">'+z.trait+'</p>' +
+      '<p class="fortune-personality">'+DECAN_NOTE[decanIdx]+'</p>' +
+      '<div class="trait-list">' +
+        '<div class="trait-item"><p class="trait-label">장점</p><p class="trait-text">'+z.strength+'</p></div>' +
+        '<div class="trait-item"><p class="trait-label">단점</p><p class="trait-text">'+z.weakness+'</p></div>' +
+        '<div class="trait-item"><p class="trait-label">주의할 점</p><p class="trait-text">'+z.caution+'</p></div>' +
+      '</div>';
+
+    var today = todayYMD();
+    var todayStr = today.y+''+pad2(today.m)+pad2(today.d);
+    document.getElementById('fortuneCaption').textContent =
+      today.y+'.'+pad2(today.m)+'.'+pad2(today.d)+' 기준 · 매일 바뀌어요';
+
+    var fortuneHtml = '';
+    FORTUNE_ORDER.forEach(function(cat){
+      var bank = FORTUNE_BANK[cat];
+      var seed = z.name+'-'+cat+'-'+todayStr;
+      var idx = hashStr(seed) % bank.length;
+      var score = (hashStr(seed+'-score') % 5) + 1;
+      fortuneHtml += '<div class="fortune-item"><div class="fortune-head">' +
+        '<span class="fortune-label">'+FORTUNE_LABELS[cat]+'</span>' +
+        '<span class="fortune-stars">'+starStr(score)+'</span></div>' +
+        '<p class="fortune-text">'+bank[idx]+'</p></div>';
+    });
+    document.getElementById('fortuneList').innerHTML = fortuneHtml;
+
+    document.getElementById('gemIntro').textContent = z.desc;
+
+    function gemCard(tierClass, badge, name, desc){
+      return '<div class="gem-card"><div class="stone-row">' +
+        '<div class="orb" style="'+gemOrbStyle(name)+'"></div>' +
+        '<div><span class="gem-tier '+tierClass+'">'+badge+'</span><p class="gem-name">'+name+'</p><p class="gem-desc">'+desc+'</p></div>' +
+        '</div></div>';
+    }
+    var html = gemCard('tier-premium', '전통 대표석', z.trad, z.desc);
+    if(z.main){ html += gemCard('tier-main', '대표원석', z.main, z.mainDesc); }
+    html += gemCard('tier-main', '추천원석', z.rec, z.recDesc);
+    document.getElementById('gemstones').innerHTML = html;
+
+    document.getElementById('contactBox').classList.remove('show');
+    var panel = document.getElementById('resultPanel');
+    panel.classList.add('show');
+    panel.scrollIntoView({behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'start'});
+  }
+
+  /* ================= Star background ================= */
+  function initStars(){
+    var canvas = document.getElementById('stars');
+    var ctx = canvas.getContext('2d');
+    var stars = [];
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function resize(){
+      canvas.width = window.innerWidth * devicePixelRatio;
+      canvas.height = window.innerHeight * devicePixelRatio;
+      canvas.style.width = window.innerWidth+'px';
+      canvas.style.height = window.innerHeight+'px';
+      ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+      var count = Math.min(140, Math.floor(window.innerWidth*window.innerHeight/9000));
+      stars = [];
+      for(var i=0;i<count;i++){
+        stars.push({
+          x:Math.random()*window.innerWidth,
+          y:Math.random()*window.innerHeight,
+          r:Math.random()*1.3+0.3,
+          base:Math.random()*0.5+0.25,
+          amp:Math.random()*0.4,
+          phase:Math.random()*Math.PI*2,
+          speed:Math.random()*0.6+0.2
+        });
+      }
+    }
+    function draw(t){
+      ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
+      stars.forEach(function(s){
+        var a = reduced ? s.base : s.base + s.amp*Math.sin(t*0.001*s.speed + s.phase);
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(238,225,190,'+Math.max(0,Math.min(1,a)).toFixed(3)+')';
+        ctx.fill();
+      });
+      if(!reduced) requestAnimationFrame(draw);
+    }
+    window.addEventListener('resize', resize);
+    resize();
+    requestAnimationFrame(draw);
+  }
+
+  /* ================= Wiring ================= */
+  document.addEventListener('DOMContentLoaded', function(){
+    initStars();
+
+    var installBtn = document.getElementById('installBtn');
+    var installIosTip = document.getElementById('installIosTip');
+    if(installBtn){
+      if(!isStandaloneMode() && isIOSDevice()) installBtn.hidden = false;
+      installBtn.addEventListener('click', function(){
+        if(deferredInstallPrompt){
+          installBtn.disabled = true;
+          deferredInstallPrompt.prompt();
+          deferredInstallPrompt.userChoice.then(function(choice){
+            deferredInstallPrompt = null;
+            installBtn.disabled = false;
+            if(choice.outcome === 'accepted') installBtn.hidden = true;
+          });
+        } else if(isIOSDevice() && installIosTip){
+          installIosTip.hidden = !installIosTip.hidden;
+        }
+      });
+    }
+
+    var dateText = document.getElementById('birthDateText');
+    var dateHint = document.getElementById('dateHint');
+
+    function refreshHint(){
+      var p = parseDateDigits(dateText.value);
+      var msg = validateYMD(p);
+      if(msg){
+        dateHint.textContent = p ? msg : '';
+        dateHint.classList.toggle('error', !!p);
+      } else {
+        dateHint.textContent = p.y+'년 '+p.m+'월 '+p.d+'일';
+        dateHint.classList.remove('error');
+      }
+    }
+
+    dateText.addEventListener('input', function(){
+      var pos = this.selectionStart;
+      var before = this.value;
+      this.value = formatDateDigits(this.value);
+      if(this.value.length !== before.length) pos += (this.value.length - before.length);
+      this.setSelectionRange(pos, pos);
+      refreshHint();
+    });
+
+    document.getElementById('zodiacForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      var p = parseDateDigits(dateText.value);
+      var msg = validateYMD(p);
+      if(msg){
+        dateHint.textContent = msg;
+        dateHint.classList.add('error');
+        return;
+      }
+      var z = findZodiac(p.m, p.d);
+      renderResult(z, p);
+    });
+
+    document.getElementById('ctaBtn').addEventListener('click', function(){
+      document.getElementById('contactBox').classList.toggle('show');
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', function(){
+      document.getElementById('resultPanel').classList.remove('show');
+      document.getElementById('formPanel').scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  /* 통합 사이트의 공통 서비스워커 (사주 · 탄생석 앱과 동일한 스코프) */
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', function(){
+      navigator.serviceWorker.register('/sw.js').catch(function(){});
+    });
+  }
+})();
+</script>
+</body></html>
