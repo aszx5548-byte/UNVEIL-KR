@@ -10,6 +10,10 @@
   --warm-white: #fcfaf6;
   --gold: #b49a63;
   --gold-light: #d1bf98;
+  /* 밝은 배경 위의 '글씨'용 골드입니다.
+     --gold 는 아이보리 배경에서 대비가 2.6 밖에 안 나와 WCAG AA(4.5) 에 미달합니다.
+     테두리·아이콘·어두운 배경의 글씨에는 --gold 를, 밝은 배경의 글씨에는 이 값을 씁니다. */
+  --gold-ink: #806a33;
   --charcoal: #242424;
   /* 아이보리 배경(#f7f3eb) 위 13px 본문이 WCAG AA 4.5:1 을 넘도록 잡은 값입니다.
      원래 #77736d 이었으나 4.26 으로 미달이라 조금 어둡게 조정했습니다. */
@@ -186,7 +190,7 @@ section[id] {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: var(--gold);
+  color: var(--gold-ink);
   font-weight: 500;
   text-decoration: none;
   border-bottom: 1px solid var(--line-on-dark);
@@ -197,6 +201,11 @@ section[id] {
 .disc-aside a:hover,
 .final-aside a:hover {
   border-bottom-color: var(--gold);
+}
+
+/* 마지막 CTA 는 어두운 배경이라 밝은 골드가 오히려 대비가 좋습니다. */
+.final .final-aside a {
+  color: var(--gold-light);
 }
 
 .inline-arrow {
@@ -429,7 +438,7 @@ section[id] {
   margin-top: 26px;
   font-size: 14px;
   font-weight: 500;
-  color: var(--gold);
+  color: var(--gold-ink);
 }
 .disc-card:hover .inline-arrow {
   transform: translateX(3px);
@@ -789,7 +798,7 @@ section[id] {
   min-height: 48px;
   font-size: 14.5px;
   font-weight: 500;
-  color: var(--gold);
+  color: var(--gold-ink);
   text-decoration: none;
   border-bottom: 1px solid var(--line-on-dark);
 }

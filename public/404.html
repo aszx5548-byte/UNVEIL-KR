@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'">
+<meta name="robots" content="noindex">
+<title>페이지를 찾을 수 없습니다 | UNVEIL</title>
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Noto+Sans+KR:wght@400;500&family=Noto+Serif+KR:wght@600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#07111f; --gold:#b49a63; --gold-light:#d1bf98;
+    --cream:#f7f3eb; --text-soft:rgba(236,230,218,.68);
+    --serif-ko:'Noto Serif KR','Batang',serif;
+    --sans:'Pretendard','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;}
+  body{
+    background:radial-gradient(ellipse at 50% 0%, #12233c 0%, var(--navy) 60%);
+    color:var(--cream); font-family:var(--sans); line-height:1.8;
+    word-break:keep-all; display:flex; align-items:center; justify-content:center;
+    padding:32px; text-align:center; -webkit-font-smoothing:antialiased;
+  }
+  .box{max-width:520px;}
+  .mark{width:44px;height:44px;color:var(--gold);}
+  .eyebrow{
+    margin:26px 0 0; font-family:'Cormorant Garamond',Georgia,serif;
+    font-size:12.5px; letter-spacing:.28em; text-transform:uppercase; color:var(--gold);
+  }
+  h1{
+    margin:14px 0 0; font-family:var(--serif-ko);
+    font-size:clamp(24px,4.5vw,32px); font-weight:600; color:var(--cream);
+  }
+  p{margin:18px 0 0; font-size:15.5px; color:var(--text-soft);}
+  .links{
+    display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:38px;
+  }
+  .links a{
+    display:inline-flex; align-items:center; justify-content:center;
+    min-height:48px; padding:0 20px;
+    border:1px solid rgba(180,154,99,.36); border-radius:2px;
+    font-size:14.5px; font-weight:500; color:var(--cream); text-decoration:none;
+    transition:background .2s ease, border-color .2s ease, color .2s ease;
+  }
+  .links a:hover{background:var(--gold); border-color:var(--gold); color:var(--navy);}
+  .home{
+    display:inline-block; margin-top:26px; font-size:14px; color:var(--gold-light);
+    text-decoration:none; border-bottom:1px solid rgba(180,154,99,.4); padding-bottom:2px;
+  }
+  :focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+</style>
+</head>
+<body>
+  <div class="box">
+    <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
+      <path fill="currentColor" d="M32 3c1 12 2 18 5 21 3 3 9 4 21 5-12 1-18 2-21 5-3 3-4 9-5 21-1-12-2-18-5-21-3-3-9-4-21-5 12-1 18-2 21-5 3-3 4-9 5-21Z"/>
+    </svg>
+
+    <p class="eyebrow">404</p>
+    <h1>찾으시는 페이지가 없습니다</h1>
+    <p>주소가 바뀌었거나 삭제된 페이지일 수 있습니다.<br>아래에서 원하시는 곳으로 이동해 보세요.</p>
+
+    <div class="links">
+      <a href="/saju/">무료 사주오행</a>
+      <a href="/zodiac/">무료 별자리</a>
+      <a href="/birthstone/">무료 탄생석</a>
+    </div>
+
+    <a class="home" href="/">← UNVEIL 홈으로</a>
+  </div>
+</body>
+</html>

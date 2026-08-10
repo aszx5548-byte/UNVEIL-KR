@@ -308,10 +308,12 @@ export interface FooterLink {
 }
 
 export const FOOTER_LINKS: FooterLink[] = [
-  { label: '이용약관', href: null },
-  { label: '개인정보처리방침', href: null },
-  { label: '배송·교환·반품 안내', href: null },
-  { label: '고객문의', href: null },
+  // 약관·정책 문서는 public/legal/ 안의 정적 HTML 입니다.
+  // 사업자 정보가 확정되면 각 문서의 노란색 표시 부분을 채워야 합니다.
+  { label: '이용약관', href: '/legal/terms/' },
+  { label: '개인정보처리방침', href: '/legal/privacy/' },
+  { label: '배송·교환·반품 안내', href: '/legal/shipping/' },
+  { label: '고객문의', href: '/legal/support/' },
   { label: '인스타그램', href: LINKTREE_URL },
   { label: '네이버 스마트스토어', href: SMARTSTORE_URL },
 ];
