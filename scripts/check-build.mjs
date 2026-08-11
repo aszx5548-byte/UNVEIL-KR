@@ -5,7 +5,9 @@
 import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
-const DIST = 'dist';
+// 검사할 폴더. 기본은 dist 이고, 인자로 다른 폴더를 줄 수 있습니다.
+// (검사기가 실제로 실패를 잡는지 시험할 때 씁니다)
+const DIST = process.argv[2] ?? 'dist';
 const fail = [];
 
 function read(p) {
@@ -95,6 +97,52 @@ for (const loc of locs) {
   if (!existsSync(join(DIST, file))) fail.push(`sitemap 에 있는데 파일이 없음 — ${loc}`);
 }
 
+// ── 6. 고아 페이지 ─────────────────────────────
+// sitemap 에만 있고 어디서도 링크되지 않는 페이지는, 사람이 클릭으로 도달할 수
+// 없고 검색엔진도 중요도를 낮게 봅니다. 홈에서 링크를 따라가 닿는지 확인합니다.
+const ASSET = /\.(css|js|mjs|png|jpe?g|webp|svg|ico|xml|txt|json|webmanifest|pdf)$/i;
+
+function pagePath(file) {
+  const rel = file.replace(/\\/g, '/').replace(/^dist\//, '');
+  return rel === 'index.html' ? '/' : '/' + rel.replace(/index\.html$/, '');
+}
+
+const graph = new Map();
+function collectPages(dir) {
+  for (const name of readdirSync(dir)) {
+    const p = join(dir, name);
+    if (statSync(p).isDirectory()) { collectPages(p); continue; }
+    if (name !== 'index.html' && name !== '404.html') continue;
+    const from = pagePath(p);
+    const links = new Set();
+    for (const m of readFileSync(p, 'utf8').matchAll(/href="(\/[^"#?]*)"/g)) {
+      const href = m[1];
+      if (ASSET.test(href)) continue;
+      links.add(href.endsWith('/') || href === '/' ? href : href + '/');
+    }
+    graph.set(from, links);
+  }
+}
+collectPages(DIST);
+
+const seen = new Set(['/']);
+const queue = ['/'];
+while (queue.length) {
+  for (const next of graph.get(queue.shift()) ?? []) {
+    if (!seen.has(next)) { seen.add(next); queue.push(next); }
+  }
+}
+
+const orphans = locs
+  .map((l) => l.replace(/^https?:\/\/[^/]+/, ''))
+  .filter((p) => !seen.has(p));
+if (orphans.length) {
+  fail.push(
+    `고아 페이지 ${orphans.length}개 — 홈에서 링크로 도달할 수 없습니다: ${orphans.slice(0, 4).join(', ')}` +
+      (orphans.length > 4 ? ' 등' : ''),
+  );
+}
+
 // ── 결과 ───────────────────────────────────────
 if (fail.length) {
   console.error('[check-build] 배포 중단 — 문제 ' + fail.length + '건');
@@ -105,3 +153,4 @@ console.log('[check-build] 통과');
 console.log('  프리렌더링   : 크롤러가 읽는 본문 ' + injected.length + '자');
 console.log('  안내 페이지  : ' + pages.length + '개');
 console.log('  sitemap      : ' + locs.length + '개 주소, 전부 파일 존재');
+console.log('  내부 링크    : 홈에서 ' + seen.size + '개 경로 도달, 고아 0개');

@@ -32,6 +32,16 @@ export default function DiscoveryCards() {
           ))}
         </div>
 
+        {/* 계산 없이 바로 읽을 수 있는 안내 페이지로 가는 길입니다.
+            목차는 페이지 아래쪽 #guide 에 있습니다. */}
+        <p className="disc-aside">
+          생년월일 없이 바로 보고 싶다면{' '}
+          <a className="statement-link" href="#guide">
+            달 · 별자리 · 오행 안내
+            <ArrowRight className="inline-arrow" />
+          </a>
+        </p>
+
         <p className="disc-aside">
           팔찌부터 보고 싶다면{' '}
           <StoreLink event="click_smartstore">

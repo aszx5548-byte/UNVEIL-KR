@@ -69,6 +69,8 @@ export const NAV_ITEMS: NavItem[] = [
   { label: '원석 찾기', href: '#discovery' },
   { label: '팔찌 보기', href: '#products' },
   { label: 'UNVEIL 기준', href: '#trust' },
+  // 안내 페이지 29개로 들어가는 목차입니다.
+  { label: '원석 안내', href: '#guide' },
   { label: '자주 묻는 질문', href: '#faq' },
 ];
 
@@ -333,6 +335,73 @@ export const FOOTER_LINKS: FooterLink[] = [
   { label: '고객문의', href: '/legal/support/' },
   { label: '인스타그램', href: LINKTREE_URL },
   { label: '네이버 스마트스토어', href: SMARTSTORE_URL },
+];
+
+/**
+ * 안내 페이지 목차 (탄생석 12 · 별자리 12 · 오행 5 = 29개)
+ *
+ * 이 페이지들은 public/ 안의 정적 HTML 이고,
+ * scratchpad/gen_pages.py 가 gen_data.py 를 읽어 생성합니다.
+ * 여기 목록은 그 결과와 같은 순서·같은 이름이어야 합니다.
+ *
+ * 목차를 두는 이유는 두 가지입니다.
+ *   1. 홈에서 들어가는 길이 없으면 사람이 클릭으로 도달할 수 없습니다.
+ *   2. sitemap 에만 있고 내부 링크가 없는 페이지는 검색엔진이
+ *      중요도를 낮게 봅니다. 링크로 이어져 있어야 제대로 평가됩니다.
+ */
+export interface GuideGroup {
+  id: string;
+  title: string;
+  description: string;
+  /** 그룹 대표 주소 — 해당 앱으로 연결됩니다. */
+  href: string;
+  items: { label: string; href: string }[];
+}
+
+export const GUIDE_GROUPS: GuideGroup[] = [
+  {
+    id: 'guide-birthstone',
+    title: '탄생월로 보기',
+    description: '월별 대표·두 번째 탄생석과 UNVEIL이 함께 권하는 원석을 정리했습니다.',
+    href: APP_LINKS.birthstone,
+    items: Array.from({ length: 12 }, (_, i) => ({
+      label: `${i + 1}월`,
+      href: `/birthstone/${i + 1}/`,
+    })),
+  },
+  {
+    id: 'guide-zodiac',
+    title: '별자리로 보기',
+    description: '자리별 전통 대표석과 UNVEIL이 취급하는 원석을 구분해 표기했습니다.',
+    href: APP_LINKS.zodiac,
+    items: [
+      { label: '염소자리', href: '/zodiac/capricorn/' },
+      { label: '물병자리', href: '/zodiac/aquarius/' },
+      { label: '물고기자리', href: '/zodiac/pisces/' },
+      { label: '양자리', href: '/zodiac/aries/' },
+      { label: '황소자리', href: '/zodiac/taurus/' },
+      { label: '쌍둥이자리', href: '/zodiac/gemini/' },
+      { label: '게자리', href: '/zodiac/cancer/' },
+      { label: '사자자리', href: '/zodiac/leo/' },
+      { label: '처녀자리', href: '/zodiac/virgo/' },
+      { label: '천칭자리', href: '/zodiac/libra/' },
+      { label: '전갈자리', href: '/zodiac/scorpio/' },
+      { label: '사수자리', href: '/zodiac/sagittarius/' },
+    ],
+  },
+  {
+    id: 'guide-saju',
+    title: '사주 오행으로 보기',
+    description: '오행별 색 대응(목=초록, 화=빨강, 토=황토, 금=흰색, 수=검정)을 기준으로 골랐습니다.',
+    href: APP_LINKS.saju,
+    items: [
+      { label: '목(木)', href: '/saju/wood/' },
+      { label: '화(火)', href: '/saju/fire/' },
+      { label: '토(土)', href: '/saju/earth/' },
+      { label: '금(金)', href: '/saju/metal/' },
+      { label: '수(水)', href: '/saju/water/' },
+    ],
+  },
 ];
 
 export const FOOTER_DISCLAIMER =

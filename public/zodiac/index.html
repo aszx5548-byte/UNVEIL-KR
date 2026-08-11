@@ -273,6 +273,31 @@
   }
   .home-link:hover{ opacity:.78; transform:translateX(-2px); }
   .home-link svg{ width:13px; height:13px; flex:none; }
+
+  /* ===== 통합 사이트: 안내 페이지 목차 =====
+     계산을 돌리지 않고 바로 읽고 싶은 사람을 위한 길이자,
+     검색엔진이 안내 페이지를 고아로 보지 않게 하는 내부 링크입니다. */
+  .guide-nav{
+    margin:38px 0 0; padding:22px 20px;
+    border:1px solid var(--gold-line); border-radius:14px;
+    background:var(--gold-soft);
+  }
+  .guide-nav h2{
+    margin:0 0 6px; font-family:var(--serif); font-size:15px;
+    font-weight:600; color:var(--gold-bright); letter-spacing:.02em;
+  }
+  .guide-nav p{
+    margin:0 0 14px; font-family:var(--sans); font-size:12.5px;
+    line-height:1.7; color:var(--text-muted); word-break:keep-all;
+  }
+  .guide-nav ul{ display:flex; flex-wrap:wrap; gap:7px; margin:0; padding:0; list-style:none; }
+  .guide-nav a{
+    display:inline-block; padding:6px 12px;
+    border:1px solid var(--gold-line); border-radius:999px;
+    font-family:var(--sans); font-size:12.5px; color:var(--text);
+    text-decoration:none; transition:border-color .2s ease, color .2s ease;
+  }
+  .guide-nav a:hover{ border-color:var(--gold); color:var(--gold-bright); }
 </style>
 
 <canvas id="stars"></canvas>
@@ -365,6 +390,25 @@
 
     <button type="button" class="reset-link" id="resetBtn">← 다시 찾아보기</button>
   </section>
+
+  <nav class="guide-nav" aria-label="별자리별 원석 안내">
+    <h2>별자리별 원석 안내</h2>
+    <p>생년월일을 넣지 않고도 볼 수 있는 안내 페이지입니다. 자리별 전통 대표석과 UNVEIL이 취급하는 원석을 구분해 적었습니다.</p>
+    <ul>
+      <li><a href="/zodiac/capricorn/">염소자리</a></li>
+      <li><a href="/zodiac/aquarius/">물병자리</a></li>
+      <li><a href="/zodiac/pisces/">물고기자리</a></li>
+      <li><a href="/zodiac/aries/">양자리</a></li>
+      <li><a href="/zodiac/taurus/">황소자리</a></li>
+      <li><a href="/zodiac/gemini/">쌍둥이자리</a></li>
+      <li><a href="/zodiac/cancer/">게자리</a></li>
+      <li><a href="/zodiac/leo/">사자자리</a></li>
+      <li><a href="/zodiac/virgo/">처녀자리</a></li>
+      <li><a href="/zodiac/libra/">천칭자리</a></li>
+      <li><a href="/zodiac/scorpio/">전갈자리</a></li>
+      <li><a href="/zodiac/sagittarius/">사수자리</a></li>
+    </ul>
+  </nav>
 
   <footer class="disclaimer">
     이 콘텐츠는 서양 점성술의 탄생석 전승과 상징적 의미를 참고용으로 재구성한 내용입니다.<br/>

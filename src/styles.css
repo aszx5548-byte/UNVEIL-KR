@@ -1029,6 +1029,82 @@ section[id] {
   color: var(--gold-light);
 }
 
+/* ---------- 안내 페이지 목차 ---------- */
+
+.guide {
+  background: var(--ivory);
+  scroll-margin-top: var(--header-h);
+}
+
+.guide-groups {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(24px, 3vw, 40px);
+}
+
+.guide-group {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(24px, 2.4vw, 32px);
+  background: var(--warm-white);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+}
+
+.guide-group-title {
+  font-family: var(--font-serif-ko);
+  font-size: 19px;
+  color: var(--charcoal);
+}
+
+.guide-group-desc {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--gray);
+  word-break: keep-all;
+}
+
+.guide-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+.guide-links a {
+  display: inline-block;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 13.5px;
+  color: var(--charcoal);
+  text-decoration: none;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.guide-links a:hover {
+  border-color: var(--gold);
+  color: var(--gold-ink);
+}
+
+/* 마지막에 붙는 링크라 위 여백을 자동으로 밀어 카드 높이를 맞춥니다. */
+.guide-more {
+  margin-top: auto;
+  padding-top: 22px;
+  font-size: 14px;
+  color: var(--gold-ink);
+  text-decoration: none;
+  border-bottom: 0;
+}
+
+.guide-more:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 /* ==================================================================
    태블릿
    ================================================================== */
@@ -1077,6 +1153,9 @@ section[id] {
 /* 카드 3열은 여기까지 유지하고, 그보다 좁으면 세로 1열로 내립니다. */
 @media (max-width: 820px) {
   .disc-grid {
+    grid-template-columns: 1fr;
+  }
+  .guide-groups {
     grid-template-columns: 1fr;
   }
 }

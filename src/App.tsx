@@ -9,6 +9,7 @@ import HowItWorks from './components/HowItWorks';
 import MeaningSection from './components/MeaningSection';
 import ProductStatement from './components/ProductStatement';
 import RecommendationPrinciple from './components/RecommendationPrinciple';
+import StoneGuide from './components/StoneGuide';
 import TrustAndGift from './components/TrustAndGift';
 import TrustStrip from './components/TrustStrip';
 
@@ -31,6 +32,7 @@ export default function App() {
         <RecommendationPrinciple />
         <MeaningSection />
         <TrustAndGift />
+        <StoneGuide />
         <FAQ />
         <FinalCTA />
       </main>
