@@ -119,7 +119,11 @@ export const DISCOVERY_CARDS: DiscoveryCard[] = [
 ];
 
 /* ------------------------------------------------------------------ *
- * 원석팔찌 소개 + 품질 기준 4가지
+ * 제품 소개 + 품질 기준 4가지
+ *
+ * 브랜드의 대상은 '원석'이고 팔찌는 현재의 제품 형태입니다.
+ * 앞으로 다른 아이템으로 확장할 예정이므로, 브랜드를 설명하는 문구에서는
+ * 제품군을 못 박지 않습니다. (SKU 코드에도 BR=팔찌 / ST=원석 단품 자리가 있습니다)
  * ------------------------------------------------------------------ */
 
 export type TrustIcon = 'stone' | 'camera' | 'size' | 'gift';
@@ -133,7 +137,7 @@ export interface TrustFeature {
 export const TRUST_FEATURES: TrustFeature[] = [
   { icon: 'stone', title: '천연 원석 사용', description: '출처와 특성을 투명하게 안내합니다.' },
   { icon: 'camera', title: '실물 검수 & 촬영', description: '자연광으로 직접 확인한 사진만 씁니다.' },
-  { icon: 'size', title: '8mm 표준 사이즈', description: '누구나 편안하게 착용할 수 있는 크기.' },
+  { icon: 'size', title: '8mm 표준 규격', description: '지금의 팔찌 라인은 8mm로 통일했습니다.' },
   { icon: 'gift', title: '의미 카드 & 패키지', description: '선물도, 나를 위한 다짐도 정성스럽게.' },
 ];
 

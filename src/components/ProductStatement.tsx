@@ -17,10 +17,12 @@ export default function ProductStatement() {
 
         <div className="statement-copy">
           <p className="eyebrow">검증된 원석, 정직한 가치</p>
+          {/* 브랜드의 대상은 '원석'입니다. 팔찌는 지금의 형태일 뿐이므로
+              제목에서 제품군을 못 박지 않습니다. */}
           <h2 className="section-title">
             의미를 담은
             <br />
-            원석팔찌
+            천연 원석
           </h2>
           <p className="statement-desc">
             자연이 만든 고유한 빛과 결을

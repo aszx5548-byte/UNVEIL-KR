@@ -39,7 +39,7 @@ export function structuredData(): string {
     '@type': 'ItemList',
     '@id': `${SITE_URL}/#collections`,
     name: '의미 컬렉션',
-    description: 'UNVEIL 이 의미별로 묶은 8mm 천연 원석팔찌 컬렉션입니다.',
+    description: 'UNVEIL 이 의미별로 묶은 천연 원석 컬렉션입니다.',
     itemListElement: COLLECTIONS.map((c, i) => ({
       '@type': 'ListItem',
       position: i + 1,
