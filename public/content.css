@@ -1,0 +1,153 @@
+/* 탄생석·별자리·오행 안내 페이지 공통 스타일
+   홈페이지와 같은 팔레트를 쓰되, 읽는 글에 맞게 여백과 크기를 조정했습니다. */
+
+:root {
+  --navy: #07111f;
+  --ivory: #f7f3eb;
+  --warm-white: #fcfaf6;
+  --gold: #b49a63;
+  --gold-ink: #806a33; /* 밝은 배경 위 글씨용 (대비 확보) */
+  --charcoal: #242424;
+  --gray: #6b6761;
+  --line: #ddd5c8;
+  --font-display: 'Cormorant Garamond', 'EB Garamond', Georgia, serif;
+  --font-serif-ko: 'Noto Serif KR', 'Nanum Myeongjo', 'Batang', serif;
+  --font-sans: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont,
+    'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--warm-white);
+  color: var(--charcoal);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.85;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--gold-ink); }
+img { max-width: 100%; height: auto; display: block; }
+
+/* 상단 바 */
+.c-top { background: var(--navy); border-bottom: 1px solid rgba(180,154,99,.34); }
+.c-top .inner {
+  max-width: 780px; margin: 0 auto; padding: 0 24px;
+  height: 68px; display: flex; align-items: center; justify-content: space-between;
+}
+.c-wordmark {
+  display: inline-flex; align-items: flex-start; gap: 5px;
+  font-family: var(--font-display); font-size: 21px; font-weight: 600;
+  letter-spacing: .32em; color: var(--warm-white); text-decoration: none;
+}
+.c-wordmark span { color: var(--gold); font-size: 12px; margin-top: 1px; }
+.c-top nav { display: flex; gap: 18px; }
+.c-top nav a {
+  font-size: 13.5px; color: rgba(236,230,218,.72); text-decoration: none;
+}
+.c-top nav a:hover { color: var(--gold); }
+
+/* 본문 */
+.c-body { max-width: 780px; margin: 0 auto; padding: clamp(36px,6vw,64px) 24px clamp(56px,8vw,88px); }
+
+.c-crumb { font-size: 13px; color: var(--gray); margin: 0 0 18px; }
+.c-crumb a { color: var(--gray); text-decoration: none; }
+.c-crumb a:hover { color: var(--gold-ink); }
+
+.c-eyebrow {
+  margin: 0; font-family: var(--font-display); font-size: 12.5px;
+  letter-spacing: .26em; text-transform: uppercase; color: var(--gold-ink); font-weight: 600;
+}
+
+h1 {
+  margin: 12px 0 0; font-family: var(--font-serif-ko);
+  font-size: clamp(28px,5vw,40px); font-weight: 600; line-height: 1.3; letter-spacing: -.01em;
+}
+
+/* 답을 먼저 주는 첫 문단 — AI 답변 엔진이 그대로 인용하기 좋은 자리 */
+.c-answer {
+  margin: 26px 0 0; padding: 24px 26px;
+  background: var(--ivory); border-left: 3px solid var(--gold);
+  font-size: 17px; line-height: 1.8;
+}
+.c-answer strong { color: var(--charcoal); }
+
+h2 {
+  margin: 52px 0 0; padding-top: 28px; border-top: 1px solid var(--line);
+  font-family: var(--font-serif-ko); font-size: 21px; font-weight: 600;
+}
+h3 { margin: 30px 0 0; font-size: 16.5px; font-weight: 700; }
+p { margin: 16px 0 0; }
+ul, ol { margin: 16px 0 0; padding-left: 20px; }
+li { margin: 7px 0; }
+
+table { width: 100%; margin-top: 20px; border-collapse: collapse; font-size: 15px; }
+th, td { border: 1px solid var(--line); padding: 13px 14px; text-align: left; vertical-align: top; }
+th { background: var(--ivory); font-weight: 600; white-space: nowrap; }
+
+.c-note {
+  margin-top: 22px; padding: 16px 18px; background: var(--ivory);
+  border: 1px solid var(--line); font-size: 14px; color: var(--gray);
+}
+
+/* 원석 카드 */
+.c-stone {
+  display: flex; gap: 18px; align-items: flex-start;
+  margin-top: 18px; padding: 20px; border: 1px solid var(--line);
+  border-radius: 3px; background: var(--warm-white);
+}
+.c-stone .swatch {
+  flex: none; width: 54px; height: 54px; border-radius: 50%;
+  border: 1px solid rgba(0,0,0,.08);
+}
+.c-stone h3 { margin: 0; font-size: 17px; }
+.c-stone p { margin: 6px 0 0; font-size: 14.5px; color: var(--gray); }
+.c-stone .tag {
+  display: inline-block; margin-top: 8px; padding: 3px 10px;
+  border: 1px solid var(--line); border-radius: 999px;
+  font-size: 12px; color: var(--gray);
+}
+
+/* 행동 유도 */
+.c-cta {
+  display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px;
+}
+.c-cta a {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 50px; padding: 0 22px;
+  border: 1px solid var(--gold); border-radius: 2px;
+  font-size: 14.5px; font-weight: 500; color: var(--charcoal); text-decoration: none;
+  transition: background .2s ease, color .2s ease;
+}
+.c-cta a:hover { background: var(--gold); color: var(--warm-white); }
+.c-cta a.solid { background: var(--navy); border-color: var(--navy); color: var(--warm-white); }
+.c-cta a.solid:hover { background: var(--gold); border-color: var(--gold); }
+
+/* 다른 달·자리로 이동 */
+.c-siblings { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.c-siblings a {
+  padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px;
+  font-size: 13.5px; color: var(--charcoal); text-decoration: none;
+}
+.c-siblings a:hover { border-color: var(--gold); color: var(--gold-ink); }
+.c-siblings a[aria-current='page'] { background: var(--navy); border-color: var(--navy); color: var(--warm-white); }
+
+.c-foot {
+  margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--line);
+  font-size: 13px; color: var(--gray);
+}
+.c-foot a { color: var(--gray); }
+
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+@media (max-width: 620px) {
+  .c-body { padding-left: 20px; padding-right: 20px; }
+  .c-top nav { display: none; }
+  table { font-size: 14px; }
+  th, td { padding: 10px 11px; }
+  .c-stone { flex-direction: column; gap: 12px; }
+}

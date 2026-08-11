@@ -523,38 +523,38 @@
   // unveilImage/unveilUrl은 실제 상품 사진·구매 링크 확보 전까지 null로 둡니다(TODO).
   var MONTHS = [
     { month:1,  primary:"garnet",   second:"roseQuartz",  basis:"Jewelers of America가 인정한 대체 탄생석",           accent:"#7a2436",
-      unveilPick:"garnet", unveilPrice:19900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
+      unveilPick:"garnet", unveilPrice:null /* 가격 미확정 */, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
     { month:2,  primary:"amethyst", second:"amber",        basis:"Jewelers of America가 인정한 대체 탄생석",           accent:"#7d4fb0",
-      unveilPick:"amethyst", unveilPrice:19900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
+      unveilPick:"amethyst", unveilPrice:null /* 가격 미확정 */, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
     { month:3,  primary:"aquamarine", second:"bloodstone", basis:"GIA가 공인한 3월의 탄생석",          accent:"#3fb8c9",
-      unveilPick:"aquamarine", unveilPrice:19900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
+      unveilPick:"aquamarine", unveilPrice:null /* 가격 미확정 */, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
     { month:4,  primary:"diamond",  second:"clearQuartz",  basis:"Jewelers of America가 인정한 대체 탄생석",           accent:"#c9d6e0",
-      unveilPick:"clearQuartz", unveilPrice:24900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
+      unveilPick:"clearQuartz", unveilPrice:null /* 가격 미확정 */, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
     { month:5,  primary:"emerald",  second:"chrysoprase",  basis:"Jewelers of America가 인정한 대체 탄생석",           accent:"#1f8f5f",
       // TODO(임시 대체, 교체 예정): 조달처 크리소프레이즈가 염색으로 확인되어 그린아벤츄린으로 임시 대체.
       // 비염색 크리소프레이즈 확보 시 unveilPick을 "chrysoprase"로 교체하세요.
-      unveilPick:"greenAventurine", unveilPrice:19900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
+      unveilPick:"greenAventurine", unveilPrice:null /* 가격 미확정 */, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
     { month:6,  primary:"pearl",    second:"moonstone",    basis:"GIA·Jewelers of America가 함께 인정한 6월의 탄생석",  accent:"#ded2ba",
-      unveilPick:"moonstone", unveilPrice:24900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
+      unveilPick:"moonstone", unveilPrice:null /* 가격 미확정 */, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
     { month:7,  primary:"ruby",     second:"carnelian",    basis:"Jewelers of America가 인정한 대체 탄생석",           accent:"#9b1237",
-      unveilPick:"carnelian", unveilPrice:19900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
+      unveilPick:"carnelian", unveilPrice:null /* 가격 미확정 */, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
     { month:8,  primary:"peridot",  second:"sardonyx",     basis:"GIA가 소개하는 8월의 가장 오래된 탄생석", accent:"#7c9a1e",
       // TODO(임시 대체, 교체 예정): 조달처 사도닉스 재고 1개·진위 불확실로 인디언아게이트로 임시 대체.
       // 진위 확인된 사도닉스 확보 시 unveilPick을 "sardonyx"로 교체하세요.
-      unveilPick:"indianAgate", unveilPrice:19900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
+      unveilPick:"indianAgate", unveilPrice:null /* 가격 미확정 */, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
     { month:9,  primary:"sapphire", second:"lapis",        basis:"Jewelers of America가 인정한 대체 탄생석",           accent:"#0f3f8f",
-      unveilPick:"lapis", unveilPrice:19900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
+      unveilPick:"lapis", unveilPrice:null /* 가격 미확정 */, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
     { month:10, primary:"opal",     second:"pinkTourmaline", basis:"GIA·Jewelers of America가 함께 인정한 10월의 탄생석", accent:"#c96a9e",
       // TODO(임시 대체, 교체 예정): 핑크 토르말린 8mm 비즈 단가가 높아 라브라도라이트로 임시 대체.
       // 단가가 맞는 핑크 토르말린 확보 시 unveilPick을 "pinkTourmaline"으로 교체하세요.
-      unveilPick:"labradorite", unveilPrice:19900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
+      unveilPick:"labradorite", unveilPrice:null /* 가격 미확정 */, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
     { month:11, primary:"topaz",    second:"citrine",      basis:"GIA·Jewelers of America가 함께 인정한 11월의 탄생석", accent:"#c98a2e",
-      unveilPick:"citrine", unveilPrice:24900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
+      unveilPick:"citrine", unveilPrice:null /* 가격 미확정 */, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
     { month:12, primary:"turquoise", second:"zircon",       basis:"GIA가 공인한 12월의 탄생석",         accent:"#1f9e93",
       // TODO(임시 대체, 최우선 교체 대상): 유통 터키석 다수가 염색 하울라이트·재구성품이라 검증된 재고가 없어
       // 3월과 동일한 아쿠아마린으로 임시 대체(청록 계열 부재, 3월과 원석 중복). 안정화 처리된 천연 터키석
       // 확보 시 unveilPick을 "turquoise"로 교체하고 unveilPrice/unveilImage/unveilUrl도 갱신하세요.
-      unveilPick:"aquamarine", unveilPrice:19900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ }
+      unveilPick:"aquamarine", unveilPrice:null /* 가격 미확정 */, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ }
   ];
 
   var RELATIONS = {
