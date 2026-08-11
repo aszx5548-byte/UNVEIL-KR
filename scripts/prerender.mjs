@@ -23,8 +23,9 @@ if (!fs.existsSync(serverEntry)) {
   process.exit(1);
 }
 
-const { render } = await import(pathToFileURL(serverEntry).href);
+const { render, structuredData } = await import(pathToFileURL(serverEntry).href);
 const appHtml = render();
+const ldJson = structuredData();
 
 if (!appHtml || appHtml.length < 500) {
   console.error('[prerender] 렌더 결과가 비었거나 너무 짧습니다. 길이=%d', appHtml?.length ?? 0);
@@ -40,6 +41,13 @@ if (!html.includes(marker)) {
 }
 
 html = html.replace(marker, `<div id="root">${appHtml}</div>`);
+
+// FAQ·컬렉션 구조화 데이터를 </head> 앞에 넣습니다.
+// data.ts 의 실제 문구에서 만들어지므로 화면과 내용이 어긋나지 않습니다.
+if (ldJson) {
+  html = html.replace('</head>', `    ${ldJson}\n  </head>`);
+}
+
 fs.writeFileSync(htmlPath, html, 'utf-8');
 
 // 실제로 본문 글자가 들어갔는지 확인합니다.

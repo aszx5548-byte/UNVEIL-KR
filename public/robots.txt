@@ -1,5 +1,8 @@
-# UNVEIL — 검색엔진 크롤링 규칙
+# UNVEIL — 검색엔진 · AI 크롤링 규칙
 
+# ─────────────────────────────────────────────
+# 일반 검색엔진
+# ─────────────────────────────────────────────
 User-agent: *
 Allow: /
 
@@ -14,6 +17,59 @@ Disallow: /saju/?*
 # 네이버 크롤러는 자바스크립트 실행이 제한적이라,
 # 홈페이지 본문을 빌드 시점에 미리 그려 넣어두었습니다(프리렌더링).
 User-agent: Yeti
+Allow: /
+Disallow: /legal/
+
+# ─────────────────────────────────────────────
+# AI 크롤러 — 전부 허용합니다
+#
+# 요즘 "학습용 크롤러는 차단하라"는 조언이 많지만, 그건 콘텐츠를 지켜야 하는
+# 언론사·출판사의 논리입니다. UNVEIL 은 신생 브랜드라 AI 가 우리를 알아야
+# 추천 대상이 됩니다. 차단하면 추천받을 기회 자체가 사라집니다.
+#
+# 공개해도 되는 정보만 사이트에 올려두었으므로(사업자 정보·상품 안내·참고 콘텐츠),
+# 학습에 쓰이는 것이 오히려 이득입니다.
+# ─────────────────────────────────────────────
+
+# OpenAI — GPTBot(학습) / OAI-SearchBot(ChatGPT 검색) / ChatGPT-User(사용자 요청 시 방문)
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: Claude-User
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+User-agent: Perplexity-User
+Allow: /
+
+# Google — Google-Extended 는 Gemini 학습·근거 참조용입니다.
+# 차단해도 일반 검색 순위에는 영향이 없지만, 우리는 허용합니다.
+User-agent: Google-Extended
+Allow: /
+
+# 그 외
+User-agent: Applebot-Extended
+Allow: /
+User-agent: CCBot
+Allow: /
+User-agent: Bingbot
+Allow: /
+User-agent: Amazonbot
+Allow: /
+User-agent: meta-externalagent
 Allow: /
 
 Sitemap: https://unveil.ai.studio/sitemap.xml

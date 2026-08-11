@@ -25,6 +25,17 @@ export const APP_LINKS = {
   birthstone: '/birthstone/',
 } as const;
 
+/**
+ * 배포된 사이트 주소입니다. 끝에 슬래시를 넣지 않습니다.
+ * 구조화 데이터(JSON-LD)에서 절대주소를 만들 때 씁니다.
+ *
+ * 도메인을 바꾸면 여기 말고도 아래 파일을 함께 고쳐야 합니다.
+ *   index.html (canonical · og:url · og:image · JSON-LD)
+ *   public/sitemap.xml · public/robots.txt
+ *   public/saju|zodiac|birthstone/index.html (canonical · og)
+ */
+export const SITE_URL = 'https://unveil.ai.studio';
+
 /** 네이버 스마트스토어. 주소가 바뀌면 이 값만 교체하세요. */
 export const SMARTSTORE_URL = 'https://smartstore.naver.com/unveil_store';
 
