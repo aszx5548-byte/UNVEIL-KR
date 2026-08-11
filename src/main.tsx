@@ -6,11 +6,20 @@ import './styles.css';
 const container = document.getElementById('root');
 
 if (container) {
-  ReactDOM.createRoot(container).render(
+  const app = (
     <React.StrictMode>
       <App />
-    </React.StrictMode>,
+    </React.StrictMode>
   );
+
+  // 빌드할 때 홈페이지를 미리 그려 넣어두므로(scripts/prerender.mjs),
+  // 이미 내용이 있으면 그 위에 hydrate 하고 없으면 새로 그립니다.
+  // 프리렌더가 실패해도 사이트는 정상 동작합니다.
+  if (container.hasChildNodes()) {
+    ReactDOM.hydrateRoot(container, app);
+  } else {
+    ReactDOM.createRoot(container).render(app);
+  }
 }
 
 // 서비스워커는 운영 빌드에서만 등록합니다.

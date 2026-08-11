@@ -39,17 +39,59 @@
       content="사주오행·별자리·탄생석으로 나와 연결되는 의미와 원석을 찾고, 현재 판매 중인 원석팔찌 실물을 확인해보세요."
     />
 
+    <!-- 배포 주소. 도메인이 바뀌면 이 파일에서 unveil.ai.studio 를 일괄 치환하고
+         public/sitemap.xml · public/robots.txt 도 함께 고쳐야 합니다. -->
+    <link rel="canonical" href="https://unveil.ai.studio/" />
+
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="UNVEIL" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="og:url" content="https://unveil.ai.studio/" />
     <meta property="og:title" content="UNVEIL | 사주오행·별자리·탄생석으로 찾는 나의 원석" />
     <meta
       property="og:description"
       content="사주오행·별자리·탄생석으로 나와 연결되는 의미와 원석을 찾고, 현재 판매 중인 원석팔찌 실물을 확인해보세요."
     />
-    <!-- 상대 경로로 두면 배포 도메인이 정해지지 않아도 정상 동작합니다. -->
-    <meta property="og:image" content="/images/hero-bracelet.webp" />
+    <!-- 카카오톡·인스타 공유 썸네일.
+         · 반드시 절대주소여야 크롤러가 읽습니다.
+         · 1200x630 이 권장 규격이고, 이보다 작으면 작은 카드로 표시됩니다.
+         · WebP 가 아닌 JPG 입니다. 카카오톡 등 일부 크롤러가 WebP 를 읽지 못합니다. -->
+    <meta property="og:image" content="https://unveil.ai.studio/images/og-cover.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="어두운 석재 위에 놓인 UNVEIL 8mm 천연 원석팔찌" />
     <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- 검색엔진이 브랜드 정보를 구조적으로 읽도록 합니다. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://unveil.ai.studio/#organization",
+            "name": "UNVEIL",
+            "alternateName": "언베일",
+            "url": "https://unveil.ai.studio/",
+            "logo": "https://unveil.ai.studio/icon-512.png",
+            "image": "https://unveil.ai.studio/images/hero-bracelet.webp",
+            "description": "사주오행·별자리·탄생석으로 나와 연결되는 의미를 발견하고, 진위를 검증한 8mm 천연 원석팔찌를 만나는 브랜드입니다.",
+            "sameAs": [
+              "https://smartstore.naver.com/unveil_store",
+              "https://litt.ly/unveil"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://unveil.ai.studio/#website",
+            "url": "https://unveil.ai.studio/",
+            "name": "UNVEIL",
+            "inLanguage": "ko-KR",
+            "publisher": { "@id": "https://unveil.ai.studio/#organization" }
+          }
+        ]
+      }
+    </script>
 
     <meta name="theme-color" content="#07111F" />
     <link rel="manifest" href="/manifest.json" />

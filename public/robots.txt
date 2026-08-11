@@ -11,5 +11,9 @@ Disallow: /legal/
 # 검색엔진이 이런 주소를 수집하지 않도록 막습니다.
 Disallow: /saju/?*
 
-# 배포 주소가 정해지면 아래 줄의 주석을 풀고 실제 주소로 바꾸세요.
-# Sitemap: https://실제주소/sitemap.xml
+# 네이버 크롤러는 자바스크립트 실행이 제한적이라,
+# 홈페이지 본문을 빌드 시점에 미리 그려 넣어두었습니다(프리렌더링).
+User-agent: Yeti
+Allow: /
+
+Sitemap: https://unveil.ai.studio/sitemap.xml
