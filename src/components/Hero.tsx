@@ -25,7 +25,7 @@ export default function Hero() {
         <div className="hero-media">
           <ImageWithFallback
             src="/images/hero-bracelet.webp"
-            alt="어두운 석재 위에 놓인 UNVEIL 8mm 천연 원석팔찌"
+            alt="어두운 석재 위에 놓인 UNVEIL 천연 원석팔찌"
             width={624}
             height={575}
             loading="eager"

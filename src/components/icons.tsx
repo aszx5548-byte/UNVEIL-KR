@@ -123,13 +123,13 @@ export function CameraIcon({ className }: IconProps) {
   );
 }
 
-/** 8mm 표준 사이즈. */
-export function SizeIcon({ className }: IconProps) {
+/** 오래 쓰도록 관리 — 되돌아오는 화살표로 수선·관리를 나타냅니다. */
+export function CareIcon({ className }: IconProps) {
   return (
     <svg className={className} viewBox="0 0 48 48" {...base}>
-      <circle cx="24" cy="24" r="15" />
-      <path d="M17 24h14" />
-      <path d="m20 21-3 3 3 3M28 21l3 3-3 3" />
+      <path d="M38 24a14 14 0 1 1-4.1-9.9" />
+      <path d="M34 6v9h-9" />
+      <circle cx="24" cy="24" r="4.2" />
     </svg>
   );
 }

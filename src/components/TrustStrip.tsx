@@ -1,10 +1,10 @@
 import { TRUST_FEATURES, type TrustIcon } from '../data';
-import { CameraIcon, GiftIcon, SizeIcon, StoneIcon } from './icons';
+import { CameraIcon, CareIcon, GiftIcon, StoneIcon } from './icons';
 
 function FeatureGlyph({ name }: { name: TrustIcon }) {
   if (name === 'stone') return <StoneIcon className="feature-icon" />;
   if (name === 'camera') return <CameraIcon className="feature-icon" />;
-  if (name === 'size') return <SizeIcon className="feature-icon" />;
+  if (name === 'care') return <CareIcon className="feature-icon" />;
   return <GiftIcon className="feature-icon" />;
 }
 

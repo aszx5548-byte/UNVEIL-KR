@@ -9,7 +9,7 @@ export default function ProductStatement() {
         <div className="statement-media">
           <ImageWithFallback
             src="/images/product-statement.webp"
-            alt="어두운 석재 위에 놓인 여러 빛깔의 UNVEIL 8mm 천연 원석팔찌"
+            alt="어두운 석재 위에 놓인 여러 빛깔의 UNVEIL 천연 원석팔찌"
             width={630}
             height={350}
           />
