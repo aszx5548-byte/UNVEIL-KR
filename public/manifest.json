@@ -1,7 +1,7 @@
 {
   "name": "UNVEIL · 나와 연결되는 하나의 의미",
   "short_name": "UNVEIL",
-  "description": "사주 음양오행, 별자리 운세, 탄생석 추천을 한 곳에서. 나에게 어울리는 8mm 천연 원석을 발견하세요.",
+  "description": "사주 음양오행, 별자리 운세, 탄생석 추천을 한 곳에서. 나에게 어울리는 천연 원석을 발견하세요.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

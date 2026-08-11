@@ -127,6 +127,15 @@ th { background: var(--ivory); font-weight: 600; white-space: nowrap; }
 .c-cta a.solid { background: var(--navy); border-color: var(--navy); color: var(--warm-white); }
 .c-cta a.solid:hover { background: var(--gold); border-color: var(--gold); }
 
+/* 같은 원석이 쓰이는 다른 기준으로 이동 */
+.c-links { margin-top: 14px; line-height: 2.1; }
+.c-links a {
+  display: inline-block; padding: 5px 12px; margin-right: 6px;
+  border: 1px solid var(--line); border-radius: 2px;
+  font-size: 13.5px; color: var(--gold-ink); text-decoration: none;
+}
+.c-links a:hover { border-color: var(--gold); background: var(--ivory); }
+
 /* 다른 달·자리로 이동 */
 .c-siblings { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
 .c-siblings a {
