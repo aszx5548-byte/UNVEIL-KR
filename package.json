@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs && node scripts/check-build.mjs",
+    "build": "vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
     "build:client-only": "vite build",
-    "check": "node scripts/check-build.mjs",
+    "verify": "node scripts/check-build.mjs",
+    "build:verified": "npm run build && npm run verify",
     "typecheck": "tsc --noEmit",
     "preview": "vite preview"
   },

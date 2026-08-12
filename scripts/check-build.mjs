@@ -5,9 +5,12 @@
 import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
-// 검사할 폴더. 기본은 dist 이고, 인자로 다른 폴더를 줄 수 있습니다.
-// (검사기가 실제로 실패를 잡는지 시험할 때 씁니다)
-const DIST = process.argv[2] ?? 'dist';
+// 검사할 폴더. 기본은 dist 입니다.
+// --dist=<경로> 로 다른 폴더를 지정할 수 있습니다(검사기 자체를 시험할 때 씁니다).
+// 위치 인자를 그냥 받으면, 실행하는 쪽이 예상 못 한 인자를 붙였을 때
+// 엉뚱한 폴더를 검사하다 실패합니다. 이름 있는 옵션만 받습니다.
+const arg = process.argv.slice(2).find((a) => a.startsWith('--dist='));
+const DIST = arg ? arg.slice('--dist='.length) : 'dist';
 const fail = [];
 
 function read(p) {
