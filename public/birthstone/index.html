@@ -311,15 +311,105 @@
     margin:0 0 14px; font-family:var(--sans); font-size:12.5px;
     line-height:1.7; color:var(--text-muted); word-break:keep-all;
   }
-  .guide-nav ul{ display:flex; flex-wrap:wrap; gap:7px; margin:0; padding:0; list-style:none; }
-  .guide-nav a{
-    display:inline-block; padding:6px 12px;
-    border:1px solid var(--gold-line); border-radius:999px;
-    font-family:var(--sans); font-size:12.5px; color:var(--text);
-    text-decoration:none; transition:border-color .2s ease, color .2s ease;
+  .guide-nav table{
+    width:100%; border-collapse:collapse; font-family:var(--sans); font-size:12.5px;
   }
-  .guide-nav a:hover{ border-color:var(--gold); color:var(--gold-bright); }
+  .guide-nav th, .guide-nav td{
+    padding:9px 8px; text-align:left; border-bottom:1px solid var(--gold-line);
+    color:var(--text); vertical-align:top;
+  }
+  .guide-nav th{
+    font-weight:600; font-size:11.5px; letter-spacing:.06em;
+    color:var(--text-muted); text-transform:uppercase;
+  }
+  .guide-nav tr:last-child td{ border-bottom:0; }
+  .guide-nav a{
+    color:var(--gold-bright); text-decoration:none;
+    border-bottom:1px solid var(--gold-line); padding-bottom:1px;
+  }
+  .guide-nav a:hover{ border-bottom-color:var(--gold); }
+  @media (max-width:420px){
+    .guide-nav th, .guide-nav td{ padding:8px 5px; font-size:11.5px; }
+  }
 </style>
+
+<!-- 구조화 데이터
+     AI 답변 엔진과 검색엔진이 이 페이지가 무엇인지 문장 해석 없이 알 수 있게 합니다.
+     화면에 실제로 있는 내용만 넣습니다. 가격은 넣지 않습니다. -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  { "@type": "ListItem", "position": 1, "name": "UNVEIL", "item": "https://unveil.ai.studio/" },
+  { "@type": "ListItem", "position": 2, "name": "탄생석", "item": "https://unveil.ai.studio/birthstone/" }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "WebApplication",
+ "name": "무료 탄생석 추천",
+ "url": "https://unveil.ai.studio/birthstone/",
+ "applicationCategory": "LifestyleApplication",
+ "operatingSystem": "All",
+ "browserRequirements": "자바스크립트를 지원하는 웹 브라우저",
+ "isAccessibleForFree": true,
+ "inLanguage": "ko",
+ "description": "생년월일로 월별 대표 탄생석과 두 번째 탄생석을 확인하고, UNVEIL이 함께 권하는 원석을 비교합니다. 입력값은 브라우저 안에서만 처리되고 저장되지 않습니다.",
+ "publisher": { "@type": "Organization", "name": "UNVEIL", "url": "https://unveil.ai.studio/" }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "ItemList",
+ "name": "월별 탄생석 안내",
+ "itemListElement": [
+  { "@type": "ListItem", "position": 1,  "name": "1월 탄생석",  "url": "https://unveil.ai.studio/birthstone/1/" },
+  { "@type": "ListItem", "position": 2,  "name": "2월 탄생석",  "url": "https://unveil.ai.studio/birthstone/2/" },
+  { "@type": "ListItem", "position": 3,  "name": "3월 탄생석",  "url": "https://unveil.ai.studio/birthstone/3/" },
+  { "@type": "ListItem", "position": 4,  "name": "4월 탄생석",  "url": "https://unveil.ai.studio/birthstone/4/" },
+  { "@type": "ListItem", "position": 5,  "name": "5월 탄생석",  "url": "https://unveil.ai.studio/birthstone/5/" },
+  { "@type": "ListItem", "position": 6,  "name": "6월 탄생석",  "url": "https://unveil.ai.studio/birthstone/6/" },
+  { "@type": "ListItem", "position": 7,  "name": "7월 탄생석",  "url": "https://unveil.ai.studio/birthstone/7/" },
+  { "@type": "ListItem", "position": 8,  "name": "8월 탄생석",  "url": "https://unveil.ai.studio/birthstone/8/" },
+  { "@type": "ListItem", "position": 9,  "name": "9월 탄생석",  "url": "https://unveil.ai.studio/birthstone/9/" },
+  { "@type": "ListItem", "position": 10, "name": "10월 탄생석", "url": "https://unveil.ai.studio/birthstone/10/" },
+  { "@type": "ListItem", "position": 11, "name": "11월 탄생석", "url": "https://unveil.ai.studio/birthstone/11/" },
+  { "@type": "ListItem", "position": 12, "name": "12월 탄생석", "url": "https://unveil.ai.studio/birthstone/12/" }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "월별 탄생석은 무엇인가요?",
+   "acceptedAnswer": { "@type": "Answer", "text": "1월 가넷, 2월 자수정, 3월 아쿠아마린, 4월 다이아몬드, 5월 에메랄드, 6월 진주, 7월 루비, 8월 페리도트, 9월 사파이어, 10월 오팔, 11월 토파즈, 12월 터키석입니다. 국제적으로 통용되는 목록을 그대로 표기합니다." }
+  },
+  {
+   "@type": "Question",
+   "name": "두 번째 탄생석은 무엇인가요?",
+   "acceptedAnswer": { "@type": "Answer", "text": "달마다 대표 탄생석 외에 함께 언급되는 원석이 있습니다. 1월 로즈쿼츠, 2월 호박, 3월 블러드스톤, 4월 백수정, 5월 크리소프레이즈, 6월 문스톤, 7월 카넬리안, 8월 사도닉스, 9월 라피스라줄리, 10월 핑크토르말린, 11월 시트린, 12월 지르콘입니다." }
+  },
+  {
+   "@type": "Question",
+   "name": "탄생석 추천은 무료인가요?",
+   "acceptedAnswer": { "@type": "Answer", "text": "가입이나 결제 없이 무료로 이용할 수 있습니다. 입력한 생년월일은 브라우저 안에서만 계산되며 저장되지 않습니다." }
+  },
+  {
+   "@type": "Question",
+   "name": "대표 탄생석과 UNVEIL 추천이 다른 달이 있는 이유는 무엇인가요?",
+   "acceptedAnswer": { "@type": "Answer", "text": "대표 탄생석에는 다이아몬드·에메랄드처럼 UNVEIL이 취급하지 않는 원석이 있습니다. 목록을 임의로 바꾸지 않고 그대로 표기하되, 같은 색과 결을 잇는 원석을 따로 안내합니다." }
+  }
+ ]
+}
+</script>
 </head><body>
 
 <canvas id="stars"></canvas>
@@ -483,21 +573,22 @@
 
   <nav class="guide-nav" aria-label="월별 탄생석 안내">
     <h2>월별 탄생석 안내</h2>
-    <p>생년월일을 넣지 않고도 볼 수 있는 안내 페이지입니다. 대표·두 번째 탄생석과 UNVEIL이 함께 권하는 원석을 정리했습니다.</p>
-    <ul>
-      <li><a href="/birthstone/1/">1월</a></li>
-      <li><a href="/birthstone/2/">2월</a></li>
-      <li><a href="/birthstone/3/">3월</a></li>
-      <li><a href="/birthstone/4/">4월</a></li>
-      <li><a href="/birthstone/5/">5월</a></li>
-      <li><a href="/birthstone/6/">6월</a></li>
-      <li><a href="/birthstone/7/">7월</a></li>
-      <li><a href="/birthstone/8/">8월</a></li>
-      <li><a href="/birthstone/9/">9월</a></li>
-      <li><a href="/birthstone/10/">10월</a></li>
-      <li><a href="/birthstone/11/">11월</a></li>
-      <li><a href="/birthstone/12/">12월</a></li>
-    </ul>
+    <p>생년월일을 넣지 않고도 볼 수 있는 안내 페이지입니다. 대표·두 번째 탄생석은 국제적으로 통용되는 목록을 그대로 표기하고, UNVEIL이 함께 권하는 원석은 따로 구분해 보여드립니다.</p>
+    <table>
+      <tr><th>월</th><th>대표 탄생석</th><th>두 번째</th><th>UNVEIL 추천</th></tr>
+      <tr><td><a href="/birthstone/1/">1월</a></td><td>가넷</td><td>로즈쿼츠</td><td>가넷</td></tr>
+      <tr><td><a href="/birthstone/2/">2월</a></td><td>자수정</td><td>호박</td><td>자수정</td></tr>
+      <tr><td><a href="/birthstone/3/">3월</a></td><td>아쿠아마린</td><td>블러드스톤</td><td>아쿠아마린</td></tr>
+      <tr><td><a href="/birthstone/4/">4월</a></td><td>다이아몬드</td><td>백수정</td><td>백수정</td></tr>
+      <tr><td><a href="/birthstone/5/">5월</a></td><td>에메랄드</td><td>크리소프레이즈</td><td>그린아벤츄린</td></tr>
+      <tr><td><a href="/birthstone/6/">6월</a></td><td>진주</td><td>문스톤</td><td>문스톤</td></tr>
+      <tr><td><a href="/birthstone/7/">7월</a></td><td>루비</td><td>카넬리안</td><td>카넬리안</td></tr>
+      <tr><td><a href="/birthstone/8/">8월</a></td><td>페리도트</td><td>사도닉스</td><td>인디언아게이트</td></tr>
+      <tr><td><a href="/birthstone/9/">9월</a></td><td>사파이어</td><td>라피스라줄리</td><td>라피스라줄리</td></tr>
+      <tr><td><a href="/birthstone/10/">10월</a></td><td>오팔</td><td>핑크토르말린</td><td>라브라도라이트</td></tr>
+      <tr><td><a href="/birthstone/11/">11월</a></td><td>토파즈</td><td>시트린</td><td>시트린</td></tr>
+      <tr><td><a href="/birthstone/12/">12월</a></td><td>터키석</td><td>지르콘</td><td>아쿠아마린</td></tr>
+    </table>
   </nav>
 
   <footer class="disclaimer">
