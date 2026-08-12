@@ -12,7 +12,7 @@
 // 직접 만들 때 쓰고, 이 파일은 플랫폼이 알아서 빌드해 줄 때 쓰입니다.
 import { createServer } from 'node:http';
 import { createReadStream } from 'node:fs';
-import { stat } from 'node:fs/promises';
+import { readFile, stat } from 'node:fs/promises';
 import { extname, join, normalize, resolve, sep } from 'node:path';
 
 const ROOT = resolve('dist');
@@ -56,6 +56,45 @@ const SECURITY = {
     "connect-src 'self'; manifest-src 'self'; worker-src 'self'; " +
     "frame-ancestors 'none'; base-uri 'self'; object-src 'none'; form-action 'self'",
 };
+
+// ── 주소 자동 교정 ────────────────────────────────────────────────
+// 빌드된 파일에는 주소가 문자열로 박혀 있습니다(canonical·og:url·sitemap·
+// 구조화 데이터 등 280곳). 배포 주소가 바뀌면 그 전부가 죽은 주소를 가리키고,
+// 특히 canonical 은 "원본은 저쪽"이라는 선언이라 검색에서 아예 빠집니다.
+//
+// 그래서 내보낼 때 실제 접속 주소로 맞춰줍니다. 파일을 다시 만들지 않아도
+// 어느 도메인에 올리든 주소가 저절로 맞습니다.
+const KNOWN_ORIGINS = ['https://unveil.ai.studio', 'https://unveil-kr.ai.studio'];
+
+// 이 확장자만 손댑니다. 이미지·폰트는 그대로 흘려보냅니다.
+const REWRITE_EXT = new Set(['.html', '.xml', '.txt', '.json', '.webmanifest']);
+
+// Host 헤더는 요청하는 쪽이 마음대로 적을 수 있습니다. 아무 값이나 믿으면
+// 공격자가 canonical 을 자기 주소로 바꿔치기할 수 있으므로(캐노니컬 포이즈닝),
+// 우리가 실제로 쓰는 호스팅 형태만 허용합니다.
+const TRUSTED_HOST = /(^|\.)(ai\.studio|pages\.dev|run\.app|vercel\.app)$|^(localhost|127\.0\.0\.1)$/i;
+
+function liveOrigin(req) {
+  // 명시적으로 지정했으면 그것이 우선입니다. 가장 안전한 방법입니다.
+  if (process.env.SITE_ORIGIN) return process.env.SITE_ORIGIN.replace(/\/+$/, '');
+
+  const raw = String(req.headers['x-forwarded-host'] ?? req.headers.host ?? '');
+  const host = raw.split(',')[0].trim();
+  if (!/^[a-z0-9.-]+(:\d+)?$/i.test(host)) return null;
+  if (!TRUSTED_HOST.test(host.replace(/:\d+$/, ''))) return null;
+
+  const proto = String(req.headers['x-forwarded-proto'] ?? '').split(',')[0].trim();
+  const scheme = proto || (host.startsWith('localhost') || host.startsWith('127.') ? 'http' : 'https');
+  return `${scheme}://${host}`;
+}
+
+function rewriteOrigins(text, origin) {
+  let out = text;
+  for (const old of KNOWN_ORIGINS) {
+    if (old !== origin) out = out.split(old).join(origin);
+  }
+  return out;
+}
 
 function cacheFor(pathname) {
   // 파일명에 해시가 붙는 자산은 영구 캐시가 안전합니다.
@@ -119,13 +158,26 @@ async function findFile(pathname) {
   }
 }
 
-function send(res, status, file, pathname, headers = {}) {
-  res.writeHead(status, {
-    'Content-Type': TYPES[extname(file).toLowerCase()] ?? 'application/octet-stream',
+async function send(res, status, file, pathname, origin, headers = {}) {
+  const ext = extname(file).toLowerCase();
+  const base = {
+    'Content-Type': TYPES[ext] ?? 'application/octet-stream',
     'Cache-Control': cacheFor(pathname),
     ...SECURITY,
     ...headers,
-  });
+  };
+
+  // 주소를 손봐야 하는 형식이면 한 번 읽어 고쳐서 내보냅니다.
+  // 여기 해당하는 파일은 가장 큰 것이 30KB 남짓이라 통째로 읽어도 부담이 없습니다.
+  if (origin && REWRITE_EXT.has(ext)) {
+    const text = rewriteOrigins(await readFile(file, 'utf8'), origin);
+    const body = Buffer.from(text, 'utf8');
+    res.writeHead(status, { ...base, 'Content-Length': body.byteLength });
+    res.end(body);
+    return;
+  }
+
+  res.writeHead(status, base);
   createReadStream(file).pipe(res);
 }
 
@@ -154,12 +206,14 @@ async function handle(req, res) {
 
   const file = await findFile(pathname);
 
+  const origin = liveOrigin(req);
+
   if (!file) {
     // 없는 주소는 진짜 404 여야 검색엔진이 유령 페이지를 색인하지 않습니다.
     // SPA 처럼 전부 index.html 로 보내지 않습니다.
     const notFound = await findFile('/404.html');
     if (notFound) {
-      send(res, 404, notFound, pathname, { 'Cache-Control': 'no-store' });
+      await send(res, 404, notFound, pathname, origin, { 'Cache-Control': 'no-store' });
     } else {
       res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8', ...SECURITY });
       res.end('404 Not Found\n');
@@ -176,7 +230,7 @@ async function handle(req, res) {
     return;
   }
 
-  send(res, 200, file, pathname);
+  await send(res, 200, file, pathname, origin);
 }
 
 // 요청 하나가 잘못돼도 서버 전체가 내려가면 안 됩니다.
