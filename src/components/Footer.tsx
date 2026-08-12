@@ -15,7 +15,9 @@ export default function Footer() {
             UNVEIL
             <SparkMark className="wordmark-spark" />
           </p>
-          <p className="footer-line">나와 연결되는 하나의 의미, UNVEIL.</p>
+          {/* 한글 표기를 한 번 노출합니다. 국내 이용자는 'UNVEIL' 이 아니라
+              '언베일' 로 검색합니다. 구조화 데이터의 alternateName 과 짝을 이룹니다. */}
+          <p className="footer-line">나와 연결되는 하나의 의미, UNVEIL(언베일).</p>
         </div>
 
         <nav className="footer-menu" aria-label="푸터 메뉴">
