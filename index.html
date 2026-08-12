@@ -45,7 +45,7 @@
 
          주소가 바뀌면 값도 새로 발급됩니다. 사이트를 다시 등록하면
          네이버가 새 값을 주므로, 옛 값은 지우고 새 값으로 바꿉니다.
-         (2026-08-12 unveil.ai.studio 삭제 → 새 주소로 재등록하며 교체)
+         (2026-08-12 옛 주소를 삭제하고 새 주소로 재등록하며 교체)
          ───────────────────────────────────────────────────────── -->
     <meta
       name="naver-site-verification"
@@ -58,14 +58,18 @@
       content="사주오행·별자리·탄생석으로 나와 연결되는 의미와 원석을 찾아보세요. 가입 없이 무료이며, 달·별자리·오행별 안내 페이지에서 전통 대표석과 UNVEIL이 취급하는 원석을 구분해 안내합니다."
     />
 
-    <!-- 배포 주소. 도메인이 바뀌면 이 파일에서 unveil.ai.studio 를 일괄 치환하고
-         public/sitemap.xml · public/robots.txt 도 함께 고쳐야 합니다. -->
-    <link rel="canonical" href="https://unveil.ai.studio/" />
+    <!-- 배포 주소. 도메인이 바뀌면 아래 다섯 곳을 함께 고쳐야 합니다.
+         (일괄 치환 스크립트는 쓰지 마세요. 조용히 다른 문자열까지 망가뜨린 적이 있습니다)
+           이 파일 · src/data.ts 의 SITE_URL · public/robots.txt 의 Sitemap 줄
+           public/{saju,zodiac,birthstone}/index.html · scratchpad/gen_data.py 의 SITE
+         마지막 것을 고치고 gen_pages.py 와 gen_sitemap.py 를 다시 돌리면
+         안내 페이지 29개와 sitemap.xml 이 새 주소로 다시 만들어집니다. -->
+    <link rel="canonical" href="https://unveil-kr.ai.studio/" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="UNVEIL" />
     <meta property="og:locale" content="ko_KR" />
-    <meta property="og:url" content="https://unveil.ai.studio/" />
+    <meta property="og:url" content="https://unveil-kr.ai.studio/" />
     <meta property="og:title" content="UNVEIL | 사주오행·별자리·탄생석으로 찾는 나의 원석" />
     <meta
       property="og:description"
@@ -75,7 +79,7 @@
          · 반드시 절대주소여야 크롤러가 읽습니다.
          · 1200x630 이 권장 규격이고, 이보다 작으면 작은 카드로 표시됩니다.
          · WebP 가 아닌 JPG 입니다. 카카오톡 등 일부 크롤러가 WebP 를 읽지 못합니다. -->
-    <meta property="og:image" content="https://unveil.ai.studio/images/og-cover.jpg" />
+    <meta property="og:image" content="https://unveil-kr.ai.studio/images/og-cover.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="어두운 석재 위에 놓인 UNVEIL 천연 원석팔찌" />
@@ -88,12 +92,12 @@
         "@graph": [
           {
             "@type": "Organization",
-            "@id": "https://unveil.ai.studio/#organization",
+            "@id": "https://unveil-kr.ai.studio/#organization",
             "name": "UNVEIL",
             "alternateName": "언베일",
-            "url": "https://unveil.ai.studio/",
-            "logo": "https://unveil.ai.studio/icon-512.png",
-            "image": "https://unveil.ai.studio/images/hero-bracelet.webp",
+            "url": "https://unveil-kr.ai.studio/",
+            "logo": "https://unveil-kr.ai.studio/icon-512.png",
+            "image": "https://unveil-kr.ai.studio/images/hero-bracelet.webp",
             "description": "사주오행·별자리·탄생석으로 나와 연결되는 의미를 발견하고, 진위를 검증한 천연 원석을 만나는 브랜드입니다.",
             "sameAs": [
               "https://smartstore.naver.com/unveil_store",
@@ -102,11 +106,11 @@
           },
           {
             "@type": "WebSite",
-            "@id": "https://unveil.ai.studio/#website",
-            "url": "https://unveil.ai.studio/",
+            "@id": "https://unveil-kr.ai.studio/#website",
+            "url": "https://unveil-kr.ai.studio/",
             "name": "UNVEIL",
             "inLanguage": "ko-KR",
-            "publisher": { "@id": "https://unveil.ai.studio/#organization" }
+            "publisher": { "@id": "https://unveil-kr.ai.studio/#organization" }
           }
         ]
       }
