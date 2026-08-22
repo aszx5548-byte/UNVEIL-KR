@@ -585,7 +585,7 @@
       <span>홈 화면에 추가하기</span>
     </button>
     <p class="install-ios-tip" id="installIosTip" hidden>
-      Safari 화면의 공유 아이콘(네모 안에 위쪽 화살표)을 누른 뒤 "홈 화면에 추가"를 선택해주세요.
+      아이폰·아이패드는 Safari 화면의 공유 아이콘(네모 안에 위쪽 화살표)을 누른 뒤 "홈 화면에 추가"를 선택해주세요.
     </p>
   </header>
 
@@ -802,7 +802,8 @@
 
   <footer class="disclaimer">
     이 콘텐츠는 전통 명리학 이론과 태양 황경(절기) 기반 근사 천문 계산을 활용한 참고용 결과입니다.<br/>
-    절입 시각은 수 분 내외의 오차가 있을 수 있으며, 의학·법률·재정적 판단의 근거로 사용하지 마세요.
+    절입 시각은 수 분 내외의 오차가 있을 수 있으며, 의학·법률·재정적 판단의 근거로 사용하지 마세요.<br/>
+    ※ 위 의미는 UNVEIL 자체 큐레이션 언어이며 원석의 의학적·과학적 효능 또는 결과를 보장하는 설명이 아닙니다.
   </footer>
 </div>
 
@@ -824,17 +825,28 @@
     return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
   }
   function isIOSDevice(){
-    return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    var ua = navigator.userAgent;
+    if(/iPad|iPhone|iPod/.test(ua) && !window.MSStream) return true;
+    /* iPadOS 13 부터 사파리가 자신을 Mac 이라고 알린다.
+       맥에는 터치가 없으므로 터치 포인트 수로 아이패드를 가려낸다. */
+    return /Macintosh/.test(ua) && navigator.maxTouchPoints > 1;
   }
   function isAndroidDevice(){
     return /Android/i.test(navigator.userAgent);
   }
+  function isDesktopLike(){
+    return !isIOSDevice() && !isAndroidDevice();
+  }
   window.addEventListener('beforeinstallprompt', function(e){
     e.preventDefault();
     deferredInstallPrompt = e;
-    if(!isAndroidDevice()) return; // 폰(안드로이드) 전용 — PC 크롬은 설치 버튼을 노출하지 않음
+    /* 이 이벤트가 오는 환경(안드로이드 폰·태블릿, PC 크롬·엣지)은 모두 설치할 수 있다 */
     var btn = document.getElementById('installBtn');
-    if(btn && !isStandaloneMode()) btn.hidden = false;
+    if(btn && !isStandaloneMode()){
+      btn.hidden = false;
+      var lbl = btn.querySelector('span');
+      if(lbl && isDesktopLike()) lbl.textContent = '앱으로 설치하기';
+    }
   });
   window.addEventListener('appinstalled', function(){
     deferredInstallPrompt = null;
@@ -1086,32 +1098,32 @@
   };
   var GEMSTONES = {
     wood:[
-      {name:'그린 아벤츄린', tier:'대표', c1:'#2f5f3a', c2:'#8fce8a', price:null,
+      {name:'그린아벤츄린', tier:'대표', c1:'#2f5f3a', c2:'#8fce8a', price:null,
         desc:'성장과 확장의 기운을 북돋아, 새로운 시작 앞에서 머뭇거리는 마음에 용기를 더해주는 원석이에요.'},
       {name:'유나카이트', tier:'선택형', c1:'#4a6b45', c2:'#e8a4a8', price:null,
         desc:'마음의 상처를 다독이며 감정과 이성의 균형을 잡아주는, 부드러운 치유의 기운을 담은 원석이에요.'},
       {name:'에피도트', tier:'선택형', c1:'#4a5a1e', c2:'#a8c04a', price:null,
         desc:'정체된 흐름에 새 활력을 불어넣어, 성장하려는 의지를 다시 끌어올려주는 원석이에요.'},
-      {name:'캄바바 재스퍼', tier:'선택형', c1:'#1a2818', c2:'#4a6b3f', price:null,
+      {name:'캄바바재스퍼', tier:'선택형', c1:'#1a2818', c2:'#4a6b3f', price:null,
         desc:'태고의 시간을 품은 듯 깊고 고요한 기운으로, 흔들리는 마음에 굳건한 뿌리를 내려주는 원석이에요.'}
     ],
     fire:[
       {name:'카넬리안', tier:'대표', c1:'#7a2c1e', c2:'#e2703f', price:null,
         desc:'표현력과 생기를 불어넣어, 마음속에 식어가던 열정을 다시 지펴주는 원석이에요.'},
-      {name:'레드 재스퍼', tier:'선택형', c1:'#6b2018', c2:'#a8452e', price:null,
+      {name:'레드재스퍼', tier:'선택형', c1:'#6b2018', c2:'#a8452e', price:null,
         desc:'묵직하고 단단한 생명력을 더해, 흔들리는 순간에도 버텨내는 끈기를 실어주는 원석이에요.'},
-      {name:'드래곤 블러드', tier:'선택형', c1:'#2d4a1e', c2:'#c23c2e', price:null,
+      {name:'드래곤블러드', tier:'선택형', c1:'#2d4a1e', c2:'#c23c2e', price:null,
         desc:'강인한 생명력과 용기를 불어넣어, 위축된 마음에 다시 일어설 힘을 실어주는 원석이에요.'},
-      {name:'블랙라인 로도나이트', tier:'선택형', c1:'#2a1a1e', c2:'#d68a9a', price:null,
+      {name:'블랙라인로도나이트', tier:'선택형', c1:'#2a1a1e', c2:'#d68a9a', price:null,
         desc:'상처받은 마음을 다정하게 감싸안으면서도, 단단한 중심을 함께 잡아주는 원석이에요.'}
     ],
     earth:[
       {name:'타이거아이', tier:'대표', c1:'#6b4e18', c2:'#d9a83f', price:null,
         desc:'흔들리는 중심을 잡아주고, 묵묵히 버텨내는 뚝심을 더해주는 원석이에요.'},
-      {name:'픽처 재스퍼', tier:'선택형', c1:'#6b5230', c2:'#d4b378', price:null,
-        desc:'지나온 길을 되짚어보게 하는 차분한 기운으로, 삶의 방향을 다시 그릴 수 있게 도와주는 원석이에요.'},
-      {name:'레오파드 재스퍼', tier:'선택형', c1:'#5a4420', c2:'#c9963f', price:null,
+      {name:'레오파드재스퍼', tier:'선택형', c1:'#5a4420', c2:'#c9963f', price:null,
         desc:'순발력 있게 변화에 대응하는 기운을 더해, 낯선 상황에서도 유연하게 헤쳐나가게 해주는 원석이에요.'},
+      {name:'픽처재스퍼', tier:'선택형', c1:'#6b5230', c2:'#d4b378', price:null,
+        desc:'지나온 길을 되짚어보게 하는 차분한 기운으로, 삶의 방향을 다시 그릴 수 있게 도와주는 원석이에요.'},
       {name:'시트린', tier:'선택형', c1:'#8a5a10', c2:'#f0c040', price:null,
         desc:'맑고 밝은 재물의 기운을 담아, 막힌 흐름을 뚫고 나아가는 힘을 더해주는 원석이에요.'}
     ],
@@ -1126,7 +1138,7 @@
         desc:'맑은 결단력을 깨워, 맺고 끊음이 필요한 순간 흔들리지 않는 힘을 실어주는 원석이에요.'}
     ],
     water:[
-      {name:'흑요석', tier:'대표', c1:'#0a0a0d', c2:'#4b4750', price:null,
+      {name:'실버흑요석', tier:'대표', c1:'#0a0a0d', c2:'#4b4750', price:null,
         desc:'불필요한 잡념과 부정적인 기운을 걸러내고, 흔들리는 마음을 단단하게 지켜주는 원석이에요.'},
       {name:'소달라이트', tier:'선택형', c1:'#1c2f52', c2:'#4a6fa8', price:null,
         desc:'차분하고 논리적인 통찰의 기운을 담아, 복잡한 마음을 정리하고 진실을 보게 해주는 원석이에요.'},
