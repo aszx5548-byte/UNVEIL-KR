@@ -43,6 +43,8 @@
     color-scheme: dark;
   }
   *{box-sizing:border-box;}
+  /* the hidden attribute must always win, regardless of any class's own display:flex/inline-flex/block */
+  [hidden]{ display:none !important; }
   html,body{margin:0;padding:0;}
   body{
     background:var(--ink);
@@ -97,12 +99,10 @@
     background:linear-gradient(90deg,transparent,var(--gold-line),transparent);
   }
   .panel + .panel{ margin-top:18px; }
-  .panel[hidden]{ display:none; }
   .section-label{
     font-family:var(--serif); font-weight:400; font-size:13px; letter-spacing:0.14em;
     color:var(--gold-bright); display:flex; align-items:center; gap:10px; margin:0 0 18px;
   }
-  .section-label[hidden]{ display:none; }
   .section-label::before, .section-label::after{ content:""; height:1px; flex:1; background:var(--line); }
   .panel-title{ font-family:var(--serif); font-size:19px; text-align:center; margin:0 0 22px; color:var(--text); }
 
@@ -153,33 +153,6 @@
   }
   .back-link:hover{ color:var(--gold-bright); }
 
-  /* ---------- Home ---------- */
-  .home-actions{ display:flex; flex-direction:column; gap:12px; margin-top:4px; }
-  .home-cta{
-    display:flex; align-items:center; gap:14px; text-align:left; width:100%;
-    background:rgba(255,255,255,0.025); border:1px solid var(--line); border-radius:14px;
-    padding:16px 16px; cursor:pointer; color:var(--text);
-    transition:border-color .15s, background .15s;
-  }
-  .home-cta:hover, .home-cta:focus-visible{ border-color:var(--gold); background:rgba(255,255,255,0.045); }
-  .home-cta .ico{ flex:none; width:38px; height:38px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:var(--gold-soft); color:var(--gold-bright); font-size:18px; }
-  .home-cta .cta-text{ flex:1; }
-  .home-cta .cta-label{ font-family:var(--serif); font-size:15px; color:var(--text); display:block; margin-bottom:2px; }
-  .home-cta .cta-desc{ font-size:12px; color:var(--text-muted); }
-  .home-cta .cta-arrow{ flex:none; color:var(--text-muted); }
-
-  /* ---------- Chips ---------- */
-  .chip-group{ display:flex; flex-wrap:wrap; gap:8px; }
-  .chip{
-    padding:9px 15px; border:1px solid var(--line); border-radius:999px;
-    background:rgba(255,255,255,0.02); color:var(--text-muted); font-size:13px;
-    cursor:pointer; transition:border-color .15s,color .15s,background .15s;
-    -webkit-tap-highlight-color:transparent;
-  }
-  .chip:hover{ border-color:var(--gold-line); }
-  .chip.selected{ border-color:var(--gold); color:var(--gold-bright); background:var(--gold-soft); }
-  .chip-swatch{ display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
-
   /* ---------- Reveal ---------- */
   .reveal-stage{ display:flex; flex-direction:column; align-items:center; text-align:center; }
   .orb-hero{
@@ -203,22 +176,22 @@
   }
   .share-btn svg{ width:14px; height:14px; }
   .share-btn:hover, .share-btn:focus-visible{ color:var(--gold-bright); }
-  .share-overlay{
+  .reveal-actions{ display:flex; align-items:center; justify-content:center; gap:4px; flex-wrap:wrap; margin-bottom:14px; }
+  .reveal-actions .share-btn{ margin-bottom:0; }
+  .capture-overlay{
     position:fixed; inset:0; z-index:50; display:none;
     align-items:center; justify-content:center; padding:24px;
     background:rgba(5,3,12,0.88);
   }
-  .share-overlay.show{ display:flex; }
-  .share-overlay-inner{ max-width:320px; width:100%; text-align:center; }
-  .share-overlay-inner img{
+  .capture-overlay.show{ display:flex; }
+  .capture-overlay-inner{ max-width:320px; width:100%; text-align:center; }
+  .capture-overlay-inner img{
     display:block; max-width:100%; max-height:60vh; margin:0 auto 12px;
     border:1px solid var(--gold-line); border-radius:14px;
   }
-  .share-overlay-hint{ font-size:12px; color:var(--text-muted); line-height:1.7; margin:0 0 12px; }
+  .capture-overlay-hint{ font-size:12px; color:var(--text-muted); line-height:1.7; margin:0 0 12px; }
   .reveal-unveil{ margin-bottom:14px; }
   .reveal-unveil-name{ font-family:var(--serif); font-size:13.5px; color:var(--text); margin-left:8px; }
-  .reveal-cta-wrap{ margin-top:16px; }
-  .reveal-cta-wrap .submit-btn{ margin-top:0; }
 
   /* ---------- Detail cards ---------- */
   .info-card{ background:rgba(255,255,255,0.025); border:1px solid var(--line); border-radius:14px; padding:16px; }
@@ -238,23 +211,6 @@
   .disclaimer-note{ margin-top:12px; font-size:11.5px; color:var(--text-muted); line-height:1.7; }
 
   /* ---------- CTA / contact ---------- */
-  .contact-box{ display:none; flex-direction:column; gap:10px; margin-top:16px; }
-  .contact-box.show{ display:flex; }
-  .contact-link{
-    display:flex; align-items:center; gap:12px; text-align:left; color:var(--text); text-decoration:none;
-    border:1px solid var(--gold-line); border-radius:12px; padding:11px 14px; background:rgba(255,255,255,0.02);
-    transition:background .15s, border-color .15s;
-  }
-  .contact-link:hover{ background:var(--gold-soft); border-color:var(--gold); }
-  .contact-icon{ flex:none; width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:var(--gold-soft); color:var(--gold-bright); }
-  .contact-icon svg{ width:18px; height:18px; }
-  .contact-icon-store{ background:rgba(3,199,90,0.14); color:#4fd881; }
-  .contact-text{ flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
-  .contact-label{ font-size:13.5px; color:var(--text); font-family:var(--serif); }
-  .contact-desc{ font-size:11.5px; color:var(--text-muted); line-height:1.5; }
-  .contact-right{ flex:none; display:flex; flex-direction:column; align-items:flex-end; gap:4px; max-width:104px; }
-  .contact-url-mini{ font-size:9.5px; color:var(--text-muted); opacity:0.75; max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .contact-arrow{ flex:none; color:var(--text-muted); font-size:14px; }
   .family-links{ margin-top:14px; display:flex; flex-direction:column; gap:8px; }
   .family-link{ display:flex; align-items:center; justify-content:space-between; font-size:12.5px; color:var(--text-muted); border:1px solid var(--line); border-radius:10px; padding:9px 13px; text-decoration:none; }
   .family-link:hover{ border-color:var(--gold); color:var(--gold-bright); }
@@ -282,6 +238,7 @@
     margin-top:34px; padding-top:20px; border-top:1px solid var(--line);
     text-align:center; color:var(--text-muted); font-size:11.5px; line-height:1.8;
   }
+
   /* ===== 통합 사이트: 홈으로 돌아가기 ===== */
   .home-link{
     display:inline-flex; align-items:center; gap:7px;
@@ -331,6 +288,7 @@
   @media (max-width:420px){
     .guide-nav th, .guide-nav td{ padding:8px 5px; font-size:11.5px; }
   }
+
 </style>
 
 <!-- 구조화 데이터
@@ -433,53 +391,13 @@
       <span>홈 화면에 추가하기</span>
     </button>
     <p class="install-ios-tip" id="installIosTip" hidden>
-      아이폰·아이패드는 Safari 화면의 공유 아이콘(네모 안에 위쪽 화살표)을 누른 뒤 "홈 화면에 추가"를 선택해주세요.
+      Safari 화면의 공유 아이콘(네모 안에 위쪽 화살표)을 누른 뒤 "홈 화면에 추가"를 선택해주세요.
     </p>
   </header>
 
-  <!-- STEP: home -->
+  <!-- STEP: home (birthdate entry) -->
   <section class="panel" id="step-home">
-    <h2 class="panel-title">누구의 탄생석을 찾아볼까요?</h2>
-    <div class="home-actions">
-      <button type="button" class="home-cta" id="ctaSelf">
-        <span class="ico">✦</span>
-        <span class="cta-text">
-          <span class="cta-label">나의 탄생석 찾기</span>
-          <span class="cta-desc">내 생년월일로 대표 탄생석을 확인해요</span>
-        </span>
-        <span class="cta-arrow">→</span>
-      </button>
-      <button type="button" class="home-cta" id="ctaGift">
-        <span class="ico">🎁</span>
-        <span class="cta-text">
-          <span class="cta-label">선물할 탄생석 찾기</span>
-          <span class="cta-desc">소중한 사람에게 어울리는 탄생석을 찾아요</span>
-        </span>
-        <span class="cta-arrow">→</span>
-      </button>
-      <button type="button" class="home-cta" id="ctaAlmanac">
-        <span class="ico">📖</span>
-        <span class="cta-text">
-          <span class="cta-label">12개월 탄생석 도감</span>
-          <span class="cta-desc">월별 탄생석을 하나씩 둘러봐요</span>
-        </span>
-        <span class="cta-arrow">→</span>
-      </button>
-    </div>
-  </section>
-
-  <!-- STEP: relation (gift only) -->
-  <section class="panel" id="step-relation" hidden>
-    <button type="button" class="back-link" data-back>← 뒤로</button>
-    <h2 class="panel-title">어떤 사이인가요?</h2>
-    <div class="chip-group" id="relationChips"></div>
-    <p class="hint">선택한 관계에 따라 결과의 문구와 추천 상품이 조금씩 달라져요</p>
-  </section>
-
-  <!-- STEP: birthdate -->
-  <section class="panel" id="step-birthdate" hidden>
-    <button type="button" class="back-link" data-back>← 뒤로</button>
-    <h2 class="panel-title" id="birthdateTitle">생년월일을 알려주세요</h2>
+    <h2 class="panel-title">태어난 날을 알려주세요</h2>
     <div class="field">
       <label for="birthDateText">생년월일 (8자리)</label>
       <input type="text" class="input" id="birthDateText" inputmode="numeric" autocomplete="off" placeholder="예: 19970407" maxlength="10">
@@ -489,9 +407,10 @@
     <p class="hint">입력한 정보는 이 브라우저 안에서만 계산되며 저장되지 않아요</p>
   </section>
 
-  <!-- STEP: reveal -->
+  <!-- STEP: reveal (birthdate result + detail, unified) -->
   <section class="panel" id="step-reveal" hidden>
-    <div class="reveal-stage">
+    <button type="button" class="back-link" data-back id="revealBackLink" hidden>← 뒤로</button>
+    <div class="reveal-stage" id="revealStage">
       <div class="orb-hero" id="revealOrb"></div>
       <p class="reveal-caption" id="revealCaption"></p>
       <h2 class="reveal-name" id="revealName"></h2>
@@ -499,53 +418,26 @@
       <p class="reveal-line" id="revealLine"></p>
       <span class="month-pill" id="revealMonthPill"></span>
       <div class="reveal-unveil" id="revealUnveil" hidden>
-        <span class="unveil-badge">UNVEIL 추천</span>
+        <span class="unveil-badge">공인 탄생석</span>
         <span class="reveal-unveil-name" id="revealUnveilName"></span>
       </div>
-      <button type="button" class="share-btn" id="shareBtn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
-        <span id="shareBtnText">결과 공유하기</span>
-      </button>
-    </div>
-    <button type="button" class="submit-btn" id="toDetailBtn">자세히 보기</button>
-    <div class="reveal-cta-wrap">
-      <button type="button" class="submit-btn" id="revealShopBtn"></button>
-      <div class="contact-box" id="revealContactBox">
-        <a class="contact-link" href="https://smartstore.naver.com/unveil_store" target="_blank" rel="noopener noreferrer">
-          <span class="contact-icon contact-icon-store" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg></span>
-          <span class="contact-text">
-            <span class="contact-label">네이버 스마트스토어에서 구매하기</span>
-            <span class="contact-desc">탄생석 팔찌·목걸이 상품을 확인해보세요.</span>
-          </span>
-          <span class="contact-right">
-            <span class="contact-url-mini">smartstore.naver.com</span>
-            <span class="contact-arrow" aria-hidden="true">↗</span>
-          </span>
-        </a>
-        <a class="contact-link" href="https://litt.ly/unveil" target="_blank" rel="noopener noreferrer">
-          <span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></span>
-          <span class="contact-text">
-            <span class="contact-label">탄생석 원석 가이드 보기</span>
-            <span class="contact-desc">월별 탄생석과 원석 선택 방법을 자세히 확인해보세요.</span>
-          </span>
-          <span class="contact-right">
-            <span class="contact-url-mini">litt.ly/unveil</span>
-            <span class="contact-arrow" aria-hidden="true">↗</span>
-          </span>
-        </a>
+      <div class="reveal-actions">
+        <button type="button" class="share-btn" id="shareBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+          <span id="shareBtnText">결과 공유하기</span>
+        </button>
+        <button type="button" class="share-btn" id="captureBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+          <span id="captureBtnText">화면 캡처하기</span>
+        </button>
       </div>
     </div>
-    <button type="button" class="reset-link" data-reset>← 처음부터 다시</button>
-  </section>
 
-  <!-- STEP: detail -->
-  <section class="panel" id="step-detail" hidden>
-    <button type="button" class="back-link" data-back>← 뒤로</button>
-    <h2 class="section-label">대표 탄생석</h2>
-    <div class="info-card" id="primaryCard"></div>
-
-    <h2 class="section-label" style="margin-top:26px;">두 번째 탄생석</h2>
+    <h2 class="section-label">대체 탄생석</h2>
     <div class="info-card" id="secondCard"></div>
+
+    <h2 class="section-label" style="margin-top:26px;">대표 탄생석</h2>
+    <div class="info-card" id="primaryCard"></div>
 
     <a class="submit-btn" href="https://smartstore.naver.com/unveil_store" target="_blank" rel="noopener noreferrer">네이버 스마트스토어에서 구매하기</a>
     <a class="family-link" href="https://litt.ly/unveil" target="_blank" rel="noopener noreferrer" style="margin-top:12px;">
@@ -597,16 +489,18 @@
     ※ 위 의미는 UNVEIL 자체 큐레이션 언어이며 원석의 의학적·과학적 효능 또는 결과를 보장하는 설명이 아닙니다.
   </footer>
 
-  <div class="share-overlay" id="shareOverlay">
-    <div class="share-overlay-inner">
-      <img id="shareOverlayImg" alt="탄생석 공유 카드">
-      <p class="share-overlay-hint">이미지를 우클릭(모바일에선 길게 누르기)하면 저장할 수 있어요.<br>공유 문구는 클립보드에 복사해뒀어요.</p>
-      <button type="button" class="ghost-btn" id="shareOverlayDownload" style="margin-top:0;">이미지 저장하기</button>
-      <button type="button" class="reset-link" id="shareOverlayClose">닫기</button>
+  <div class="capture-overlay" id="captureOverlay">
+    <div class="capture-overlay-inner">
+      <img id="captureOverlayImg" alt="탄생석 결과 화면 캡처">
+      <p class="capture-overlay-hint">이미지를 우클릭(모바일에선 길게 누르기)하면 저장할 수 있어요.</p>
+      <button type="button" class="ghost-btn" id="captureOverlayDownload" style="margin-top:0;">이미지 저장하기</button>
+      <button type="button" class="reset-link" id="captureOverlayClose">닫기</button>
     </div>
   </div>
 </div>
 
+
+<script src="html2canvas.min.js"></script>
 <script>
 (function(){
   "use strict";
@@ -659,37 +553,38 @@
   // unveilImage/unveilUrl은 실제 상품 사진·구매 링크 확보 전까지 null로 둡니다(TODO).
   var MONTHS = [
     { month:1,  primary:"garnet",   second:"roseQuartz",  basis:"Jewelers of America가 인정한 대체 탄생석",           accent:"#7a2436",
-      unveilPick:"garnet", unveilPrice:null /* 가격 미확정 */, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
+      unveilPick:"garnet", unveilPrice:19900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
     { month:2,  primary:"amethyst", second:"amber",        basis:"Jewelers of America가 인정한 대체 탄생석",           accent:"#7d4fb0",
-      unveilPick:"amethyst", unveilPrice:null /* 가격 미확정 */, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
+      unveilPick:"amethyst", unveilPrice:19900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
     { month:3,  primary:"aquamarine", second:"bloodstone", basis:"GIA가 공인한 3월의 탄생석",          accent:"#3fb8c9",
-      unveilPick:"aquamarine", unveilPrice:null /* 가격 미확정 */, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
+      unveilPick:"aquamarine", unveilPrice:19900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
     { month:4,  primary:"diamond",  second:"clearQuartz",  basis:"Jewelers of America가 인정한 대체 탄생석",           accent:"#c9d6e0",
-      unveilPick:"clearQuartz", unveilPrice:null /* 가격 미확정 */, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
+      unveilPick:"clearQuartz", unveilPrice:24900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
     { month:5,  primary:"emerald",  second:"chrysoprase",  basis:"Jewelers of America가 인정한 대체 탄생석",           accent:"#1f8f5f",
       // TODO(임시 대체, 교체 예정): 조달처 크리소프레이즈가 염색으로 확인되어 그린아벤츄린으로 임시 대체.
       // 비염색 크리소프레이즈 확보 시 unveilPick을 "chrysoprase"로 교체하세요.
-      unveilPick:"greenAventurine", unveilPrice:null /* 가격 미확정 */, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
+      unveilPick:"greenAventurine", unveilPrice:19900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
     { month:6,  primary:"pearl",    second:"moonstone",    basis:"GIA·Jewelers of America가 함께 인정한 6월의 탄생석",  accent:"#ded2ba",
-      unveilPick:"moonstone", unveilPrice:null /* 가격 미확정 */, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
+      unveilPick:"moonstone", unveilPrice:24900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
     { month:7,  primary:"ruby",     second:"carnelian",    basis:"Jewelers of America가 인정한 대체 탄생석",           accent:"#9b1237",
-      unveilPick:"carnelian", unveilPrice:null /* 가격 미확정 */, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
+      unveilPick:"carnelian", unveilPrice:19900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
     { month:8,  primary:"peridot",  second:"sardonyx",     basis:"GIA가 소개하는 8월의 가장 오래된 탄생석", accent:"#7c9a1e",
       // TODO(임시 대체, 교체 예정): 조달처 사도닉스 재고 1개·진위 불확실로 인디언아게이트로 임시 대체.
       // 진위 확인된 사도닉스 확보 시 unveilPick을 "sardonyx"로 교체하세요.
-      unveilPick:"indianAgate", unveilPrice:null /* 가격 미확정 */, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
+      unveilPick:"indianAgate", unveilPrice:19900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
     { month:9,  primary:"sapphire", second:"lapis",        basis:"Jewelers of America가 인정한 대체 탄생석",           accent:"#0f3f8f",
-      unveilPick:"lapis", unveilPrice:null /* 가격 미확정 */, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
+      unveilPick:"lapis", unveilPrice:19900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
     { month:10, primary:"opal",     second:"pinkTourmaline", basis:"GIA·Jewelers of America가 함께 인정한 10월의 탄생석", accent:"#c96a9e",
-      // 10월은 현재 라브라도라이트로 안내합니다. 핑크 토르말린 확보 시 unveilPick을 "pinkTourmaline"으로 교체하세요.
-      unveilPick:"labradorite", unveilPrice:null /* 가격 미확정 */, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
+      // TODO(임시 대체, 교체 예정): 핑크 토르말린 8mm 비즈 단가가 높아 라브라도라이트로 임시 대체.
+      // 단가가 맞는 핑크 토르말린 확보 시 unveilPick을 "pinkTourmaline"으로 교체하세요.
+      unveilPick:"labradorite", unveilPrice:19900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
     { month:11, primary:"topaz",    second:"citrine",      basis:"GIA·Jewelers of America가 함께 인정한 11월의 탄생석", accent:"#c98a2e",
-      unveilPick:"citrine", unveilPrice:null /* 가격 미확정 */, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
+      unveilPick:"citrine", unveilPrice:24900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ },
     { month:12, primary:"turquoise", second:"zircon",       basis:"GIA가 공인한 12월의 탄생석",         accent:"#1f9e93",
       // TODO(임시 대체, 최우선 교체 대상): 유통 터키석 다수가 염색 하울라이트·재구성품이라 검증된 재고가 없어
       // 3월과 동일한 아쿠아마린으로 임시 대체(청록 계열 부재, 3월과 원석 중복). 안정화 처리된 천연 터키석
       // 확보 시 unveilPick을 "turquoise"로 교체하고 unveilPrice/unveilImage/unveilUrl도 갱신하세요.
-      unveilPick:"aquamarine", unveilPrice:null /* 가격 미확정 */, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ }
+      unveilPick:"aquamarine", unveilPrice:19900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */ }
   ];
 
   var RELATIONS = {
@@ -703,7 +598,7 @@
 
   /* ================= 상태 ================= */
 
-  var state = { target:"self", relation:"self", year:0, month:0, day:0, monthData:null, browseMonth:null };
+  var state = { relation:"self", year:0, month:0, day:0, monthData:null, browseMonth:null };
   var history = [{ id:"step-home" }];
 
   function orbStyle(stone){
@@ -720,7 +615,7 @@
     if(history.length > 1){
       history.pop();
       var prev = history[history.length-1];
-      if(prev.id === "step-detail" && prev.detail){
+      if(prev.id === "step-reveal" && prev.detail){
         renderDetail(prev.detail.monthIdx, prev.detail.mode);
       }
       document.querySelectorAll(".panel").forEach(function(p){ p.hidden = true; });
@@ -729,50 +624,16 @@
   }
   function resetAll(){
     history = [{ id:"step-home" }];
-    state = { target:"self", relation:"self", year:0, month:0, day:0, monthData:null, browseMonth:null };
-    showStep("step-home", false);
-  }
-
-  /* ================= 렌더링 ================= */
-
-  function renderChipGroup(container, options, selectedId, onPick){
-    container.innerHTML = "";
-    options.forEach(function(opt){
-      var btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "chip" + (opt.id === selectedId ? " selected" : "");
-      if(opt.hex){
-        var sw = document.createElement("span");
-        sw.className = "chip-swatch";
-        sw.style.background = opt.hex;
-        btn.appendChild(sw);
-      }
-      btn.appendChild(document.createTextNode(opt.label));
-      btn.addEventListener("click", function(){ onPick(opt.id); });
-      container.appendChild(btn);
-    });
-  }
-
-  function renderRelationStep(){
-    var opts = Object.keys(RELATIONS).filter(function(k){ return k !== "self"; }).map(function(k){ return { id:k, label:RELATIONS[k].label }; });
-    renderChipGroup(document.getElementById("relationChips"), opts, state.relation, function(id){
-      state.relation = id;
-      renderRelationStep();
-      setTimeout(function(){ goToBirthdate(); }, 180);
-    });
-  }
-
-  function goToBirthdate(){
-    var title = state.target === "self" ? "생년월일을 알려주세요" : (RELATIONS[state.relation].label + "의 생년월일을 알려주세요");
-    document.getElementById("birthdateTitle").textContent = title;
+    state = { relation:"self", year:0, month:0, day:0, monthData:null, browseMonth:null };
     var input = document.getElementById("birthDateText");
     input.value = "";
     document.getElementById("dateHint").textContent = "";
     document.getElementById("dateHint").className = "field-hint";
     document.getElementById("revealBtn").disabled = true;
-    showStep("step-birthdate");
-    setTimeout(function(){ input.focus(); }, 50);
+    showStep("step-home", false);
   }
+
+  /* ================= 렌더링 ================= */
 
   function daysInMonth(y,m){ return new Date(y, m, 0).getDate(); }
   function formatDateDigits(raw){
@@ -854,138 +715,23 @@
     return (code % 28) !== 0;
   }
 
-  /* ================= 공유 카드 이미지 ================= */
+  /* ================= 공유 링크 ================= */
 
-  function roundRectPath(ctx,x,y,w,h,r){
-    if(ctx.roundRect){ ctx.beginPath(); ctx.roundRect(x,y,w,h,r); return; }
-    ctx.beginPath();
-    ctx.moveTo(x+r,y);
-    ctx.arcTo(x+w,y,x+w,y+h,r);
-    ctx.arcTo(x+w,y+h,x,y+h,r);
-    ctx.arcTo(x,y+h,x,y,r);
-    ctx.arcTo(x,y,x+w,y,r);
-    ctx.closePath();
+  var APP_SHARE_URL = "https://unveil-kr.ai.studio/birthstone/";
+
+  function pad2(n){ return n < 10 ? "0"+n : ""+n; }
+
+  function buildResultShareUrl(){
+    var qs = new URLSearchParams();
+    qs.set("d", state.year + pad2(state.month) + pad2(state.day));
+    return APP_SHARE_URL + "?" + qs.toString();
   }
 
-  function fitFontSize(ctx, text, maxWidth, startSize, weight, family){
-    var size = startSize;
-    while(size > 44){
-      ctx.font = weight+" "+size+"px "+family;
-      if(ctx.measureText(text).width <= maxWidth) break;
-      size -= 4;
-    }
-    return size;
-  }
-
-  function drawMark(ctx, cx, cy, scale){
-    ctx.save();
-    ctx.translate(cx, cy);
-    ctx.scale(scale, scale);
-    ctx.strokeStyle = "#c8a24a";
-    ctx.lineWidth = 1.4;
-    ctx.beginPath();
-    ctx.moveTo(0,-17); ctx.lineTo(11,-6); ctx.lineTo(5,17); ctx.lineTo(-5,17); ctx.lineTo(-11,-6); ctx.closePath();
-    ctx.stroke();
-    ctx.fillStyle = "#e9c876";
-    ctx.globalAlpha = 0.9;
-    ctx.beginPath();
-    ctx.moveTo(0,-17); ctx.lineTo(11,-6); ctx.lineTo(0,-1); ctx.lineTo(-11,-6); ctx.closePath();
-    ctx.fill();
-    ctx.globalAlpha = 0.85;
-    ctx.beginPath();
-    ctx.moveTo(15,-16); ctx.lineTo(16.6,-12); ctx.lineTo(20.6,-10.4); ctx.lineTo(16.6,-8.8); ctx.lineTo(15,-4.8); ctx.lineTo(13.4,-8.8); ctx.lineTo(9.4,-10.4); ctx.lineTo(13.4,-12); ctx.closePath();
-    ctx.fill();
-    ctx.restore();
-  }
-
-  function drawShareCard(stone, month){
-    var W = 1080, H = 1920;
-    var serif = "'Noto Serif KR', 'Nanum Myeongjo', serif";
-    var sans = "-apple-system, 'Pretendard', 'Apple SD Gothic Neo', sans-serif";
-    var canvas = document.createElement("canvas");
-    canvas.width = W; canvas.height = H;
-    var ctx = canvas.getContext("2d");
-
-    var bg = ctx.createRadialGradient(W/2, H*0.32, 0, W/2, H*0.32, H*0.95);
-    bg.addColorStop(0, "#211a3a");
-    bg.addColorStop(1, "#0b0912");
-    ctx.fillStyle = bg;
-    ctx.fillRect(0,0,W,H);
-
-    ctx.fillStyle = "rgba(238,225,190,0.55)";
-    var starSeed = month*97;
-    for(var i=0;i<70;i++){
-      var sx = (Math.sin(starSeed+i*12.9898)*43758.5453 % 1 + 1) % 1 * W;
-      var sy = (Math.sin(starSeed+i*78.233)*12543.789 % 1 + 1) % 1 * H * 0.85;
-      var sr = 1 + ((i*37) % 5) / 3;
-      ctx.beginPath(); ctx.arc(sx, sy, sr, 0, Math.PI*2); ctx.fill();
-    }
-
-    drawMark(ctx, W/2, 150, 2.4);
-    ctx.textAlign = "center";
-    ctx.fillStyle = "#c8a24a";
-    ctx.font = "600 26px "+sans;
-    ctx.fillText("U N V E I L   ·   탄 생 석   리 딩", W/2, 230);
-
-    var cx = W/2, cy = 680, r = 230;
-    ctx.save();
-    ctx.shadowColor = stone.glow; ctx.shadowBlur = 90;
-    var gg = ctx.createRadialGradient(cx-70,cy-90,10, cx,cy,r);
-    gg.addColorStop(0, stone.glow);
-    gg.addColorStop(1, stone.hex);
-    ctx.fillStyle = gg;
-    ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.fill();
-    ctx.restore();
-
-    var pillText = month+"월의 탄생석";
-    ctx.font = "500 30px "+sans;
-    var pillW = ctx.measureText(pillText).width + 64;
-    ctx.strokeStyle = "rgba(200,162,74,0.55)";
-    ctx.lineWidth = 2;
-    roundRectPath(ctx, W/2 - pillW/2, 970, pillW, 66, 33);
-    ctx.stroke();
-    ctx.fillStyle = "#e9c876";
-    ctx.fillText(pillText, W/2, 1013);
-
-    var nameSize = fitFontSize(ctx, stone.name, 900, 118, 700, serif);
-    ctx.font = "700 "+nameSize+"px "+serif;
-    ctx.fillStyle = "#e9c876";
-    ctx.fillText(stone.name, W/2, 1160);
-
-    ctx.font = "500 34px "+sans;
-    ctx.fillStyle = "#9d93b0";
-    ctx.fillText(stone.en.toUpperCase(), W/2, 1215);
-
-    var kwText = "#"+stone.keyword;
-    ctx.font = "600 36px "+serif;
-    var kwW = ctx.measureText(kwText).width + 72;
-    roundRectPath(ctx, W/2 - kwW/2, 1270, kwW, 84, 42);
-    ctx.fillStyle = "rgba(200,162,74,0.16)";
-    ctx.fill();
-    ctx.strokeStyle = "rgba(200,162,74,0.5)";
-    ctx.stroke();
-    ctx.fillStyle = "#e9c876";
-    ctx.fillText(kwText, W/2, 1324);
-
-    ctx.strokeStyle = "rgba(200,162,74,0.28)";
-    ctx.lineWidth = 1.5;
-    ctx.beginPath(); ctx.moveTo(W/2-90, H-230); ctx.lineTo(W/2+90, H-230); ctx.stroke();
-
-    ctx.font = "500 40px "+serif;
-    ctx.fillStyle = "#ece3d4";
-    ctx.fillText("당신의 탄생석은 무엇인가요?", W/2, H-160);
-    ctx.font = "400 28px "+sans;
-    ctx.fillStyle = "#9d93b0";
-    ctx.fillText("UNVEIL 탄생석 리딩에서 확인해보세요", W/2, H-112);
-
-    return canvas;
-  }
-
-  function shopLabel(mode){
-    if(mode === "browse" || state.target === "self"){
-      return "나의 탄생석이 담긴 아이템 찾기 →";
-    }
-    return RELATIONS[state.relation].label + "의 탄생석이 담긴 아이템 찾기 →";
+  function parseResultParamsFromLocation(){
+    var qs = new URLSearchParams(window.location.search);
+    var d = qs.get("d");
+    if(!d || !/^\d{8}$/.test(d)) return null;
+    return { dateDigits: d };
   }
 
   function hashString(str){
@@ -1008,13 +754,13 @@
     state.month = parsed.m;
     state.day = parsed.d;
     state.monthData = MONTHS[state.month - 1];
-    var stone = STONES[state.monthData.primary];
+    var stone = STONES[state.monthData.unveilPick];
 
-    var caption = state.target === "self" ? "당신의 탄생석" : (RELATIONS[state.relation].topicPhrase + " 탄생석");
+    var caption = state.relation === "self" ? "UNVEIL 추천" : (RELATIONS[state.relation].topicPhrase + " UNVEIL 추천");
     document.getElementById("revealCaption").textContent = caption;
     document.getElementById("revealName").textContent = stone.name;
     document.getElementById("revealNameEn").textContent = stone.en.toUpperCase();
-    document.getElementById("revealMonthPill").textContent = state.month + "월의 탄생석";
+    document.getElementById("revealMonthPill").textContent = state.month + "월 UNVEIL 추천";
     document.getElementById("revealOrb").style.cssText = orbStyle(stone);
 
     var seed = hashString(state.year + "-" + state.month + "-" + state.day);
@@ -1026,17 +772,15 @@
       revealUnveil.hidden = true;
     } else {
       revealUnveil.hidden = false;
-      document.getElementById("revealUnveilName").textContent = STONES[state.monthData.unveilPick].name;
+      document.getElementById("revealUnveilName").textContent = STONES[state.monthData.primary].name;
     }
 
-    document.getElementById("revealShopBtn").textContent = shopLabel();
-    document.getElementById("revealContactBox").classList.remove("show");
-
-    showStep("step-reveal");
+    renderDetail(state.month, "flow");
+    showStep("step-reveal", true, { monthIdx: state.month, mode:"flow" });
   }
 
   function relationBridge(mode){
-    if(mode === "browse" || state.target === "self"){
+    if(mode === "browse" || state.relation === "self"){
       return "그래서 많은 분들이 이 원석을 팔찌나 목걸이로 만들어 매일 곁에 두어요.";
     }
     return "그래서 많은 분들이 이 원석으로 만든 팔찌나 목걸이를 "+RELATIONS[state.relation].label+"에게 선물해요.";
@@ -1079,7 +823,9 @@
     document.getElementById("detailToAlmanacBtn").onclick = function(){
       if(mode === "browse"){ goBack(); } else { showStep("step-almanac"); }
     };
-    document.querySelector("#step-detail .reset-link").hidden = (mode === "browse");
+    document.querySelector("#step-reveal .reset-link").hidden = (mode === "browse");
+    document.getElementById("revealStage").hidden = (mode === "browse");
+    document.getElementById("revealBackLink").hidden = (mode !== "browse");
   }
 
   function renderAlmanac(){
@@ -1098,7 +844,7 @@
         state.browseMonth = m;
         state.monthData = MONTHS[m-1];
         renderDetail(m, "browse");
-        showStep("step-detail", true, { monthIdx: m, mode:"browse" });
+        showStep("step-reveal", true, { monthIdx: m, mode:"browse" });
       });
     });
   }
@@ -1140,24 +886,15 @@
   var deferredInstallPrompt = null;
   function isStandaloneMode(){ return window.matchMedia("(display-mode: standalone)").matches || navigator.standalone === true; }
   function isIOSDevice(){
-    var ua = navigator.userAgent;
-    if(/iPad|iPhone|iPod/.test(ua) && !window.MSStream) return true;
-    /* iPadOS 13 부터 사파리가 자신을 Mac 이라고 알린다.
-       맥에는 터치가 없으므로 터치 포인트 수로 아이패드를 가려낸다. */
-    return /Macintosh/.test(ua) && navigator.maxTouchPoints > 1;
+    var iOSByUA = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    var iPadOS13Up = navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1; // iPadOS 13+는 데스크톱 Safari로 위장함
+    return iOSByUA || iPadOS13Up;
   }
-  function isAndroidDevice(){ return /Android/i.test(navigator.userAgent); }
-  function isDesktopLike(){ return !isIOSDevice() && !isAndroidDevice(); }
   window.addEventListener("beforeinstallprompt", function(e){
     e.preventDefault();
     deferredInstallPrompt = e;
-    /* 이 이벤트가 오는 환경(안드로이드 폰·태블릿, PC 크롬·엣지)은 모두 설치할 수 있다 */
     var btn = document.getElementById("installBtn");
-    if(btn && !isStandaloneMode()){
-      btn.hidden = false;
-      var lbl = btn.querySelector("span");
-      if(lbl && isDesktopLike()) lbl.textContent = "앱으로 설치하기";
-    }
+    if(btn && !isStandaloneMode()) btn.hidden = false;
   });
   window.addEventListener("appinstalled", function(){
     deferredInstallPrompt = null;
@@ -1170,6 +907,7 @@
     initStars();
     wireBirthdateInput();
     renderAlmanac();
+    setTimeout(function(){ document.getElementById("birthDateText").focus(); }, 50);
 
     var installBtn = document.getElementById("installBtn");
     var installIosTip = document.getElementById("installIosTip");
@@ -1178,64 +916,100 @@
       if(deferredInstallPrompt){
         installBtn.disabled = true;
         deferredInstallPrompt.prompt();
-        deferredInstallPrompt.userChoice.then(function(){ installBtn.disabled = false; deferredInstallPrompt = null; });
+        deferredInstallPrompt.userChoice.then(function(choice){
+          deferredInstallPrompt = null;
+          installBtn.disabled = false;
+          if(choice.outcome === "accepted") installBtn.hidden = true;
+        });
       } else if(isIOSDevice()){
         installIosTip.hidden = !installIosTip.hidden;
       }
     });
 
-    document.getElementById("ctaSelf").addEventListener("click", function(){
-      state.target = "self"; state.relation = "self";
-      goToBirthdate();
-    });
-    document.getElementById("ctaGift").addEventListener("click", function(){
-      state.target = "gift"; state.relation = "lover";
-      renderRelationStep();
-      showStep("step-relation");
-    });
-    document.getElementById("ctaAlmanac").addEventListener("click", function(){ showStep("step-almanac"); });
-
     document.getElementById("revealBtn").addEventListener("click", doReveal);
-    document.getElementById("revealShopBtn").addEventListener("click", function(){
-      document.getElementById("revealContactBox").classList.toggle("show");
+
+    document.getElementById("shareBtn").addEventListener("click", function(){
+      var stone = STONES[state.monthData.primary];
+      var text = state.month+"월의 탄생석은 "+stone.name+(hasBatchim(stone.name)?"이에요":"예요")+". UNVEIL 탄생석 리딩에서 확인해보세요.";
+      var shareUrl = buildResultShareUrl();
+      var shareBtnText = document.getElementById("shareBtnText");
+      var original = shareBtnText.textContent;
+      function showTemp(msg){
+        shareBtnText.textContent = msg;
+        setTimeout(function(){ shareBtnText.textContent = original; }, 1800);
+      }
+      function fallbackCopy(){
+        copyToClipboard(shareUrl).then(function(){
+          showTemp("링크 복사완료 ✓");
+        }).catch(function(){
+          showTemp("복사에 실패했어요");
+        });
+      }
+      if(navigator.share){
+        navigator.share({ title:"UNVEIL 탄생석 리딩", text:text, url:shareUrl }).catch(function(err){
+          if(!err || err.name !== "AbortError"){ fallbackCopy(); }
+        });
+      } else {
+        fallbackCopy();
+      }
     });
-    function openShareOverlay(canvas, fileName){
+
+    function openCaptureOverlay(canvas, fileName){
       var dataUrl = canvas.toDataURL("image/png");
-      document.getElementById("shareOverlayImg").src = dataUrl;
-      document.getElementById("shareOverlayDownload").onclick = function(){
+      document.getElementById("captureOverlayImg").src = dataUrl;
+      document.getElementById("captureOverlayDownload").onclick = function(){
         var a = document.createElement("a");
         a.href = dataUrl; a.download = fileName;
         document.body.appendChild(a); a.click(); document.body.removeChild(a);
       };
-      document.getElementById("shareOverlay").classList.add("show");
+      document.getElementById("captureOverlay").classList.add("show");
     }
-    document.getElementById("shareOverlayClose").addEventListener("click", function(){
-      document.getElementById("shareOverlay").classList.remove("show");
+    document.getElementById("captureOverlayClose").addEventListener("click", function(){
+      document.getElementById("captureOverlay").classList.remove("show");
     });
 
-    document.getElementById("shareBtn").addEventListener("click", function(){
-      var stone = STONES[state.monthData.primary];
-      var month = state.month;
-      var text = month+"월의 탄생석은 "+stone.name+(hasBatchim(stone.name)?"이에요":"예요")+". UNVEIL 탄생석 리딩에서 나의 탄생석을 확인해보세요.";
-      var fileName = "unveil-birthstone-"+stone.en.toLowerCase().replace(/\s+/g,"-")+".png";
-      var canvas = drawShareCard(stone, month);
-      copyToClipboard(text).catch(function(){});
-      canvas.toBlob(function(blob){
-        if(blob && navigator.canShare){
-          var file = new File([blob], "unveil-birthstone.png", { type:"image/png" });
-          if(navigator.canShare({ files:[file] })){
-            navigator.share({ files:[file], title:"UNVEIL 탄생석 리딩", text:text }).catch(function(err){
-              if(!err || err.name !== "AbortError"){ openShareOverlay(canvas, fileName); }
-            });
-            return;
+    document.getElementById("captureBtn").addEventListener("click", function(){
+      var captureBtnText = document.getElementById("captureBtnText");
+      var original = captureBtnText.textContent;
+      function showTemp(msg){
+        captureBtnText.textContent = msg;
+        setTimeout(function(){ captureBtnText.textContent = original; }, 1800);
+      }
+      if(typeof html2canvas !== "function"){
+        showTemp("이 화면에서는 지원되지 않아요");
+        return;
+      }
+      var installBtnEl = document.getElementById("installBtn");
+      var installIosTipEl = document.getElementById("installIosTip");
+      var installBtnWasVisible = !installBtnEl.hidden;
+      var installTipWasVisible = !installIosTipEl.hidden;
+      installBtnEl.hidden = true;
+      installIosTipEl.hidden = true;
+      showTemp("캡처 중...");
+
+      html2canvas(document.querySelector(".app"), { backgroundColor:"#0b0912", useCORS:true }).then(function(canvas){
+        installBtnEl.hidden = !installBtnWasVisible;
+        installIosTipEl.hidden = !installTipWasVisible;
+        captureBtnText.textContent = original;
+
+        var fileName = "unveil-탄생석-결과.png";
+        canvas.toBlob(function(blob){
+          if(blob && navigator.canShare){
+            var file = new File([blob], fileName, { type:"image/png" });
+            if(navigator.canShare({ files:[file] })){
+              navigator.share({ files:[file], title:"UNVEIL 탄생석 리딩" }).catch(function(err){
+                if(!err || err.name !== "AbortError"){ openCaptureOverlay(canvas, fileName); }
+              });
+              return;
+            }
           }
-        }
-        openShareOverlay(canvas, fileName);
-      }, "image/png", 0.95);
-    });
-    document.getElementById("toDetailBtn").addEventListener("click", function(){
-      renderDetail(state.month, "flow");
-      showStep("step-detail", true, { monthIdx: state.month, mode:"flow" });
+          openCaptureOverlay(canvas, fileName);
+        }, "image/png", 0.95);
+      }).catch(function(){
+        installBtnEl.hidden = !installBtnWasVisible;
+        installIosTipEl.hidden = !installTipWasVisible;
+        showTemp("캡처에 실패했어요");
+      });
     });
 
     Array.prototype.forEach.call(document.querySelectorAll("[data-back]"), function(btn){
@@ -1244,6 +1018,14 @@
     Array.prototype.forEach.call(document.querySelectorAll("[data-reset]"), function(btn){
       btn.addEventListener("click", resetAll);
     });
+
+    var sharedParams = parseResultParamsFromLocation();
+    if(sharedParams){
+      var sharedInput = document.getElementById("birthDateText");
+      sharedInput.value = sharedParams.dateDigits;
+      sharedInput.dispatchEvent(new Event("input", { bubbles:true }));
+      doReveal();
+    }
   });
 
   if("serviceWorker" in navigator){
@@ -1251,6 +1033,7 @@
       navigator.serviceWorker.register("/sw.js").catch(function(){});
     });
   }
+
 })();
 </script>
 </body></html>
