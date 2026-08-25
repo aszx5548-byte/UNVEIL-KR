@@ -311,7 +311,6 @@
   }
   .term:hover, .term:focus-visible{ border-bottom-color:var(--gold-bright); }
   .term:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; border-radius:3px; }
-  .term::after{ content:'?'; font-size:0.68em; vertical-align:super; opacity:0.75; margin-left:1px; }
   .glyph-tip{
     position:fixed; z-index:30; max-width:230px; max-height:70vh; overflow-y:auto;
     background:linear-gradient(180deg,var(--surface-2),var(--surface));
@@ -2784,8 +2783,21 @@
       .replace('억부용신', T('eokbu','억부용신'))
       .replace('일간', T('ilgan','일간'));
 
+    /* 최대 4개만 보여준다 — 더 부족한 원소 쪽에 더 많은 자리를 주고(3:1),
+       두 원소가 똑같이 부족하면 2:2 로 나눈다. 대표 원석은 항상 포함해 용신·희신이
+       둘 다 최소 1개는 뜨게 하고, 나머지 자리는 일주(생일)를 시드로 골라
+       같은 사람은 항상 같은 조합, 다른 사람은 자연스럽게 다르게 보이게 한다. */
+    var slots = (counts[ranked[0]] === counts[ranked[1]]) ? [2,2] : [3,1];
+    var seed = saju.day.stemIdx * 12 + saju.day.branchIdx;
+
     var html = ranked.map(function(k, i){
-      var stones = GEMSTONES[k];
+      var all = GEMSTONES[k];
+      var main = all.filter(function(g){ return g.tier === '대표'; })[0] || all[0];
+      var alts = all.filter(function(g){ return g !== main; });
+      var extra = slots[i] - 1;
+      var stones = [main];
+      for(var p=0; p<extra; p++){ stones.push(alts[(seed+p) % alts.length]); }
+
       var badge = '<div class="rank-badge '+badgeClasses[i]+'">'+labels[i]+'</div>';
       var stonesHtml = stones.map(function(g){
         var tierClass = TIER_CLASS[g.tier] || 'tier-sub';
