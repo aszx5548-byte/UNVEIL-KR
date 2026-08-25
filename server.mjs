@@ -16,7 +16,7 @@ import { readFile, stat } from 'node:fs/promises';
 import { extname, join, normalize, resolve, sep } from 'node:path';
 
 const ROOT = resolve('dist');
-const PORT = Number(process.env.PORT) || 8080;
+const PORT = Number(process.env.PORT) || 3000;
 
 // 한글이 깨지지 않도록 텍스트 형식에는 charset 을 명시합니다.
 const TYPES = {

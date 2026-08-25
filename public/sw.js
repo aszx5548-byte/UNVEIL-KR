@@ -1,5 +1,5 @@
 /* UNVEIL 통합 사이트 서비스워커 — 사주 / 별자리 / 탄생석 3개 앱을 하나의 스코프로 관리합니다. */
-var CACHE_NAME = 'unveil-web-v3';
+var CACHE_NAME = 'unveil-web-v2';
 var ASSETS = [
   '/',
   '/index.html',
@@ -9,9 +9,7 @@ var ASSETS = [
   '/zodiac/index.html',
   '/birthstone/',
   '/birthstone/index.html',
-  '/birthstone/html2canvas.min.js',
   '/manifest.json',
-  '/saju/manifest.json',
   '/favicon.svg',
   '/favicon.ico',
   '/apple-touch-icon.png',

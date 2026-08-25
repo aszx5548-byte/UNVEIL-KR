@@ -72,4 +72,4 @@ Allow: /
 User-agent: meta-externalagent
 Allow: /
 
-Sitemap: https://unveil-kr.ai.studio/sitemap.xml
+Sitemap: https://unveil.ai.studio/sitemap.xml
