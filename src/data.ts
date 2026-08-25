@@ -34,7 +34,7 @@ export const APP_LINKS = {
  *   public/sitemap.xml · public/robots.txt
  *   public/saju|zodiac|birthstone/index.html (canonical · og)
  */
-export const SITE_URL = 'https://unveil.ai.studio';
+export const SITE_URL = 'https://unveil-kr.ai.studio';
 
 /** 네이버 스마트스토어. 주소가 바뀌면 이 값만 교체하세요. */
 export const SMARTSTORE_URL = 'https://smartstore.naver.com/unveil_store';

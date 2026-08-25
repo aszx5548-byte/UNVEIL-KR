@@ -71,6 +71,9 @@ if (missing.length) fail.push(`안내 페이지 ${missing.length}개 누락 — 
 const FORBIDDEN = [
   ['API 키', /AIza[0-9A-Za-z_-]{30,}|sk-[A-Za-z0-9]{20,}|ghp_[A-Za-z0-9]{20,}/],
   ['가격 표기', /\d{1,3},\d{3}\s*원|₩\s?\d/],
+  // 화면에 안 보여도 소스에 남은 가격은 잡습니다. 소스를 열면 그대로 읽히고,
+  // 8/23 앱 교체 때 실제로 unveilPrice:19900 이 이렇게 다시 들어왔습니다.
+  ['소스에 남은 가격', /\w*[Pp]rice\s*[:=]\s*\d{3,}/],
   ['규격 8mm', /\b8\s?mm\b/i],
   ['깨진 문자열', /NNVEIL|TRNST|재재|연연|추연/],
   ['localhost 잔재', /localhost:\d+/],
