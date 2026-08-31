@@ -1,99 +1,15 @@
 <!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- 호스팅이 헤더를 못 주는 곳(Cloud Run 등)에서도 정책이 적용되도록 HTML 안에 둡니다. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'">
-<meta name="referrer" content="strict-origin-when-cross-origin">
-<meta name="description" content="생년월일을 넣으면 사주 원국과 오행 균형을 풀어봅니다. 만세력 절기 기준으로 계산하며, 오행에 어울리는 천연 원석도 함께 안내합니다. 가입 없이 무료입니다.">
-<link rel="canonical" href="https://unveil-kr.ai.studio/saju/">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="UNVEIL">
-<meta property="og:locale" content="ko_KR">
-<meta property="og:url" content="https://unveil-kr.ai.studio/saju/">
-<meta property="og:title" content="무료 사주 음양오행 | UNVEIL">
-<meta property="og:description" content="생년월일을 넣으면 사주 원국과 오행 균형을 풀어봅니다. 만세력 절기 기준으로 계산하며, 오행에 어울리는 천연 원석도 함께 안내합니다. 가입 없이 무료입니다.">
-<meta property="og:image" content="https://unveil-kr.ai.studio/images/og-cover.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-<!-- 구조화 데이터
-     AI 답변 엔진과 검색엔진이 이 페이지가 무엇인지 문장 해석 없이 알 수 있게 합니다.
-     화면에 실제로 있는 내용만 넣습니다. 가격은 넣지 않습니다. -->
-<script type="application/ld+json">
-{
- "@context": "https://schema.org",
- "@type": "BreadcrumbList",
- "itemListElement": [
-  { "@type": "ListItem", "position": 1, "name": "UNVEIL", "item": "https://unveil-kr.ai.studio/" },
-  { "@type": "ListItem", "position": 2, "name": "사주오행", "item": "https://unveil-kr.ai.studio/saju/" }
- ]
-}
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="0;url=https://earnest-mochi-720126.netlify.app/saju/">
+<title>UNVEIL 사주 음양오행</title>
+</head>
+<body>
+<script>
+  location.replace('https://earnest-mochi-720126.netlify.app/saju/' + location.search + location.hash);
 </script>
-<script type="application/ld+json">
-{
- "@context": "https://schema.org",
- "@type": "WebApplication",
- "name": "무료 사주 음양오행",
- "url": "https://unveil-kr.ai.studio/saju/",
- "applicationCategory": "LifestyleApplication",
- "operatingSystem": "All",
- "browserRequirements": "자바스크립트를 지원하는 웹 브라우저",
- "isAccessibleForFree": true,
- "inLanguage": "ko",
- "description": "생년월일과 태어난 시각으로 사주 원국을 세우고 오행 균형을 계산합니다. 만세력 절기 기준이며, 입력값은 브라우저 안에서만 처리되고 저장되지 않습니다.",
- "publisher": { "@type": "Organization", "name": "UNVEIL", "url": "https://unveil-kr.ai.studio/" }
-}
-</script>
-<script type="application/ld+json">
-{
- "@context": "https://schema.org",
- "@type": "ItemList",
- "name": "오행별 원석 안내",
- "itemListElement": [
-  { "@type": "ListItem", "position": 1, "name": "목(木) 초록", "url": "https://unveil-kr.ai.studio/saju/wood/" },
-  { "@type": "ListItem", "position": 2, "name": "화(火) 빨강", "url": "https://unveil-kr.ai.studio/saju/fire/" },
-  { "@type": "ListItem", "position": 3, "name": "토(土) 황토", "url": "https://unveil-kr.ai.studio/saju/earth/" },
-  { "@type": "ListItem", "position": 4, "name": "금(金) 흰색", "url": "https://unveil-kr.ai.studio/saju/metal/" },
-  { "@type": "ListItem", "position": 5, "name": "수(水) 검정", "url": "https://unveil-kr.ai.studio/saju/water/" }
- ]
-}
-</script>
-<script type="application/ld+json">
-{
- "@context": "https://schema.org",
- "@type": "FAQPage",
- "mainEntity": [
-  {
-   "@type": "Question",
-   "name": "사주 오행은 어떻게 계산하나요?",
-   "acceptedAnswer": { "@type": "Answer", "text": "생년월일과 태어난 시각으로 사주 원국(년주·월주·일주·시주)을 세우면 목·화·토·금·수 다섯 기운의 분포를 볼 수 있습니다. UNVEIL은 만세력 절기를 기준으로 계산하며 가입 없이 무료로 이용할 수 있습니다." }
-  },
-  {
-   "@type": "Question",
-   "name": "오행별로 어울리는 원석은 무엇인가요?",
-   "acceptedAnswer": { "@type": "Answer", "text": "오행은 각각 색에 대응합니다. 목은 초록, 화는 빨강, 토는 황토, 금은 흰색, 수는 검정입니다. UNVEIL은 이 색 대응을 지키는 범위에서 목은 그린아벤츄린, 화는 카넬리안, 토는 타이거아이, 금은 백수정, 수는 실버흑요석을 대표 원석으로 안내합니다." }
-  },
-  {
-   "@type": "Question",
-   "name": "입력한 생년월일이 저장되나요?",
-   "acceptedAnswer": { "@type": "Answer", "text": "저장되지 않습니다. 계산은 이용자의 브라우저 안에서만 이루어지며 서버로 전송되지 않습니다." }
-  },
-  {
-   "@type": "Question",
-   "name": "사주오행으로 고른 원석이 효과가 있나요?",
-   "acceptedAnswer": { "@type": "Answer", "text": "UNVEIL은 원석의 효능이나 건강·재물·연애·운세 결과를 보장하지 않습니다. 사주오행과 원석의 연결은 전통적인 색 대응을 바탕으로 한 큐레이션이며 참고 정보입니다." }
-  }
- ]
-}
-</script>
-<title>무료 사주 음양오행 | 생년월일로 보는 나의 오행 - UNVEIL</title>
-<link rel="manifest" href="/saju/manifest.json">
-<meta name="theme-color" content="#0b0912">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="UNVEIL 사주">
-<link rel="icon" href="/favicon.ico" sizes="32x32">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-</head><body>
-<style>
+<p>최신 사주 페이지로 이동 중입니다… <a href="https://earnest-mochi-720126.netlify.app/saju/">이동이 안 되면 여기를 눌러주세요</a></p>
+</body>
+</html>
