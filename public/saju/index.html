@@ -155,7 +155,7 @@
     color:var(--gold); font-weight:600; margin-bottom:14px;
   }
   .tagline{
-    color:var(--text-muted); font-size:15px; font-weight:400; margin:0;
+    color:var(--text-muted); font-size:16.5px; font-weight:400; margin:0;
     text-wrap:balance;
   }
   .install-btn{
@@ -173,7 +173,7 @@
     max-width:320px; margin:12px auto 0; padding:12px 16px;
     border:1px solid var(--gold-line); border-radius:12px;
     background:rgba(255,255,255,0.02); color:var(--text-muted);
-    font-size:12.5px; line-height:1.7; text-align:left;
+    font-size:14px; line-height:1.7; text-align:left; word-break:keep-all;
   }
   /* ---------- Panels ---------- */
   .panel{
@@ -203,7 +203,7 @@
   .field{ margin-bottom:18px; }
   .field:last-of-type{ margin-bottom:0; }
   .field label{
-    display:block; font-size:11px; letter-spacing:0.14em; text-transform:uppercase;
+    display:block; font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase;
     color:var(--text-muted); margin-bottom:8px;
   }
   input[type="date"], select.input{
@@ -220,7 +220,7 @@
   input[type="date"]:focus, select.input:focus{
     outline:2px solid var(--gold); outline-offset:1px; border-color:var(--gold);
   }
-  .field-hint{ font-size:12px; color:var(--text-muted); margin:8px 2px 0; font-variant-numeric:tabular-nums; }
+  .field-hint{ font-size:13.5px; color:var(--text-muted); margin:8px 2px 0; font-variant-numeric:tabular-nums; word-break:keep-all; }
   .field-hint.error{ color:#d98066; }
   input.input{
     width:100%; appearance:none;
@@ -293,7 +293,7 @@
   .pillar-div{ width:44%; height:1px; background:var(--gold-line); margin:4px auto; }
   .pillar-ko{ font-size:10px; color:var(--text-muted); margin-top:2px; letter-spacing:0.04em; }
   .pillar-unknown-mark{ font-family:var(--serif); font-size:22px; color:var(--text-muted); padding:10px 0; }
-  .pillar-intro{ text-align:center; color:#afa5c4; font-size:12.5px; margin:-10px 0 16px; line-height:1.7; }
+  .pillar-intro{ text-align:center; color:#afa5c4; font-size:14px; margin:-10px 0 16px; line-height:1.7; word-break:keep-all; }
   .glyph{
     background:none; border:none; padding:2px 6px; margin:0 -6px;
     cursor:pointer; border-radius:6px;
@@ -323,8 +323,8 @@
   }
   .glyph-tip.wide{ max-width:300px; }
   .glyph-tip.show{ opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
-  .glyph-tip-head{ font-family:var(--serif); font-size:13.5px; color:var(--gold-bright); margin:0 0 5px; letter-spacing:0.02em; }
-  .glyph-tip-desc{ font-size:12.5px; color:var(--text-muted); margin:0; line-height:1.6; }
+  .glyph-tip-head{ font-family:var(--serif); font-size:14.5px; color:var(--gold-bright); margin:0 0 5px; letter-spacing:0.02em; }
+  .glyph-tip-desc{ font-size:14px; color:var(--text-muted); margin:0; line-height:1.6; }
   .glyph-tip-desc b{ color:var(--text); }
   .glyph-tip-arrow{
     position:absolute; left:var(--arrow-x,50%); bottom:-5px; margin-left:-5px;
@@ -340,7 +340,7 @@
   }
   .term-caption{
     text-align:center; font-size:11.5px; color:var(--text-muted); margin-top:14px;
-    font-variant-numeric:tabular-nums;
+    font-variant-numeric:tabular-nums; word-break:keep-all;
   }
   .radar-wrap{ display:flex; justify-content:center; margin:6px 0 6px; }
   .radar-legend{
@@ -350,7 +350,7 @@
   .legend-dot{ width:9px; height:9px; border-radius:50%; flex:none; }
   .legend-item b{ color:var(--text); font-variant-numeric:tabular-nums; font-weight:600; }
   .ohaeng-detail{ margin-top:26px; display:flex; flex-direction:column; gap:12px; }
-  .ohaeng-detail-intro{ font-size:12.5px; color:var(--text-muted); line-height:1.75; margin:0 0 2px; }
+  .ohaeng-detail-intro{ font-size:14px; color:var(--text-muted); line-height:1.75; margin:0 0 2px; word-break:keep-all; }
   .el-card{
     background:rgba(255,255,255,0.025);
     border:1px solid var(--line); border-left:3px solid var(--el, var(--gold));
@@ -365,7 +365,7 @@
   }
   .el-badge-over{ background:rgba(193,87,60,0.18); color:#e2a08c; }
   .el-badge-low{ background:var(--gold-soft); color:var(--gold-bright); }
-  .el-card-text{ font-size:13.5px; line-height:1.8; color:var(--text-muted); margin:0; }
+  .el-card-text{ font-size:15px; line-height:1.8; color:var(--text-muted); margin:0; word-break:keep-all; }
   .el-card-text + .el-card-text{ margin-top:8px; }
   .el-card-flow{ color:var(--text); }
   .el-sol{ margin-top:13px; padding-top:12px; border-top:1px dashed var(--line); }
@@ -377,63 +377,28 @@
     border:1px solid var(--line); border-radius:6px;
     text-align:center; padding:2px 0; margin-top:2px;
   }
-  .el-sol-val{ flex:1; font-size:13px; line-height:1.7; color:var(--text); }
-  .ohaeng-detail-note{ font-size:11.5px; color:var(--text-muted); line-height:1.7; margin:4px 0 0; }
-  .ohaeng-detail-bridge{ font-size:12.5px; color:var(--text-muted); line-height:1.8; margin:10px 0 0; }
+  .el-sol-val{ flex:1; font-size:14.5px; line-height:1.7; color:var(--text); word-break:keep-all; }
+  .ohaeng-detail-note{ font-size:13px; color:var(--text-muted); line-height:1.7; margin:4px 0 0; word-break:keep-all; }
+  .ohaeng-detail-bridge{ font-size:14px; color:var(--text-muted); line-height:1.8; margin:10px 0 0; word-break:keep-all; }
   .yy-row{ margin-top:24px; }
   .yy-labels{ display:flex; justify-content:space-between; font-size:12px; color:var(--text-muted); margin-bottom:7px; }
   .yy-labels b{ color:var(--text); font-variant-numeric:tabular-nums; }
   .yy-bar{ height:8px; border-radius:6px; overflow:hidden; display:flex; background:var(--line); }
   .yy-yang{ background:linear-gradient(90deg,var(--gold),var(--gold-bright)); }
   .yy-yin{ background:linear-gradient(90deg,#4a5686,var(--yin)); }
-  .interp-text{ color:var(--text); font-size:14.5px; line-height:1.85; margin:0; }
+  .interp-text{ color:var(--text); font-size:16px; line-height:1.85; margin:0; word-break:keep-all; }
   .interp-text + .interp-text{ margin-top:12px; }
-  .health-disclaimer{ margin-top:14px; font-size:11.5px; color:var(--text-muted); line-height:1.7; }
+  .health-disclaimer{ margin-top:14px; font-size:13px; color:var(--text-muted); line-height:1.7; word-break:keep-all; }
 
-  /* ===== 주의사항 안내 (결과 상단 / 원국 인라인 / 원석 CTA 직전) ===== */
-  .read-first{
-    margin:0 0 26px; padding:16px 18px;
-    border:1px solid var(--line); border-left:2px solid var(--gold-line);
-    border-radius:12px; background:rgba(255,255,255,0.022);
-  }
-  .read-first-head{
-    margin:0 0 7px; font-family:var(--serif); font-size:13px;
-    color:var(--gold-bright); letter-spacing:0.03em;
-  }
-  .read-first-lead{
-    margin:0; font-size:12.5px; line-height:1.8; color:var(--text-muted); word-break:keep-all;
-  }
-  .read-first-lead b{ color:var(--text); font-weight:600; }
-  .read-first-more{ margin-top:10px; }
-  .read-first-more summary{
-    cursor:pointer; font-size:12px; color:var(--gold-bright);
-    list-style:none; padding:3px 0;
-  }
-  .read-first-more summary::-webkit-details-marker{ display:none; }
-  .read-first-more summary::after{ content:' +'; }
-  .read-first-more[open] summary::after{ content:' \2212'; }
-  .read-first-more summary:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; border-radius:6px; }
-  .read-first-more ul{
-    margin:10px 0 0; padding-left:16px;
-    font-size:12px; line-height:1.8; color:var(--text-muted); word-break:keep-all;
-  }
-  .read-first-more li + li{ margin-top:7px; }
-  .read-first-more li b{ color:var(--text); font-weight:600; }
+  /* ===== 주의사항 안내 (원국 인라인 — 시간 미상·절기 경계일 때만 조건부로 뜸) ===== */
   .pillar-note{
     margin-top:12px; padding:11px 13px;
     border:1px dashed var(--gold-line); border-radius:10px;
-    font-size:11.5px; line-height:1.75; color:var(--text-muted); word-break:keep-all;
+    font-size:13px; line-height:1.75; color:var(--text-muted); word-break:keep-all;
   }
   .pillar-note[hidden]{ display:none; }
   .pillar-note span{ display:block; }
   .pillar-note span + span{ margin-top:6px; }
-  .gem-note{
-    margin:16px 0 0; padding:13px 15px;
-    border:1px solid var(--gold-line); border-radius:12px;
-    background:var(--gold-soft);
-    font-size:12px; line-height:1.8; color:var(--text-muted); word-break:keep-all;
-  }
-  .gem-note b{ color:var(--text); font-weight:600; }
   .strength-wrap{ text-align:center; }
   .strength-badge{
     display:inline-block; font-family:var(--serif); font-size:16px; font-weight:600;
@@ -461,8 +426,8 @@
   }
   .relation-hap .relation-tag{ background:var(--gold-soft); color:var(--gold-bright); }
   .relation-chung .relation-tag{ background:rgba(193,87,60,0.18); color:#e2a08c; }
-  .relation-text{ font-size:13px; color:var(--text-muted); font-variant-numeric:tabular-nums; }
-  .relation-empty{ text-align:center; color:var(--text-muted); font-size:13px; padding:6px 0; }
+  .relation-text{ font-size:14px; color:var(--text-muted); font-variant-numeric:tabular-nums; word-break:keep-all; }
+  .relation-empty{ text-align:center; color:var(--text-muted); font-size:14px; padding:6px 0; }
   .daewoon-scroll{ overflow-x:auto; padding-bottom:6px; margin:0 -4px; }
   .daewoon-grid{ display:flex; gap:8px; padding:0 4px; width:max-content; }
   .daewoon-pillar{
@@ -506,8 +471,8 @@
     background:rgba(255,255,255,0.05); color:var(--text-muted);
   }
   .dw-tense.is-present{ background:var(--gold-soft); color:var(--gold-bright); }
-  .daewoon-detail .interp-text{ font-size:14px; text-align:left; }
-  .dw-note{ margin:14px 0 0; font-size:11.5px; color:var(--text-muted); line-height:1.7; }
+  .daewoon-detail .interp-text{ font-size:15.5px; text-align:left; }
+  .dw-note{ margin:14px 0 0; font-size:13px; color:var(--text-muted); line-height:1.7; word-break:keep-all; }
   .interp-text a{ color:var(--gold-bright); text-decoration:none; border-bottom:1px solid var(--gold-line); }
   .interp-text a:hover, .interp-text a:focus-visible{ border-bottom-color:var(--gold-bright); }
   .jumpnav-scroll{ overflow-x:auto; margin:-6px -4px 22px; padding:0 4px; }
@@ -535,6 +500,10 @@
     font-family:var(--serif); font-size:17px; color:var(--text); margin:0 0 12px;
   }
   .summary-teaser-main b{ color:var(--gold-bright); font-weight:600; }
+  .gem-summary-why{
+    text-align:left; font-size:13.5px; color:var(--text-muted); line-height:1.8;
+    margin:0 0 14px; word-break:keep-all;
+  }
   .summary-teaser-link{
     display:inline-block; font-size:13px; color:var(--gold-bright);
     text-decoration:none; border-bottom:1px solid var(--gold-line);
@@ -551,9 +520,9 @@
   .summary-teaser-share svg{ width:14px; height:14px; }
   .summary-teaser-share:hover, .summary-teaser-share:focus-visible{ color:var(--gold-bright); }
   .gemstones{ display:flex; flex-direction:column; gap:14px; }
-  .gem-intro{ text-align:center; color:var(--text-muted); font-size:12.5px; margin:-10px 0 4px; }
+  .gem-intro{ text-align:center; color:var(--text-muted); font-size:14px; margin:-10px 0 4px; word-break:keep-all; }
   .gem-card{
-    position:relative;
+    position:relative; text-align:left;
     background:rgba(255,255,255,0.025); border:1px solid var(--line);
     border-radius:14px; padding:16px;
     transition:opacity .2s;
@@ -580,11 +549,31 @@
   }
   .gem-tier.tier-main{ border-color:var(--gold); color:var(--gold-bright); background:var(--gold-soft); }
   .gem-name{ font-family:var(--serif); font-size:16px; color:var(--gold-bright); margin:0 0 6px; letter-spacing:0.02em; display:block; }
-  .gem-desc{ font-size:13.5px; color:var(--text-muted); margin:0; line-height:1.7; }
+  .gem-desc{ font-size:15px; color:var(--text-muted); margin:0; line-height:1.7; word-break:keep-all; }
+  .gem-fit{ font-size:12.5px; color:var(--text-muted); margin:8px 0 0; padding-top:8px; border-top:1px dashed var(--line); line-height:1.6; word-break:keep-all; }
+  .gem-fit b{ color:var(--gold-bright); font-weight:600; }
+  .gem-alts{ margin-top:14px; }
+  .gem-alts summary{
+    list-style:none; cursor:pointer; display:inline-flex; align-items:center; gap:5px;
+    font-size:12px; color:var(--text-muted); padding:4px 0; user-select:none; transition:color .15s;
+  }
+  .gem-alts summary::-webkit-details-marker{ display:none; }
+  .gem-alts summary::after{ content:'▾'; font-size:9px; transition:transform .15s; }
+  .gem-alts[open] summary::after{ transform:rotate(180deg); }
+  .gem-alts summary:hover, .gem-alts summary:focus-visible{ color:var(--gold-bright); }
+  .gem-alts-list{ margin-top:10px; padding-top:10px; border-top:1px dashed var(--line); }
+  .stone-mini{ display:flex; gap:12px; align-items:flex-start; }
+  .stone-mini + .stone-mini{ margin-top:12px; padding-top:12px; border-top:1px dashed var(--line); }
+  .orb-sm{ flex:none; width:32px; height:32px; border-radius:50%; margin-top:1px; }
+  .gem-name-sm{ font-family:var(--serif); font-size:13.5px; color:var(--gold-bright); margin:0 0 4px; letter-spacing:0.02em; display:block; }
+  .gem-desc-sm{ font-size:12.5px; color:var(--text-muted); margin:0; line-height:1.6; word-break:keep-all; }
+  .gem-fit-sm{ font-size:11.5px; color:var(--text-muted); margin:6px 0 0; line-height:1.5; opacity:0.85; word-break:keep-all; }
+  .gem-origin{ margin-top:10px; padding-top:10px; border-top:1px dashed var(--line); }
+  .gem-origin-label{ font-size:11px; color:var(--gold-bright); letter-spacing:0.04em; margin:0 0 4px; }
+  .gem-origin p{ margin:0; font-size:12.5px; line-height:1.75; color:var(--text-muted); word-break:keep-all; }
   .cta-wrap{ margin-top:26px; display:flex; flex-direction:column; gap:10px; }
-  .cta-lead{ text-align:center; font-family:var(--serif); font-size:14.5px; color:var(--gold-bright); margin:0 0 2px; }
   .cta-primary{
-    display:flex; align-items:center; gap:13px; text-decoration:none;
+    display:flex; align-items:center; gap:13px; text-decoration:none; text-align:left;
     background:linear-gradient(180deg,var(--gold-bright),var(--gold));
     color:#241a08; border-radius:14px; padding:15px 17px;
     box-shadow:0 14px 30px -14px rgba(200,162,74,0.65);
@@ -599,7 +588,7 @@
   .cta-primary-icon svg{ width:20px; height:20px; }
   .cta-primary-text{ flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
   .cta-primary-label{ font-family:var(--serif); font-size:15.5px; font-weight:600; letter-spacing:0.01em; }
-  .cta-primary-desc{ font-size:12px; opacity:0.76; line-height:1.5; }
+  .cta-primary-desc{ font-size:12px; opacity:0.76; line-height:1.5; word-break:keep-all; }
   .cta-primary-arrow{ flex:none; font-size:19px; }
   @media (prefers-reduced-motion: reduce){ .cta-primary{ transition:none; } }
   .contact-box{ display:flex; flex-direction:column; gap:10px; }
@@ -621,7 +610,7 @@
   .contact-icon-store{ background:rgba(3,199,90,0.14); color:#4fd881; }
   .contact-text{ flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
   .contact-label{ font-size:13.5px; color:var(--text); font-family:var(--serif); }
-  .contact-desc{ font-size:11.5px; color:var(--text-muted); line-height:1.5; }
+  .contact-desc{ font-size:12.5px; color:var(--text-muted); line-height:1.5; word-break:keep-all; }
   .contact-right{ flex:none; display:flex; flex-direction:column; align-items:flex-end; gap:4px; max-width:104px; }
   .contact-url-mini{
     font-size:9.5px; color:var(--text-muted); opacity:0.75; font-variant-numeric:tabular-nums;
@@ -629,7 +618,7 @@
   }
   .contact-arrow{ flex:none; color:var(--text-muted); font-size:14px; }
   .share-wrap{ margin-top:26px; padding-top:22px; border-top:1px solid var(--line); }
-  .share-lead{ text-align:center; font-size:12.5px; color:var(--text-muted); margin:0 0 12px; }
+  .share-lead{ text-align:center; font-size:14px; color:var(--text-muted); margin:0 0 12px; word-break:keep-all; }
   .share-row{ display:flex; gap:9px; }
   .share-btn{
     flex:1; display:inline-flex; align-items:center; justify-content:center; gap:7px;
@@ -651,7 +640,7 @@
   .reset-link:hover{ color:var(--gold-bright); }
   footer.disclaimer{
     margin-top:34px; padding-top:20px; border-top:1px solid var(--line);
-    text-align:center; color:var(--text-muted); font-size:11.5px; line-height:1.8;
+    text-align:center; color:var(--text-muted); font-size:13px; line-height:1.8;
   }
   @media (prefers-reduced-motion: reduce){
     #resultPanel{ transition:none; }
@@ -684,11 +673,11 @@
     font-weight:600; color:var(--gold-bright); letter-spacing:.02em;
   }
   .guide-nav p{
-    margin:0 0 14px; font-family:var(--sans); font-size:12.5px;
+    margin:0 0 14px; font-family:var(--sans); font-size:14px;
     line-height:1.7; color:var(--text-muted); word-break:keep-all;
   }
   .guide-nav table{
-    width:100%; border-collapse:collapse; font-family:var(--sans); font-size:12.5px;
+    width:100%; border-collapse:collapse; font-family:var(--sans); font-size:14px;
   }
   .guide-nav th, .guide-nav td{
     padding:9px 8px; text-align:left; border-bottom:1px solid var(--gold-line);
@@ -705,7 +694,7 @@
   }
   .guide-nav a:hover{ border-bottom-color:var(--gold); }
   @media (max-width:420px){
-    .guide-nav th, .guide-nav td{ padding:8px 5px; font-size:11.5px; }
+    .guide-nav th, .guide-nav td{ padding:8px 5px; font-size:12.5px; }
   }
 </style>
 
@@ -802,40 +791,54 @@
 
     <nav class="jumpnav-scroll" aria-label="결과 섹션 이동">
       <div class="jumpnav" id="jumpNav">
-        <a href="#sec-wonguk">원국</a><a href="#sec-ohaeng">오행</a><a href="#sec-tengod">십성</a>
-        <a href="#sec-strength">신강약</a><a href="#sec-relations">합충</a><a href="#sec-daewoon">대운</a>
+        <a href="#sec-gems">원석</a><a href="#sec-wonguk">원국</a><a href="#sec-ohaeng">오행</a><a href="#sec-tengod">십성</a>
+        <a href="#sec-gyeokguk">격국</a><a href="#sec-strength">신강약</a><a href="#sec-relations">합충</a><a href="#sec-daewoon">대운</a>
         <a href="#sec-sinsal">신살</a><a href="#sec-summary">총평</a><a href="#sec-personality">성격</a>
         <a href="#sec-overall">종합운</a><a href="#sec-year">올해</a><a href="#sec-wealth">재물</a>
-        <a href="#sec-career">직업</a><a href="#sec-relationship">연애</a><a href="#sec-health">건강</a><a href="#sec-gems">원석</a>
+        <a href="#sec-career">직업</a><a href="#sec-social">인간관계</a><a href="#sec-family">가족</a><a href="#sec-relationship">연애</a><a href="#sec-health">건강</a>
       </div>
     </nav>
 
     <div class="summary-teaser" id="summaryTeaser">
       <p class="summary-teaser-eyebrow">먼저 확인해보세요</p>
-      <p class="summary-teaser-main">당신에게 필요한 기운은 <b id="teaserElement">-</b>예요</p>
+      <p class="summary-teaser-main" id="teaserMain">당신에게 필요한 기운을 찾고 있어요</p>
+      <p class="gem-summary-why" id="gemSummaryWhy"></p>
+      <p class="term-caption">처음 보는 말이 나와도 괜찮아요 — 금색 점선이 그어진 말을 누르면 뜻이 바로 떠요.</p>
       <div class="summary-teaser-actions">
-        <a href="#sec-gems" class="summary-teaser-link" id="teaserGemLink">나에게 맞는 원석 바로 보기 ↓</a>
         <button type="button" class="summary-teaser-share" id="shareBtn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
           <span id="shareBtnText">결과 공유하기</span>
         </button>
       </div>
-    </div>
 
-    <section class="read-first" id="readFirst">
-      <p class="read-first-head">읽기 전에 잠깐</p>
-      <p class="read-first-lead">명리학은 학파마다 해석이 갈려요. 이 앱은 그중 <b>억부</b>라는 한 가지 기준으로만 풀었으니, 다른 곳에서 본 결과와 다를 수 있어요. 앞일을 맞히는 도구가 아니라 나를 한 번 더 들여다보는 참고 자료로 읽어주세요. 처음 보는 말이 나와도 괜찮아요 — <b>금색 점선이 그어진 말</b>을 누르면 뜻이 바로 떠요.</p>
-      <details class="read-first-more">
-        <summary>더 알아두면 좋은 것들</summary>
-        <ul>
-          <li><b>기준이 하나예요.</b> 용신을 찾는 방법에는 억부 말고도 조후·병약·통관 같은 여러 갈래가 있어요. 기준이 바뀌면 필요한 기운도 달라질 수 있어요.</li>
-          <li><b>태어난 시간이 큰 몫을 해요.</b> 시간을 모르면 여덟 글자 중 두 글자가 비어서, 오행 균형과 원석 추천이 달라질 수 있어요.</li>
-          <li><b>절기 경계라면 더 조심스럽게요.</b> 절입 시각은 계산 방식에 따라 수 분씩 차이가 나요. 절기가 바뀌는 날 가까이 태어났다면 월주나 연주가 달라지기도 해요.</li>
-          <li><b>결정의 근거로는 쓰지 말아주세요.</b> 건강·법률·돈·진로처럼 되돌리기 어려운 선택은 그 분야 전문가와 함께 정하는 게 맞아요.</li>
-          <li><b>원석은 상징이에요.</b> 오행에 맞춰 고른 원석은 전해져 온 색과 상징을 따른 것이지, 몸이나 운을 바꿔 준다는 뜻이 아니에요.</li>
-        </ul>
-      </details>
-    </section>
+      <h2 class="section-label" id="sec-gems" style="margin-top:22px; padding-top:20px; border-top:1px solid var(--gold-line);">그대에게 필요한 원석</h2>
+    <p class="gem-intro"><button type="button" class="term" data-term="yongsin" aria-label="용신 희신 뜻 보기">용신·희신</button> 중 <button type="button" class="term" data-term="eokbu" aria-label="억부용신 뜻 보기">억부용신</button> 기준으로 짚어본 결과예요.</p>
+    <div class="gemstones" id="gemstones"></div>
+
+    <div class="cta-wrap">
+      <a class="cta-primary" href="https://smartstore.naver.com/unveil_store" target="_blank" rel="noopener noreferrer">
+        <span class="cta-primary-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg></span>
+        <span class="cta-primary-text">
+          <span class="cta-primary-label">네이버 스마트스토어에서 구매하기</span>
+          <span class="cta-primary-desc" id="ctaPrimaryDesc">추천받은 원석의 팔찌·목걸이 상품을 확인해보세요</span>
+        </span>
+        <span class="cta-primary-arrow" aria-hidden="true">→</span>
+      </a>
+      <div class="contact-box">
+        <a class="contact-link" href="https://litt.ly/unveil" target="_blank" rel="noopener noreferrer">
+          <span class="contact-icon contact-icon-link" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></span>
+          <span class="contact-text">
+            <span class="contact-label">오행별 원석 가이드 보기</span>
+            <span class="contact-desc">목·화·토·금·수에 맞는 원석의 의미와 선택 방법을 확인해보세요.</span>
+          </span>
+          <span class="contact-right">
+            <span class="contact-url-mini">litt.ly/unveil</span>
+            <span class="contact-arrow" aria-hidden="true">↗</span>
+          </span>
+        </a>
+      </div>
+    </div>
+    </div>
 
     <h2 class="section-label" id="sec-wonguk">사주 원국</h2>
     <p class="pillar-intro">태어난 연·월·일·시를 한자 여덟 글자로 옮긴 표예요. 이 여덟 글자를 <button type="button" class="term" data-term="wonguk" aria-label="원국 뜻 보기">원국</button>이라고 불러요.<br/>위는 <button type="button" class="term" data-term="cheongan" aria-label="천간 뜻 보기">천간</button>(하늘의 기운), 아래는 <button type="button" class="term" data-term="jiji" aria-label="지지 뜻 보기">지지</button>(땅의 기운)이고, 색깔은 <button type="button" class="term" data-term="ohaeng" aria-label="오행 뜻 보기">오행</button>을 나타내요.<br/>글자를 누르면 그 글자의 자세한 뜻을 볼 수 있어요.</p>
@@ -863,6 +866,14 @@
     <h2 class="section-label" id="sec-tengod" style="margin-top:32px;">십성의 분포</h2>
     <p class="pillar-intro"><button type="button" class="term" data-term="ilgan" aria-label="일간 뜻 보기">일간</button>(나 자신을 뜻하는 글자)을 기준으로, 나머지 일곱 글자가 나와 어떤 사이인지 붙인 이름이 <button type="button" class="term" data-term="sipseong" aria-label="십성 뜻 보기">십성</button>이에요.<br/>다섯 무리로 묶어서 봐요 — <button type="button" class="term" data-term="bigyeop" aria-label="비겁 뜻 보기">비겁</button>(같은 편) · <button type="button" class="term" data-term="siksang" aria-label="식상 뜻 보기">식상</button>(표현) · <button type="button" class="term" data-term="jaeseong" aria-label="재성 뜻 보기">재성</button>(재물) · <button type="button" class="term" data-term="gwanseong" aria-label="관성 뜻 보기">관성</button>(책임) · <button type="button" class="term" data-term="inseong" aria-label="인성 뜻 보기">인성</button>(배움).</p>
     <div class="radar-legend" id="tenGodLegend"></div>
+    <p class="interp-text" id="tenGodNote"></p>
+
+    <h2 class="section-label" id="sec-gyeokguk" style="margin-top:32px;">사주의 유형(격국)</h2>
+    <p class="pillar-intro">십성 중에서도 태어난 달의 지지(월지)에 숨은 주된 기운이 <button type="button" class="term" data-term="ilgan" aria-label="일간 뜻 보기">일간</button>과 어떤 사이인지로 사주 전체를 하나의 큰 유형으로 나누는 걸 <button type="button" class="term" data-term="gyeokguk" aria-label="격국 뜻 보기">격국</button>이라고 해요.<br/>격국을 정하는 방법도 여러 갈래예요 — 여기서는 가장 널리 쓰이는 월지 정기 기준 하나로 짚어봤어요.</p>
+    <div class="strength-wrap">
+      <div class="strength-badge" id="gyeokgukBadge"></div>
+      <p class="interp-text" id="gyeokgukNote"></p>
+    </div>
 
     <h2 class="section-label" id="sec-strength" style="margin-top:32px;">일간의 힘</h2>
 
@@ -879,6 +890,7 @@
 
     <h2 class="section-label" id="sec-relations" style="margin-top:32px;">합충 관계</h2>
     <p class="pillar-intro">여덟 글자끼리 서로 끌려 묶이거나(<button type="button" class="term" data-term="hapchung" aria-label="합 충 뜻 보기">합</button>) 정면으로 부딪히는(충) 관계예요.<br/>카드 앞의 <b>천간합·육합·삼합</b>은 묶이는 방식이 다른 세 종류의 합이고, <b>충</b>은 부딪히는 관계예요.<br/>합이 항상 좋고 충이 항상 나쁜 건 아니에요 — 카드를 누르면 이 사주에서 어떻게 작용하는지 볼 수 있어요.</p>
+    <p class="interp-text" id="relationsSummary"></p>
     <div class="relations-wrap" id="relationsWrap"></div>
 
     <h2 class="section-label" id="sec-daewoon" style="margin-top:32px;">대운의 흐름</h2>
@@ -888,7 +900,7 @@
     <div class="daewoon-detail" id="daewoonDetail" aria-live="polite"></div>
 
     <h2 class="section-label" id="sec-sinsal" style="margin-top:32px;">눈에 띄는 신살</h2>
-    <p class="pillar-intro">글자 조합에서 나오는 <button type="button" class="term" data-term="sinsal" aria-label="신살 뜻 보기">신살</button>, 곧 <b>별칭 같은 특징</b> 중 두드러지는 것만 골라 짚어봤어요.<br/>이름에 '살(煞)'이 붙어도 나쁜 일을 뜻하지 않아요 — 성향을 짚는 표현이고, 학파마다 보는 방식이 달라요.</p>
+    <p class="pillar-intro">글자 조합에서 나오는 <button type="button" class="term" data-term="sinsal" aria-label="신살 뜻 보기">신살</button>, 곧 <b>별칭 같은 특징</b> 중 두드러지는 것만 골라 짚어봤어요.<br/>이름에 '살(煞)'이 붙어도 나쁜 일을 뜻하지 않아요.</p>
     <div class="relations-wrap" id="sinsalWrap"></div>
 
     <h2 class="section-label" id="sec-summary" style="margin-top:32px;">기운의 결</h2>
@@ -921,6 +933,16 @@
     <p class="pillar-intro">여덟 글자에서 가장 많이 나타난 <button type="button" class="term" data-term="sipseong" aria-label="십성 뜻 보기">십성</button> 무리를 기준으로 어울리는 일의 결을 짚어본 거예요.</p>
     <div id="careerText"></div>
 
+    <h2 class="section-label" id="sec-social" style="margin-top:32px;">인간관계</h2>
+
+    <p class="pillar-intro">앞서 본 <button type="button" class="term" data-term="singang" aria-label="신강 신약 뜻 보기">일간의 힘</button>과 가장 많은 <button type="button" class="term" data-term="sipseong" aria-label="십성 뜻 보기">십성</button> 무리를 근거로, 연애가 아닌 친구·동료 관계에서는 어떤 모습이 편안한지 짚어본 거예요.</p>
+    <div id="socialText"></div>
+
+    <h2 class="section-label" id="sec-family" style="margin-top:32px;">부모·형제·자녀운</h2>
+
+    <p class="pillar-intro">십성으로 가족 구성원을 보는 전통적인 방법이 있어요 — 아버지는 <button type="button" class="term" data-term="jaeseong" aria-label="재성 뜻 보기">재성</button>, 어머니는 <button type="button" class="term" data-term="inseong" aria-label="인성 뜻 보기">인성</button>, 형제자매는 <button type="button" class="term" data-term="bigyeop" aria-label="비겁 뜻 보기">비겁</button>의 기운으로 봐요.<br/>여덟 글자 중 그 기운이 몇 개나 있는지로 관계의 결을 짚어봤어요.</p>
+    <div id="familyText"></div>
+
     <h2 class="section-label" id="sec-relationship" style="margin-top:32px;">연애결혼운</h2>
 
     <p class="pillar-intro">전통적으로 남성은 <button type="button" class="term" data-term="jaeseong" aria-label="재성 뜻 보기">재성</button>, 여성은 <button type="button" class="term" data-term="gwanseong" aria-label="관성 뜻 보기">관성</button>을 짝을 뜻하는 기운(배우자성)으로 봐요.<br/>태어난 날의 아랫글자 자리는 <button type="button" class="term" data-term="baeuja" aria-label="배우자궁 뜻 보기">배우자궁</button>이라고 불러요.</p>
@@ -930,42 +952,6 @@
 
     <p class="pillar-intro"><button type="button" class="term" data-term="ohaeng" aria-label="오행 뜻 보기">오행</button>을 몸의 기관과 짝지어 보던 <b>옛 해석</b>을 옮긴 것이에요.<br/>건강 상태를 알아보는 것이 아니라, 생활 습관을 챙길 때 참고하는 정도로만 봐주세요.</p>
     <div id="healthText"></div>
-
-    <h2 class="section-label" id="sec-gems" style="margin-top:32px;">그대에게 필요한 원석</h2>
-    <p class="gem-intro">사주의 균형을 잡는 데 가장 필요한 기운을 <button type="button" class="term" data-term="yongsin" aria-label="용신 희신 뜻 보기">용신</button>, 그다음으로 도움이 되는 기운을 <b>희신</b>이라고 해요.<br/>용신을 찾는 방법은 여러 갈래라 학파마다 답이 달라요. 여기서는 가장 기본이 되는<br/><button type="button" class="term" data-term="eokbu" aria-label="억부용신 뜻 보기">억부용신</button>(강하면 눌러주고 약하면 보태주는 기준) 하나로 짚어봤어요.</p>
-    <p class="gem-intro" id="yongsinReason"></p>
-    <div class="gemstones" id="gemstones"></div>
-
-    <p class="gem-note">
-      추천한 원석은 오행마다 오래 전해져 온 <b>색과 상징</b>을 기준으로 UNVEIL이 고른 거예요.
-      원석이 건강·재물·연애·시험 같은 결과를 바꿔 준다는 뜻은 아니고, 그런 효능은 UNVEIL도 보장하지 않아요.
-      마음에 드는 돌을 곁에 두고 오늘의 나를 한 번 더 떠올리는 것 — 딱 그만큼의 의미로 즐겨주세요.
-    </p>
-
-    <div class="cta-wrap">
-      <p class="cta-lead" id="ctaLead">나에게 필요한 기운을 채워줄 원석, 바로 만나보세요</p>
-      <a class="cta-primary" href="https://smartstore.naver.com/unveil_store" target="_blank" rel="noopener noreferrer">
-        <span class="cta-primary-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg></span>
-        <span class="cta-primary-text">
-          <span class="cta-primary-label">네이버 스마트스토어에서 구매하기</span>
-          <span class="cta-primary-desc" id="ctaPrimaryDesc">추천받은 원석의 팔찌·목걸이 상품을 확인해보세요</span>
-        </span>
-        <span class="cta-primary-arrow" aria-hidden="true">→</span>
-      </a>
-      <div class="contact-box">
-        <a class="contact-link" href="https://litt.ly/unveil" target="_blank" rel="noopener noreferrer">
-          <span class="contact-icon contact-icon-link" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></span>
-          <span class="contact-text">
-            <span class="contact-label">오행별 원석 가이드 보기</span>
-            <span class="contact-desc">목·화·토·금·수에 맞는 원석의 의미와 선택 방법을 확인해보세요.</span>
-          </span>
-          <span class="contact-right">
-            <span class="contact-url-mini">litt.ly/unveil</span>
-            <span class="contact-arrow" aria-hidden="true">↗</span>
-          </span>
-        </a>
-      </div>
-    </div>
 
     <div class="share-wrap">
       <p class="share-lead">결과를 친구에게 보내보세요</p>
@@ -1390,11 +1376,11 @@
      over/overCare = 많을 때, under/underCare = 옅을 때,
      ease = 넘칠 때 흐름을 풀어주는 방향, care = 그 기운을 채우는 생활 속 방법. */
   var EL_JOSA = {
-    wood:{ro:'으로', gwa:'과'},
-    fire:{ro:'로',   gwa:'와'},
-    earth:{ro:'로',  gwa:'와'},
-    metal:{ro:'으로',gwa:'과'},
-    water:{ro:'로',  gwa:'와'}
+    wood:{ro:'으로', gwa:'과', neun:'은'},
+    fire:{ro:'로',   gwa:'와', neun:'는'},
+    earth:{ro:'로',  gwa:'와', neun:'는'},
+    metal:{ro:'으로',gwa:'과', neun:'은'},
+    water:{ro:'로',  gwa:'와', neun:'는'}
   };
   var ELEMENT_DETAIL = {
     wood:{
@@ -1468,56 +1454,86 @@
       }
     }
   };
+  /* 결과 상단 요약 카드용 — 왜 필요한지 · 부족하면 뭐가 힘든지 · 어떻게 하면 도움되는지를
+     ELEMENT_INFO/ELEMENT_DETAIL 값을 그대로 이어붙이지 않고, 하나의 흐름으로 새로 썼다.
+     단순 concat 은 같은 단어(예: '결단력')가 반복돼 어색하게 읽힌다. */
+  var SUMMARY_WHY = {
+    wood:'새로운 걸 벌이고 뻗어나가는 추진력의 기운이에요. 이 기운이 부족하면 시작하고 싶은 마음은 있는데 막상 첫걸음을 떼기가 어려워질 수 있어요. 이럴 땐 큰 결심 한 번보다, 아주 작은 시작을 자주 만들어보는 쪽이 훨씬 잘 맞아요.',
+    fire:'마음을 표현하고 사람을 끌어당기는 밝고 뜨거운 기운이에요. 이 기운이 부족하면 속마음을 겉으로 잘 드러내지 못하고, 사람들 앞이 유독 어색하게 느껴질 수 있어요. 이럴 땐 큰 무대보다 편한 사람들 앞에서 자주 말해보는 연습이 도움이 돼요.',
+    earth:'흔들림 없이 중심을 잡아주는 안정의 기운이에요. 이 기운이 부족하면 마음이 자주 흔들리고, 하나를 오래 붙들고 가는 일이 유독 힘겹게 느껴질 수 있어요. 이럴 땐 의지로 버티기보다, 매일 반복되는 틀 하나를 만들어두는 쪽이 훨씬 잘 맞아요.',
+    metal:'맺고 끊는 결단력과 원칙의 기운이에요. 이 기운이 부족하면 정리하고 마무리 짓는 힘이 약해져서, 결정을 자꾸 미루게 될 수 있어요. 이럴 땐 마감이나 금액, 횟수처럼 미리 정한 기준을 눈에 보이게 적어두면 결정이 한결 수월해져요.',
+    water:'깊이 헤아리고 유연하게 흘러가는 지혜의 기운이에요. 이 기운이 부족하면 여유를 갖고 다시 생각해볼 틈 없이, 몰아붙이듯 지내기 쉬워요. 이럴 땐 일정 사이에 아무 계획 없는 시간을 일부러 남겨두는 것이 도움이 돼요.'
+  };
   var GEMSTONES = {
     wood:[
       {name:'그린아벤츄린', tier:'대표', c1:'#2f5f3a', c2:'#8fce8a', price:null,
-        desc:'성장과 확장의 기운을 북돋아, 새로운 시작 앞에서 머뭇거리는 마음에 용기를 더해주는 원석이에요.'},
+        desc:'성장과 확장의 기운을 북돋아, 새로운 시작 앞에서 머뭇거리는 마음에 용기를 더해주는 원석이에요.',
+        origin:'석영 알갱이 사이에 크롬 운모 조각이 섞여 들어가면서 표면이 은은히 반짝이는 아벤투레센스 효과를 만들어내요. 이 반짝임은 원래 베네치아 유리 장인들이 우연히 만들어낸 아벤투린 유리에서 이름을 따온 거라고 해요. 초록빛을 띤 이 결정은 중국에서 오래도록 옥을 대신하는 돌로 다뤄지며 생명과 성장의 상징을 이어받았어요.'},
       {name:'유나카이트', tier:'선택형', c1:'#4a6b45', c2:'#e8a4a8', price:null,
-        desc:'초록과 분홍이 한 돌에 섞여 있어, 예로부터 감정과 이성의 균형을 상징해 온 원석이에요.'},
+        desc:'초록과 분홍이 한 돌에 섞여 있어, 예로부터 감정과 이성의 균형을 상징해 온 원석이에요.',
+        origin:'분홍빛 장석과 초록빛 녹염석이 뒤섞인 이 돌은 원래 단단한 화강암이었다가, 땅속 열수 작용으로 광물 성분이 바뀌면서 지금의 얼룩무늬를 갖게 됐어요. 처음 발견된 미국 애팔래치아산맥의 유네이카 산맥 이름을 그대로 물려받았고요. 두 가지 색이 한 몸에서 섞여 있는 모습이, 서로 다른 기운이 함께 자라나는 나무의 이미지와 자연스럽게 겹쳐졌어요.'},
       {name:'에피도트', tier:'선택형', c1:'#4a5a1e', c2:'#a8c04a', price:null,
-        desc:'정체된 흐름에 새 활력을 불어넣어, 성장하려는 의지를 다시 끌어올려주는 원석이에요.'},
+        desc:'정체된 흐름에 새 활력을 불어넣어, 성장하려는 의지를 다시 끌어올려주는 원석이에요.',
+        origin:'결정을 이루는 면 하나가 다른 면들보다 유난히 길게 자라는 특이한 모양 때문에, 그리스어로 더 자란다는 뜻의 에피도시스에서 이름을 따왔어요. 광물 이름 자체가 성장이라는 뜻을 담고 있는 셈이에요. 그래서 예로부터 멈춰 있던 흐름에 다시 생기를 불어넣는 상징으로 여겨져 왔어요.'},
       {name:'캄바바재스퍼', tier:'선택형', c1:'#1a2818', c2:'#4a6b3f', price:null,
-        desc:'태고의 시간을 품은 듯 깊고 고요한 기운으로, 흔들리는 마음에 굳건한 뿌리를 내려주는 원석이에요.'}
+        desc:'태고의 시간을 품은 듯 깊고 고요한 기운으로, 흔들리는 마음에 굳건한 뿌리를 내려주는 원석이에요.',
+        origin:'마다가스카르 등지에서 나는 이 돌은 사실 벽옥이 아니라, 아주 오래전 지구에 살았던 남조류(시아노박테리아) 군집의 흔적이 동심원 무늬로 남은 것으로 알려져 있어요. 지구에 산소를 만들어낸 최초의 생명체 중 하나가 남긴 흔적인 셈이에요. 억겁의 시간을 품은 짙은 초록빛이, 흔들림 없이 뿌리내리는 나무의 기운과 잘 어울려요.'}
     ],
     fire:[
       {name:'카넬리안', tier:'대표', c1:'#7a2c1e', c2:'#e2703f', price:null,
-        desc:'표현력과 생기를 불어넣어, 마음속에 식어가던 열정을 다시 지펴주는 원석이에요.'},
+        desc:'표현력과 생기를 불어넣어, 마음속에 식어가던 열정을 다시 지펴주는 원석이에요.',
+        origin:'산화철 성분이 붉은빛을 내는 이 돌은, 고대 이집트에서 햇볕 아래 오래 두거나 불에 가까이해 색을 더 짙게 만들었다고 전해질 만큼 실제로 열과 인연이 깊어요. 파라오의 부적이나 인장에 즐겨 쓰이며 생명력의 상징으로 여겨졌고요. 열을 가까이할수록 붉어지는 이 돌의 성질이, 다시 지펴지는 열정의 이미지로 이어졌어요.'},
       {name:'레드재스퍼', tier:'선택형', c1:'#6b2018', c2:'#a8452e', price:null,
-        desc:'깊고 묵직한 붉은빛 때문에, 오래전부터 끈기와 버티는 힘의 상징으로 여겨져 온 원석이에요.'},
+        desc:'깊고 묵직한 붉은빛 때문에, 오래전부터 끈기와 버티는 힘의 상징으로 여겨져 온 원석이에요.',
+        origin:'철 산화물, 그러니까 녹슨 쇠와 비슷한 성분이 스며들어 짙은 붉은빛을 띠게 된 돌이에요. 화산재나 퇴적물이 규소 성분과 함께 굳어져 만들어지는데, 고대 이집트에서는 이 붉은빛을 이시스 여신의 피라 부르며 생명력의 상징으로 여겼다고 해요. 은은하게 오래 타는 숯불처럼, 서두르지 않고 버텨내는 힘의 이미지를 갖게 됐어요.'},
       {name:'드래곤블러드', tier:'선택형', c1:'#2d4a1e', c2:'#c23c2e', price:null,
-        desc:'초록 바탕에 붉은 무늬가 번지는 모습에서, 전통적으로 용기와 다시 일어서는 마음을 떠올리던 원석이에요.'},
+        desc:'초록 바탕에 붉은 무늬가 번지는 모습에서, 전통적으로 용기와 다시 일어서는 마음을 떠올리던 원석이에요.',
+        origin:'초록빛 녹염석 바탕에 붉은 반점이 흩뿌려진 이 돌은, 호주 서부의 오래된 화산암층이 변성 작용을 거치며 만들어진 것으로 알려져 있어요. 붉은 반점은 망간 성분을 머금은 광물이 남긴 흔적이에요. 초록 위에 번진 붉은 무늬가 마치 용의 비늘에 남은 상처 같다 해서, 다시 일어서는 용기의 상징으로 이야기돼 왔어요.'},
       {name:'블랙라인로도나이트', tier:'선택형', c1:'#2a1a1e', c2:'#d68a9a', price:null,
-        desc:'분홍빛에 검은 결이 지나가는 무늬라, 다정함과 단단함이 함께 있는 상징으로 이야기되어 온 원석이에요.'}
+        desc:'분홍빛에 검은 결이 지나가는 무늬라, 다정함과 단단함이 함께 있는 상징으로 이야기되어 온 원석이에요.',
+        origin:'장미를 뜻하는 그리스어 로돈에서 이름을 딴 분홍빛 돌로, 시간이 흐르며 망간 성분이 산화돼 검은 결이 스며들어요. 러시아 우랄산맥에서 많이 나 독수리 돌이라 불리며 황실 공예품에 즐겨 쓰였다고 전해져요. 부드러운 분홍빛과 단단한 검은 결이 한 몸에 있는 모습이, 다정함과 단단함을 함께 지닌 상징으로 여겨졌어요.'}
     ],
     earth:[
       {name:'타이거아이', tier:'대표', c1:'#6b4e18', c2:'#d9a83f', price:null,
-        desc:'흔들리는 중심을 잡아주고, 묵묵히 버텨내는 뚝심을 더해주는 원석이에요.'},
+        desc:'흔들리는 중심을 잡아주고, 묵묵히 버텨내는 뚝심을 더해주는 원석이에요.',
+        origin:'원래는 파란 석면(크로시돌라이트) 섬유였다가, 그 자리를 규산 성분이 서서히 채우며 원래의 결 무늬는 그대로 남긴 채 다른 광물로 바뀐 거예요. 이 과정에서 스며든 철 성분이 황금빛으로 산화되고, 빛을 받으면 결을 따라 은은히 움직이는 광택이 생겨요. 하나의 광물이 다른 광물로 서서히 바뀌면서도 뿌리는 그대로인 이 과정이, 흔들림 없이 버텨내는 땅의 기운과 닮았어요.'},
       {name:'레오파드재스퍼', tier:'선택형', c1:'#5a4420', c2:'#c9963f', price:null,
-        desc:'순발력 있게 변화에 대응하는 기운을 더해, 낯선 상황에서도 유연하게 헤쳐나가게 해주는 원석이에요.'},
+        desc:'순발력 있게 변화에 대응하는 기운을 더해, 낯선 상황에서도 유연하게 헤쳐나가게 해주는 원석이에요.',
+        origin:'용암이 지표에서 빠르게 식으면서 작은 구형 결정들이 곳곳에서 동시에 자라나 얼룩무늬를 만들어낸 돌이에요. 이 둥근 반점들이 표범 무늬를 닮았다 해서 지금의 이름이 붙었고요. 급격한 환경 변화 속에서도 저마다 자리를 잡아가는 이 무늬처럼, 변화에 유연하게 대응하는 힘의 상징으로 여겨져요.'},
       {name:'픽처재스퍼', tier:'선택형', c1:'#6b5230', c2:'#d4b378', price:null,
-        desc:'지나온 길을 되짚어보게 하는 차분한 기운으로, 삶의 방향을 다시 그릴 수 있게 도와주는 원석이에요.'},
+        desc:'지나온 길을 되짚어보게 하는 차분한 기운으로, 삶의 방향을 다시 그릴 수 있게 도와주는 원석이에요.',
+        origin:'화산재와 진흙이 겹겹이 쌓인 뒤 규소 성분이 스며들어 굳어지면서, 마치 사막 풍경을 그려놓은 듯한 줄무늬가 생겨난 돌이에요. 층마다 그 땅이 지나온 시간이 고스란히 새겨져 있는 셈이라, 미국 서부 지역에서 많이 나요. 그 결을 들여다보고 있으면 지나온 길을 되짚어보게 된다 해서, 삶의 방향을 되새기는 상징으로 이야기돼요.'},
       {name:'시트린', tier:'선택형', c1:'#8a5a10', c2:'#f0c040', price:null,
-        desc:'햇빛을 닮은 노란빛 덕에 풍요의 상징으로 오래 사랑받아 온 원석이에요. 재물 운을 만들어 준다는 뜻은 아니에요.'}
+        desc:'햇빛을 닮은 노란빛 덕에 풍요의 상징으로 오래 사랑받아 온 원석이에요. 재물 운을 만들어 준다는 뜻은 아니에요.',
+        origin:'사실 시장에 나온 시트린 대부분은 자수정을 낮은 온도로 가열해 만든 거예요. 열을 받으면 자수정 속 철 성분의 산화 상태가 바뀌면서 보랏빛이 황금빛으로 변하거든요. 이름도 레몬을 뜻하는 프랑스어 시트롱에서 왔고, 잘 익은 곡식을 닮은 노란빛 때문에 오래전부터 풍요의 상징으로 여겨졌어요.'}
     ],
     metal:[
       {name:'백수정', tier:'대표', c1:'#8a8a92', c2:'#f2f0f5', price:null,
-        desc:'티 없이 맑은 결정 때문에, 예로부터 정갈함과 또렷한 마음을 상징해 온 원석이에요.'},
+        desc:'티 없이 맑은 결정 때문에, 예로부터 정갈함과 또렷한 마음을 상징해 온 원석이에요.',
+        origin:'불순물 없이 순수한 이산화규소로만 이뤄져 있어 색이 전혀 들지 않은 수정이에요. 고대 그리스인들은 이 맑은 결정을 두고 너무 차가워서 다시는 녹지 않는 얼음이라 여겼다고 전해지고, 그래서 얼음을 뜻하는 그리스어 크리스탈로스가 오늘날 크리스탈이라는 말의 어원이 됐어요. 티 한 점 없는 맑음이 그대로 정갈한 마음의 상징이 됐어요.'},
       {name:'헤마타이트', tier:'선택형', c1:'#3a3a40', c2:'#8f909a', price:null,
-        desc:'단단하고 묵직한 금속의 기운으로, 현실적인 판단력과 중심을 잡아주는 원석이에요.'},
+        desc:'단단하고 묵직한 금속의 기운으로, 현실적인 판단력과 중심을 잡아주는 원석이에요.',
+        origin:'가루로 빻으면 붉은빛을 띤다고 해서, 그리스어로 피를 뜻하는 하이마에서 이름을 따온 광물이에요. 선사시대 동굴 벽화의 붉은 안료로도 쓰였고, 무엇보다 쇠를 뽑아내는 대표적인 철광석이기도 해요. 이름 그대로 쇠라는 금속 원소를 가장 직접적으로 품고 있는 돌이라, 현실적인 판단력의 상징으로 자연스럽게 이어졌어요.'},
       {name:'백옥', tier:'선택형', c1:'#a8a292', c2:'#f5f0e6', price:null,
-        desc:'예로부터 귀하게 여겨진 맑고 온화한 기운을 담아, 마음을 정갈하게 다스려주는 원석이에요.'},
+        desc:'예로부터 귀하게 여겨진 맑고 온화한 기운을 담아, 마음을 정갈하게 다스려주는 원석이에요.',
+        origin:'중국에서는 예로부터 강바닥에서 물에 씻겨 둥글어진 흰 옥돌을 귀하게 여겨, 신장 지역 강 이름에 아예 옥이 들어갈 정도였다고 해요. 결정이 촘촘하게 얽혀 있어 잘 깨지지 않는 성질 덕분에, 청동기 이전부터 예를 다루는 도구와 인장에 쓰였고요. 다듬을수록 은은한 윤이 나는 이 단단함이, 정갈하게 다스려진 마음의 상징이 됐어요.'},
       {name:'문스톤', tier:'선택형', c1:'#5c5c6a', c2:'#eceaf3', price:null,
-        desc:'맑은 결단력을 깨워, 맺고 끊음이 필요한 순간 흔들리지 않는 힘을 실어주는 원석이에요.'}
+        desc:'맑은 결단력을 깨워, 맺고 끊음이 필요한 순간 흔들리지 않는 힘을 실어주는 원석이에요.',
+        origin:'장석 결정 안에 두 종류의 광물이 아주 얇은 층으로 겹겹이 쌓여 있어서, 빛이 그 사이를 통과하며 은은하게 흩어지는 월광 효과가 생겨요. 스위스의 아둘라산에서 처음 이름을 따왔지만, 여러 문화권에서 달빛이 차고 기우는 모습과 겹쳐 이야기돼 왔어요. 은은하게 흐르는 그 빛깔이, 흔들리지 않는 결단의 상징으로 여겨졌어요.'}
     ],
     water:[
       {name:'실버흑요석', tier:'대표', c1:'#0a0a0d', c2:'#4b4750', price:null,
-        desc:'검은 바탕에 은빛이 어리는 화산 유리로, 전통적으로 중심을 지키는 단단함의 상징으로 여겨져 온 원석이에요.'},
+        desc:'검은 바탕에 은빛이 어리는 화산 유리로, 전통적으로 중심을 지키는 단단함의 상징으로 여겨져 온 원석이에요.',
+        origin:'용암이 결정을 이룰 틈도 없이 아주 빠르게 식어 굳어진 화산 유리예요. 그 안에 갇힌 미세한 기포들이 층을 이루며 빛을 반사해, 은빛으로 일렁이는 무늬를 만들어내요. 고대 중남미 문명에서는 이 매끈한 검은 돌을 갈아 거울과 날카로운 도구로 썼는데, 흐르던 것이 순간 멈춰 굳어진 모습이 깊은 물이 고요히 가라앉은 순간처럼 여겨졌어요.'},
       {name:'소달라이트', tier:'선택형', c1:'#1c2f52', c2:'#4a6fa8', price:null,
-        desc:'깊고 차분한 파란빛이라, 오래전부터 생각을 가라앉히고 정리하는 이미지로 이야기되어 온 원석이에요.'},
+        desc:'깊고 차분한 파란빛이라, 오래전부터 생각을 가라앉히고 정리하는 이미지로 이야기되어 온 원석이에요.',
+        origin:'나트륨 성분이 짙은 파란빛을 만들어내는 광물이라 소다라는 이름이 그대로 붙었어요. 처음엔 그린란드에서 발견됐지만, 이후 캐나다에서 큰 광맥이 발견되며 널리 알려졌다고 전해져요. 바닷물처럼 깊고 짙은 파란빛이, 생각을 가라앉히고 차분히 정리하는 물의 이미지와 자연스럽게 이어졌어요.'},
       {name:'라바스톤', tier:'선택형', c1:'#0d0d0d', c2:'#3a3a3a', price:null,
-        desc:'대지의 뜨거운 근원에서 태어난 기운을 담아, 흔들리는 마음에 묵직한 안정감을 실어주는 원석이에요.'},
+        desc:'대지의 뜨거운 근원에서 태어난 기운을 담아, 흔들리는 마음에 묵직한 안정감을 실어주는 원석이에요.',
+        origin:'말 그대로 용암이 지표에서 빠르게 식어 굳은 현무암이에요. 굳는 과정에서 빠져나가지 못한 화산 가스가 무수한 작은 구멍을 남겨, 표면이 숨을 쉬듯 다공질로 남아요. 땅속 깊은 곳의 뜨거운 기운이 한순간에 식어 단단해진 돌이라, 흔들리던 마음에 묵직한 안정감을 주는 상징으로 여겨졌어요.'},
       {name:'제브라스톤', tier:'선택형', c1:'#1a1a1a', c2:'#c8c8c8', price:null,
-        desc:'서로 다른 두 기운의 조화를 상징하며, 상반된 감정 사이에서 균형을 잡아주는 원석이에요.'}
+        desc:'서로 다른 두 기운의 조화를 상징하며, 상반된 감정 사이에서 균형을 잡아주는 원석이에요.',
+        origin:'호주 킴벌리 지역의 오래된 호숫가 퇴적층에서 나는 돌로, 물에 녹은 철·망간 성분이 갈라진 틈을 따라 스며들며 줄무늬를 남긴 것으로 알려져 있어요. 이 무늬 자체가 아주 오랜 세월 물이 돌 틈새를 흘러 지나간 흔적인 셈이에요. 밝고 어두운 결이 나란히 새겨진 모습이, 서로 다른 기운 사이에서 균형을 잡아주는 물의 상징으로 이어졌어요.'}
     ]
   };
   var ELEMENT_COLOR_VAR = {wood:'--el-wood',fire:'--el-fire',earth:'--el-earth',metal:'--el-metal',water:'--el-water'};
@@ -1550,6 +1566,20 @@
     '편인':{group:'인성', side:'support', desc:'나를 낳는 오행·같은 음양이에요. 독특한 발상과 직관을 주는 기운이에요.'},
     '정인':{group:'인성', side:'support', desc:'나를 낳는 오행·다른 음양이에요. 배움과 보살핌을 받는 안정적인 기운이에요.'}
   };
+  /* 격국 — 월지 정기(숨은 주된 기운)와 일간의 십성 관계로 사주 유형을 나눈다.
+     격국을 정하는 방법은 이 밖에도 여러 갈래라 학파마다 달라질 수 있다(TERM_INFO.gyeokguk 참고). */
+  var GYEOKGUK_INFO = {
+    '정관':{name:'정관격(正官格)', desc:'원칙과 책임을 중심에 두고 살아가는 유형이에요. 맡은 역할에 충실하고, 사회적 신뢰를 쌓아가는 데서 힘을 얻어요.'},
+    '편관':{name:'편관격(偏官格)', desc:'위기 속에서 오히려 결단력이 살아나는 유형이에요. 강한 추진력과 승부 근성으로 어려운 상황을 뚫고 나가는 힘이 있어요.'},
+    '정재':{name:'정재격(正財格)', desc:'꾸준함과 안정을 중요하게 여기는 유형이에요. 차근차근 쌓아 올리는 성실함으로 실속을 챙겨요.'},
+    '편재':{name:'편재격(偏財格)', desc:'기회를 놓치지 않고 크게 움직이는 유형이에요. 활동 범위가 넓고, 여러 갈래의 기회를 동시에 만들어가는 힘이 있어요.'},
+    '식신':{name:'식신격(食神格)', desc:'여유롭게 표현하고 즐기며 살아가는 유형이에요. 좋아하는 것에 몰입해 자연스럽게 결과를 만들어내요.'},
+    '상관':{name:'상관격(傷官格)', desc:'재치와 개성이 뚜렷한 유형이에요. 틀에 얽매이지 않고 자기만의 방식으로 재능을 드러내요.'},
+    '정인':{name:'정인격(正印格)', desc:'배움과 보살핌 속에서 힘을 얻는 유형이에요. 깊이 있게 익히고, 안정적인 울타리 안에서 성장해요.'},
+    '편인':{name:'편인격(偏印格)', desc:'남다른 발상과 직관이 두드러지는 유형이에요. 익숙하지 않은 분야에서도 자기만의 통찰을 발휘해요.'},
+    '비견':{name:'비견격(比肩格)', desc:'자기 주관이 뚜렷하고 독립적인 유형이에요. 스스로 판단하고 밀고 나가는 힘이 강해요.'},
+    '겁재':{name:'겁재격(劫財格)', desc:'경쟁 속에서 순발력을 발휘하는 유형이에요. 승부욕이 강하고, 빠르게 상황을 전환하는 힘이 있어요.'}
+  };
   var DOMINANT_TENGOD_TRAIT = {
     '비겁':'자기 주관이 뚜렷하고 독립적이에요. 남에게 기대기보다 스스로 해내려는 힘이 강해요.',
     '식상':'표현력이 좋고 재기발랄해요. 생각을 자유롭게 펼치고 사람들 앞에서 빛나는 편이에요.',
@@ -1563,6 +1593,43 @@
     '재성':'현실적인 성과가 보이는 일에서 힘을 발휘해요. 영업·사업·유통·금융이 잘 맞아요.',
     '관성':'체계와 규율이 있는 조직에서 안정감을 느껴요. 공직·대기업·관리자·법률행정이 잘 맞아요.',
     '인성':'배우고 연구하고 정리하는 일에서 힘을 얻어요. 교육·연구·상담·기획이 잘 맞아요.'
+  };
+  var SOCIAL_ROLE_TRAIT = {
+    '비겁':'친구나 동료 사이에서는 나란히 서서 힘을 보태거나, 선의의 경쟁으로 서로를 끌어올리는 관계에서 특히 편안함을 느껴요.',
+    '식상':'모임의 분위기를 살리고 생각이나 감정을 스스럼없이 나누는 역할이 편안해요. 마음을 터놓을 수 있는 사이일수록 더 편하게 마음을 열어요.',
+    '재성':'말보다 행동으로, 함께 일을 도모하거나 현실적인 문제를 풀어가며 신뢰를 쌓는 관계에서 편안함을 느껴요.',
+    '관성':'역할과 책임이 분명한 관계에서 안정감을 느껴요. 선후배나 조직처럼 질서가 있는 구조 안에서 믿음직한 사람으로 자리 잡는 편이에요.',
+    '인성':'깊이 있는 대화를 나누는 소수의 관계를 편하게 느껴요. 가르치고 배우거나, 서로의 이야기를 찬찬히 들어주는 관계에서 마음을 놓는 편이에요.'
+  };
+  var SOCIAL_COMPANION_NOTE = {
+    strong:'일간의 힘이 실린 만큼, 생각과 감정을 자유롭게 표현하도록 이끌어주는 사람(식상), 함께 실속을 챙기는 사람(재성), 원칙과 균형을 잡아주는 사람(관성)과 가까이 지내면 서로에게 좋은 영향을 줄 수 있어요. 내 쪽에서 너무 앞서가지 않도록 잡아주는 사람이 특히 힘이 돼요.',
+    weak:'일간의 힘이 여린 만큼, 든든하게 힘을 보태주는 사람(비겁), 배움과 보살핌을 나눠주는 사람(인성)과 가까이 지내면 서로에게 좋은 영향을 줄 수 있어요. 나를 지지해주는 관계 안에서 더 편안하게 스스로를 펼칠 수 있어요.',
+    neutral:'일간의 힘이 균형에 가까운 만큼, 한쪽으로 치우치기보다 서로 다른 결을 가진 사람들과 두루 어울리는 편이 잘 맞아요. 힘을 보태주는 사람과 표현을 이끌어주는 사람 모두에게서 배울 점을 찾을 수 있어요.'
+  };
+  /* 부모·형제·자녀운 — 전통적인 육친(六親) 배정: 아버지=재성, 어머니=인성, 형제자매=비겁,
+     자녀=남성 기준 관성·여성 기준 식상. 배우자성(renderRelationshipLuck)과 같은 방식으로
+     개수(0·1·여럿)에 따라 세 갈래로 나눠 짚는다. */
+  var FAMILY_NOTE = {
+    father: {
+      zero:'아버지의 기운(재성)이 뚜렷하게 보이지 않아요. 살가운 표현보다는 각자의 삶을 존중하는 관계로 흘러가기 쉬워요.',
+      one:'아버지의 기운(재성)이 하나 자리 잡고 있어요. 무난하고 안정적인 관계로 보는 편이에요.',
+      many:'아버지의 기운(재성)이 여럿이라 영향을 많이 주고받는 편이에요. 가까운 만큼 부딪히는 순간도 있을 수 있어요.'
+    },
+    mother: {
+      zero:'어머니의 기운(인성)이 뚜렷하게 보이지 않아요. 일찍부터 스스로 해내는 법을 익혔을 수 있어요.',
+      one:'어머니의 기운(인성)이 하나 자리 잡고 있어요. 배움과 보살핌을 무난하게 주고받는 관계로 봐요.',
+      many:'어머니의 기운(인성)이 여럿이라 보살핌을 많이 받는 편이에요. 애정이 깊은 만큼 서로에 대한 기대도 클 수 있어요.'
+    },
+    sibling: {
+      zero:'형제자매의 기운(비겁)이 뚜렷하게 보이지 않아요. 형제가 적거나, 있어도 각자의 길을 가는 관계일 수 있어요.',
+      one:'형제자매의 기운(비겁)이 하나 자리 잡고 있어요. 서로 힘이 되어주는 무난한 관계로 봐요.',
+      many:'형제자매의 기운(비겁)이 여럿이라 가깝게 지내는 편이에요. 힘이 되어주는 동료이자, 때로는 선의의 경쟁 상대가 되기도 해요.'
+    },
+    child: {
+      zero:'자녀의 기운이 뚜렷하게 보이지 않아요. 인연이 늦게 찾아오거나, 거리를 존중하는 관계로 흘러갈 수 있어요.',
+      one:'자녀의 기운이 하나 자리 잡고 있어요. 무난하고 안정적인 관계로 보는 편이에요.',
+      many:'자녀의 기운이 여럿이라 신경 쓸 일도 많은 편이에요. 그만큼 정성을 쏟는 관계가 될 수 있어요.'
+    }
   };
   var HEALTH_ORGAN_INFO = {
     wood:{organ:'간·담, 눈과 근육', tip:'과로나 스트레스가 쌓이지 않도록 틈틈이 몸을 움직이고, 눈의 피로도 챙겨주면 좋아요.'},
@@ -1669,13 +1736,6 @@
     return {support:support, drain:drain, ratio:ratio, level:level};
   }
 
-  var YONGSIN_REASON = {
-    '극신강':'일간의 힘이 아주 강해서(극신강), 억부용신 기준으로는 그 힘을 밖으로 흘려보내는 기운이 필요해요.',
-    '신강':'일간이 힘 있게 서 있어서(신강), 억부용신 기준으로는 그 힘을 적절히 흘려보내는 기운이 필요해요.',
-    '중화':'지지력과 설극력이 균형에 가까워서, 억부용신 기준으로는 아주 살짝 부족한 쪽을 보완하는 정도면 충분해요.',
-    '신약':'일간을 도와주는 기운이 적어서(신약), 억부용신 기준으로는 일간에 힘을 보태는 기운이 필요해요.',
-    '극신약':'일간의 힘이 많이 약해서(극신약), 억부용신 기준으로는 일간을 든든히 채워주는 기운이 특히 필요해요.'
-  };
   function selectYongsin(dayEl, strengthResult, counts){
     var supportEls = [dayEl, GENERATED_BY[dayEl]];
     var drainEls = [GENERATES[dayEl], CONTROLS[dayEl], CONTROLLED_BY[dayEl]];
@@ -2374,7 +2434,36 @@
         g+' <b>'+groupCounts[g]+'</b></div>';
     }).join('');
     document.getElementById('tenGodLegend').innerHTML = legend;
+
+    /* 숫자만 보여주고 끝나면 "그래서 뭐?"가 남는다 — 가장 많은 무리가 어떤 성향인지
+       바로 짚어준다(성격기질 섹션의 DOMINANT_TENGOD_TRAIT를 그대로 재사용해 두 섹션이 어긋나지 않게 한다). */
+    var maxCount = Math.max.apply(null, TEN_GOD_GROUPS.map(function(g){ return groupCounts[g]; }));
+    var topGroups = TEN_GOD_GROUPS.filter(function(g){ return groupCounts[g] === maxCount; });
+    var tenGodNote;
+    if(maxCount === 0){
+      tenGodNote = '여덟 글자 안에 뚜렷하게 두드러지는 무리가 없어요. 어느 한쪽으로 치우치지 않은 편이에요.';
+    } else if(topGroups.length === 1){
+      var topGroup = topGroups[0];
+      tenGodNote = '가장 많이 나온 무리는 <b>'+topGroup+'</b>('+maxCount+'개)이에요. '+DOMINANT_TENGOD_TRAIT[topGroup];
+    } else {
+      tenGodNote = '<b>'+topGroups.join('·')+'</b>이(가) 나란히 가장 많아요('+maxCount+'개씩). 여러 기운이 함께 두드러지는 사주예요.';
+    }
+    document.getElementById('tenGodNote').innerHTML = tenGodNote;
     return positions;
+  }
+
+  /* 격국 — 태어난 달의 지지(월지) 속 정기(주된 숨은 기운)가 일간과 어떤 십성 관계인지로
+     사주 전체를 하나의 유형으로 분류한다. 비견·겁재가 나오는 경우도 간략화해 그대로
+     "비견격/겁재격"으로 부른다(건록격 등 전통적 별칭은 쓰지 않음 — TERM_INFO.gyeokguk에 명시). */
+  function renderGyeokguk(saju){
+    var dayS = STEMS[saju.day.stemIdx];
+    var jeonggi = HIDDEN_STEMS[saju.month.branchIdx].filter(function(h){ return h.role==='정기'; })[0];
+    var mainStem = STEMS[jeonggi.s];
+    var god = tenGod(dayS.el, dayS.yy, mainStem.el, mainStem.yy);
+    var info = GYEOKGUK_INFO[god];
+    document.getElementById('gyeokgukBadge').textContent = info.name;
+    document.getElementById('gyeokgukNote').innerHTML = info.desc;
+    return god;
   }
 
   function renderStrength(positions){
@@ -2406,11 +2495,27 @@
     currentYongsinRanked = selectYongsin(dayEl, strengthResult, counts);
     currentDominantEl = ELEMENT_ORDER.slice().sort(function(a,b){ return counts[b]-counts[a]; })[0];
 
+    var summary = document.getElementById('relationsSummary');
     var wrap = document.getElementById('relationsWrap');
+
     if(!relations.length){
-      wrap.innerHTML = '<p class="relation-empty">여덟 글자 사이에 뚜렷한 합충 관계는 보이지 않아요.</p>';
+      summary.textContent = '여덟 글자 사이에 뚜렷한 합충 관계는 보이지 않아요. 서로 끌어당기거나 부딪히는 힘 없이, 각 글자가 제 역할을 하는 편이에요.';
+      wrap.innerHTML = '';
       return relations;
     }
+
+    /* 카드를 하나하나 눌러야만 감이 오는 구조라, 먼저 합·충이 몇 번씩 있고 전체적으로
+       어떤 흐름인지부터 짚어준다. */
+    var hapCount = relations.filter(function(r){ return r.kind==='hap'; }).length;
+    var chungCount = relations.filter(function(r){ return r.kind==='chung'; }).length;
+    if(hapCount && chungCount){
+      summary.textContent = '합이 '+hapCount+'번, 충이 '+chungCount+'번 함께 나타나요. 끌어당기는 힘과 부딪히는 힘이 공존해서, 안정과 변화가 번갈아 찾아오는 흐름으로 봐요.';
+    } else if(hapCount){
+      summary.textContent = '합이 '+hapCount+'번 나타나요. 글자끼리 서로 끌어당기며 묶이는 힘이 강한 사주로 봐요.';
+    } else {
+      summary.textContent = '충이 '+chungCount+'번 나타나요. 부딪히는 자리마다 변화나 움직임이 생기기 쉬운 사주로 봐요.';
+    }
+
     wrap.innerHTML = relations.map(function(r, i){
       return '<button type="button" class="relation-chip relation-'+r.kind+'" data-rel-idx="'+i+'">' +
         '<span class="relation-tag">'+r.tag+'</span>' +
@@ -2699,7 +2804,35 @@
       '<p class="interp-text">'+CAREER_TRAIT[dominantGroup]+'</p>';
   }
 
-  function renderRelationshipLuck(tenGodPositions, gender, relations){
+  function renderSocial(strengthResult, dominantGroup){
+    var strong = (strengthResult.level==='극신강' || strengthResult.level==='신강');
+    var weak = (strengthResult.level==='극신약' || strengthResult.level==='신약');
+    var s1 = SOCIAL_ROLE_TRAIT[dominantGroup];
+    var s2 = strong ? SOCIAL_COMPANION_NOTE.strong : weak ? SOCIAL_COMPANION_NOTE.weak : SOCIAL_COMPANION_NOTE.neutral;
+    var s3 = '나와 비슷한 결의 사람들에게만 머무르면 시야가 좁아질 수 있어요. 다른 무리의 기운을 가진 사람과도 마음을 열고 지내보면 관계의 폭이 한층 넓어질 수 있어요.';
+    document.getElementById('socialText').innerHTML =
+      '<p class="interp-text">'+s1+'</p><p class="interp-text">'+s2+'</p><p class="interp-text">'+s3+'</p>';
+  }
+
+  function renderFamily(tenGodPositions, gender){
+    var groupCounts = {비겁:0,식상:0,재성:0,관성:0,인성:0};
+    tenGodPositions.forEach(function(p){ groupCounts[TEN_GOD_INFO[p.god].group]++; });
+
+    function bucket(n){ return n===0 ? 'zero' : (n===1 ? 'one' : 'many'); }
+    var childGroup = (gender==='남성') ? '관성' : '식상';
+
+    var f1 = FAMILY_NOTE.father[bucket(groupCounts['재성'])].replace('(재성)', '('+T('jaeseong','재성')+')');
+    var f2 = FAMILY_NOTE.mother[bucket(groupCounts['인성'])].replace('(인성)', '('+T('inseong','인성')+')');
+    var f3 = FAMILY_NOTE.sibling[bucket(groupCounts['비겁'])].replace('(비겁)', '('+T('bigyeop','비겁')+')');
+    var f4 = FAMILY_NOTE.child[bucket(groupCounts[childGroup])]
+      .replace('자녀의 기운', '자녀의 기운('+T(TENGOD_TERM_KEY[childGroup], childGroup)+')');
+    var f5 = '가족은 명리학 하나로 다 설명되지 않는, 훨씬 더 깊은 관계예요. 이 결과는 참고 정도로만 봐주세요.';
+
+    document.getElementById('familyText').innerHTML =
+      '<p class="interp-text">'+f1+'</p><p class="interp-text">'+f2+'</p><p class="interp-text">'+f3+'</p><p class="interp-text">'+f4+'</p><p class="interp-text">'+f5+'</p>';
+  }
+
+  function renderRelationshipLuck(saju, tenGodPositions, gender, relations, counts, strengthResult){
     var spouseGroup = (gender==='남성') ? '재성' : '관성';
     var spouseCount = tenGodPositions.filter(function(p){ return TEN_GOD_INFO[p.god].group===spouseGroup; }).length;
     var p1;
@@ -2722,8 +2855,26 @@
       : hasChung
       ? '짝을 보는 자리인 '+gungTerm+'에 '+T('hapchung','충')+'(부딪히는 관계)이 있어 관계에 변화나 굴곡이 있을 수 있어요. 서로 존중하는 대화가 중요해요.'
       : '짝을 보는 자리인 '+gungTerm+'이 비교적 잔잔해요. 큰 굴곡 없이 관계를 이어가는 편이에요.';
+    var dayEl = STEMS[saju.day.stemIdx].el;
+    var yongsinRanked = selectYongsin(dayEl, strengthResult, counts).slice(0,2);
+    var elNames = yongsinRanked.map(function(k){ return ELEMENT_INFO[k].han+'('+ELEMENT_INFO[k].ko+')'; }).join('·');
+    var p3 = '오행으로 보면, 나에게 필요한 '+T('yongsin','용신')+'·희신 — '+elNames+' — 의 기운을 가진 사람과는 서로 기운을 보완할 수 있다고 봐요. 상대의 사주에 이 기운이 뚜렷하다면, 곁에서 채워지는 느낌을 받기 쉬운 편이에요.';
+
+    var strong = (strengthResult.level==='극신강' || strengthResult.level==='신강');
+    var weak = (strengthResult.level==='극신약' || strengthResult.level==='신약');
+    var p4;
+    if(strong){
+      p4 = '십성으로 보면, 일간의 힘이 든든한 편이라 그 힘을 자연스럽게 '+T('seolgi','설기')+'해주는 사람 — '+T('siksang','식상')+'이나 '+T('jaeseong','재성')+'의 결을 가진 사람 — 과 있을 때 오히려 편안하고 잘 맞는 관계를 만들 수 있어요.';
+    } else if(weak){
+      p4 = '십성으로 보면, 일간의 힘이 여린 편이라 그 힘을 채워주는 사람 — '+T('inseong','인성')+'이나 '+T('bigyeop','비겁')+'의 결을 가진 사람 — 과 있을 때 힘이 되는 관계를 만들 수 있어요.';
+    } else {
+      p4 = '십성으로 보면, 일간의 힘이 균형에 가까운 편이라 어느 한쪽에 치우치기보다, 나와 결이 비슷한 사람과 다른 결을 가진 사람 모두와 무난하게 어울릴 수 있어요.';
+    }
+
+    var p5 = '다만 이건 내 사주 하나만으로 짚어보는 \'결이 맞는 유형\'이에요. 상대방과 생년월일을 나란히 놓고 비교하는 정식 궁합은 또 다른 이야기라, 이 내용만으로 관계를 단정 짓지는 말아주세요.';
+
     document.getElementById('relationshipText').innerHTML =
-      '<p class="interp-text">'+p1+'</p><p class="interp-text">'+p2+'</p>';
+      '<p class="interp-text">'+p1+'</p><p class="interp-text">'+p2+'</p><p class="interp-text">'+p3+'</p><p class="interp-text">'+p4+'</p><p class="interp-text">'+p5+'</p>';
   }
 
   function renderHealth(counts){
@@ -2768,9 +2919,18 @@
 
   function renderSummaryTeaser(saju, counts, strengthResult){
     var dayEl = STEMS[saju.day.stemIdx].el;
-    var top = selectYongsin(dayEl, strengthResult, counts)[0];
-    var info = ELEMENT_INFO[top];
-    document.getElementById('teaserElement').textContent = info.han+'('+info.ko+')';
+    /* renderGemstones 와 완전히 같은 기준(selectYongsin 상위 2개)으로 두 기운을 모두 이름부터
+       먼저 말해준다 — 결과(어떤 원석이 필요한지)를 설명보다 앞에 두기 위해서다. */
+    var ranked = selectYongsin(dayEl, strengthResult, counts).slice(0,2);
+    var elA = ELEMENT_INFO[ranked[0]], elB = ELEMENT_INFO[ranked[1]];
+    var copula = (EL_JOSA[ranked[1]].neun === '은') ? '이에요' : '예요';
+    document.getElementById('teaserMain').innerHTML =
+      '당신에게 필요한 기운은 <b>'+elA.han+'('+elA.ko+')</b>'+EL_JOSA[ranked[0]].gwa+' <b>'+elB.han+'('+elB.ko+')</b>'+copula;
+
+    /* 왜 이 기운이 필요한지 · 부족하면 뭐가 힘든지 · 어떻게 하면 도움되는지 — 가장 필요한 쪽
+       하나(용신)만 짧게 짚어준다. 나머지 자세한 결은 바로 아래 원석 카드에서 원소별로 이어진다. */
+    document.getElementById('gemSummaryWhy').textContent =
+      '그중에서도 특히 '+elA.han+'('+elA.ko+')'+EL_JOSA[ranked[0]].neun+' '+SUMMARY_WHY[ranked[0]];
   }
 
   function renderGemstones(saju, counts, strengthResult){
@@ -2779,36 +2939,62 @@
     var labels = ['용신','희신'];
     var badgeClasses = ['rank-1','rank-2'];
 
-    document.getElementById('yongsinReason').innerHTML = YONGSIN_REASON[strengthResult.level]
-      .replace('억부용신', T('eokbu','억부용신'))
-      .replace('일간', T('ilgan','일간'));
-
-    /* 최대 4개만 보여준다 — 더 부족한 원소 쪽에 더 많은 자리를 주고(3:1),
-       두 원소가 똑같이 부족하면 2:2 로 나눈다. 대표 원석은 항상 포함해 용신·희신이
-       둘 다 최소 1개는 뜨게 하고, 나머지 자리는 일주(생일)를 시드로 골라
-       같은 사람은 항상 같은 조합, 다른 사람은 자연스럽게 다르게 보이게 한다. */
+    /* 최대 4개까지 후보를 잡되, 화면에는 대표 원석 1개만 펼쳐서 보여주고
+       나머지는 <details> 아코디언 안에 접어 카드당 정보량을 줄인다.
+       더 부족한 원소 쪽에 더 많은 자리를 주고(3:1), 두 원소가 똑같이 부족하면
+       2:2 로 나눈다. 대표 원석은 항상 포함해 용신·희신이 둘 다 최소 1개는 뜨게
+       하고, 나머지 자리는 일주(생일)를 시드로 골라 같은 사람은 항상 같은 조합,
+       다른 사람은 자연스럽게 다르게 보이게 한다. */
     var slots = (counts[ranked[0]] === counts[ranked[1]]) ? [2,2] : [3,1];
     var seed = saju.day.stemIdx * 12 + saju.day.branchIdx;
+
+    /* 오행-속성 연결 문장 — "이 원석은 부족한 OO 기운을 보완해, 전통적으로 XX를
+       상징해 왔어요" 형태로, ELEMENT_INFO의 기존 trait 데이터를 그대로 재사용한다. */
+    function fitSentence(k){
+      var info = ELEMENT_INFO[k];
+      return '이 원석은 부족한 <b>'+info.han+'('+info.ko+')</b> 기운을 보완해, 전통적으로 '+info.trait+'을 상징해 왔어요.';
+    }
+
+    /* 원석의 유래 이야기는 있을 때만 접이식으로 붙인다(g.origin 없으면 생략). */
+    function originHtml(g){
+      return g.origin ? '<div class="gem-origin"><p class="gem-origin-label">이 원석의 유래</p><p>'+g.origin+'</p></div>' : '';
+    }
 
     var html = ranked.map(function(k, i){
       var all = GEMSTONES[k];
       var main = all.filter(function(g){ return g.tier === '대표'; })[0] || all[0];
       var alts = all.filter(function(g){ return g !== main; });
       var extra = slots[i] - 1;
-      var stones = [main];
-      for(var p=0; p<extra; p++){ stones.push(alts[(seed+p) % alts.length]); }
+      var picked = [];
+      for(var p=0; p<extra; p++){ picked.push(alts[(seed+p) % alts.length]); }
+      /* i===0(용신)은 바로 위 요약 카드(gemSummaryWhy)에서 이미 이 오행이 왜 필요한지
+         말했으니 여기서 또 반복하지 않는다. i===1(희신)은 아직 어디서도 설명 안 됐으니 남긴다. */
+      var fit = (i === 0) ? '' : fitSentence(k);
+      var mainTierClass = TIER_CLASS[main.tier] || 'tier-main';
 
       var badge = '<div class="rank-badge '+badgeClasses[i]+'">'+labels[i]+'</div>';
-      var stonesHtml = stones.map(function(g){
-        var tierClass = TIER_CLASS[g.tier] || 'tier-sub';
-        return '<div class="stone-row">' +
-          '<div class="orb" style="background:radial-gradient(circle at 32% 28%, '+g.c2+', '+g.c1+' 70%); box-shadow:0 0 22px -4px '+g.c2+'88;"></div>' +
-          '<div><span class="gem-tier '+tierClass+'">'+g.tier+'</span><p class="gem-name">'+g.name+'</p><p class="gem-desc">'+g.desc+'</p></div>' +
-          '</div>';
-      }).join('');
+      var mainHtml = '<div class="stone-row">' +
+        '<div class="orb" style="background:radial-gradient(circle at 32% 28%, '+main.c2+', '+main.c1+' 70%); box-shadow:0 0 22px -4px '+main.c2+'88;"></div>' +
+        '<div><span class="gem-tier '+mainTierClass+'">'+main.tier+'</span><p class="gem-name">'+main.name+'</p>' +
+        '<p class="gem-desc">'+main.desc+'</p>' + (fit ? '<p class="gem-fit">'+fit+'</p>' : '') + originHtml(main) + '</div>' +
+        '</div>';
+
+      var altsHtml = '';
+      if(picked.length){
+        var miniHtml = picked.map(function(g){
+          return '<div class="stone-mini">' +
+            '<div class="orb orb-sm" style="background:radial-gradient(circle at 32% 28%, '+g.c2+', '+g.c1+' 70%); box-shadow:0 0 14px -4px '+g.c2+'88;"></div>' +
+            '<div><p class="gem-name-sm">'+g.name+'</p><p class="gem-desc-sm">'+g.desc+'</p>' +
+            (fit ? '<p class="gem-fit-sm">'+fit+'</p>' : '') + originHtml(g) + '</div>' +
+            '</div>';
+        }).join('');
+        altsHtml = '<details class="gem-alts"><summary>다른 선택지 더 보기 · '+picked.length+'개</summary>' +
+          '<div class="gem-alts-list">'+miniHtml+'</div></details>';
+      }
+
       return '<div class="gem-card">' + badge +
         '<p class="gem-el">'+ELEMENT_INFO[k].han+'('+ELEMENT_INFO[k].ko+') 기운을 보완하는 원석 · 내 여덟 글자 중 '+counts[k]+'개</p>' +
-        stonesHtml +
+        mainHtml + altsHtml +
         '</div>';
     }).join('');
     document.getElementById('gemstones').innerHTML = html;
@@ -2819,11 +3005,6 @@
       return {el:k, label:labels[i], stone:main};
     });
 
-    var lead = document.getElementById('ctaLead');
-    if(lead && currentShareGems.length){
-      var firstEl = ELEMENT_INFO[currentShareGems[0].el];
-      lead.textContent = firstEl.han+'('+firstEl.ko+') 기운을 채워줄 '+currentShareGems[0].stone.name+', 바로 만나보세요';
-    }
   }
 
   /* ================= 공유 이미지 (캔버스로 직접 그림 · 외부 라이브러리 없음) ================= */
@@ -3026,6 +3207,8 @@
     'jijanggan':{head:'지장간(支藏干)',   desc:'지지 글자 <b>속에 숨어 있는 천간</b>이에요. 겉으로는 안 보여도 속에서 함께 작용하는 기운으로 봐요.'},
     'unseong':  {head:'십이운성(十二運星)', desc:'기운이 <b>태어나 자라고 저무는 열두 단계</b> 중 어디쯤인지 표시한 거예요. 사람의 일생에 빗댄 비유예요.'},
     'baeuja':   {head:'배우자궁(일지)',   desc:'태어난 날의 <b>아랫글자</b> 자리예요. 전통적으로 <b>짝이나 가장 가까운 사람</b>을 보는 자리로 여겨요.'},
+    'seolgi':   {head:'설기(泄氣)',      desc:'일간(나)의 힘을 <b>밖으로 흘려보내는</b> 것을 말해요. 식상·재성처럼 내가 낳거나 다스리는 기운과 만나면, 넘치는 힘이 자연스럽게 풀린다고 봐요.'},
+    'gyeokguk': {head:'격국(格局)',      desc:'사주 전체를 <b>하나의 큰 유형</b>으로 분류하는 방법이에요. 태어난 달의 지지에 숨은 기운이 일간과 어떤 사이인지로 이름 붙여요. 억부용신과는 다른 관점의 분류라, 학파에 따라 정하는 기준이 여러 갈래예요.'},
     'jeolib':   {head:'절입 · 입춘',      desc:'사주에서 한 해와 한 달은 달력 1월 1일이 아니라 <b>절기가 바뀌는 순간(절입)</b>부터 세요. 그래서 새해 기준은 <b>입춘</b>이에요.'}
   };
   function T(key, label){
@@ -3375,9 +3558,11 @@
       renderYinYang(stats.yy);
       renderElementDetail(stats.counts);
       var tenGodPositions = renderTenGods(saju);
+      renderGyeokguk(saju);
       var strengthResult = renderStrength(tenGodPositions);
       currentStrength = strengthResult;
       renderSummaryTeaser(saju, stats.counts, strengthResult);
+      renderGemstones(saju, stats.counts, strengthResult);
       var relations = renderRelations(saju, stats.counts, strengthResult);
       var daewoon = computeDaewoon(saju, gender);
       var currentDaewoonPillar = renderDaewoon(daewoon, saju, strengthResult, y, m, d);
@@ -3389,10 +3574,10 @@
       renderOverallLuck(saju, currentDaewoonPillar, strengthResult);
       renderYearLuck(saju);
       renderWealthCareer(tenGodPositions, strengthResult, dominantGroup);
-      renderRelationshipLuck(tenGodPositions, gender, relations);
+      renderSocial(strengthResult, dominantGroup);
+      renderFamily(tenGodPositions, gender);
+      renderRelationshipLuck(saju, tenGodPositions, gender, relations, stats.counts, strengthResult);
       renderHealth(stats.counts);
-
-      renderGemstones(saju, stats.counts, strengthResult);
 
       var panel = document.getElementById('resultPanel');
       panel.classList.add('show');
@@ -3403,14 +3588,6 @@
         var resultUrl = buildResultShareUrl(currentResultParams);
         history.replaceState(null, '', resultUrl.slice(APP_SHARE_URL.length));
       }catch(err){}
-    });
-
-    document.getElementById('teaserGemLink').addEventListener('click', function(e){
-      e.preventDefault();
-      var target = document.querySelector(this.getAttribute('href'));
-      if(target){
-        target.scrollIntoView({behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'start'});
-      }
     });
 
     document.getElementById('shareBtn').addEventListener('click', function(){
