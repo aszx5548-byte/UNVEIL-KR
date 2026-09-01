@@ -556,49 +556,49 @@
   // unveilImage/unveilUrl은 실제 상품 사진·구매 링크 확보 전까지 null로 둡니다(TODO).
   var MONTHS = [
     { month:1,  primary:"garnet",   second:"roseQuartz",  basis:"Jewelers of America가 인정한 대체 탄생석",           accent:"#7a2436",
-      unveilPick:"garnet", unveilPrice:19900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */,
+      unveilPick:"garnet", unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */,
       unveilReason:"중세 여행자들이 무사 귀환을 빌며 지녔던 가넷이에요. 짙고 단단한 붉은빛을 매일 곁에 둘 수 있어요." },
     { month:2,  primary:"amethyst", second:"amber",        basis:"Jewelers of America가 인정한 대체 탄생석",           accent:"#7d4fb0",
-      unveilPick:"amethyst", unveilPrice:19900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */,
+      unveilPick:"amethyst", unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */,
       unveilReason:"고대 그리스인들이 마음을 다스리는 돌로 여겼던 자수정이에요. 은은한 보랏빛을 매일 곁에 둘 수 있어요." },
     { month:3,  primary:"aquamarine", second:"bloodstone", basis:"GIA가 공인한 3월의 탄생석",          accent:"#3fb8c9",
-      unveilPick:"aquamarine", unveilPrice:19900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */,
+      unveilPick:"aquamarine", unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */,
       unveilReason:"옛 뱃사람들이 무사 항해를 빌며 지녔던 아쿠아마린이에요. 바닷물처럼 맑은 빛깔을 매일 곁에 둘 수 있어요." },
     { month:4,  primary:"diamond",  second:"clearQuartz",  basis:"Jewelers of America가 인정한 대체 탄생석",           accent:"#c9d6e0",
-      unveilPick:"clearQuartz", unveilPrice:24900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */,
+      unveilPick:"clearQuartz", unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */,
       unveilReason:"얼음이 영원히 녹지 않고 굳어진 것이라 여겨졌던 백수정이에요. 다이아몬드 못지않게 맑고 정제된 빛을 부담 없는 가격에 곁에 둘 수 있어요." },
     { month:5,  primary:"emerald",  second:"chrysoprase",  basis:"Jewelers of America가 인정한 대체 탄생석",           accent:"#1f8f5f",
       // TODO(임시 대체, 교체 예정): 조달처 크리소프레이즈가 염색으로 확인되어 그린아벤츄린으로 임시 대체.
       // 비염색 크리소프레이즈 확보 시 unveilPick을 "chrysoprase"로 교체하세요.
-      unveilPick:"greenAventurine", unveilPrice:19900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */,
+      unveilPick:"greenAventurine", unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */,
       unveilReason:"빛에 비추면 미세한 결정이 반짝이는 그린아벤츄린이에요. 에메랄드를 닮은 초록빛을 매일 부담 없이 즐길 수 있어요." },
     { month:6,  primary:"pearl",    second:"moonstone",    basis:"GIA·Jewelers of America가 함께 인정한 6월의 탄생석",  accent:"#ded2ba",
-      unveilPick:"moonstone", unveilPrice:24900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */,
+      unveilPick:"moonstone", unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */,
       unveilReason:"각도에 따라 달빛 같은 은은한 광채가 움직이는 문스톤이에요. 진주와 함께 공인된 6월의 탄생석이라 관리 부담 없이 매일 착용할 수 있어요." },
     { month:7,  primary:"ruby",     second:"carnelian",    basis:"Jewelers of America가 인정한 대체 탄생석",           accent:"#9b1237",
-      unveilPick:"carnelian", unveilPrice:19900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */,
+      unveilPick:"carnelian", unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */,
       unveilReason:"고대 이집트 파라오의 장신구에 즐겨 쓰였던 카넬리안이에요. 루비 못지않은 생기 있는 주황빛을 부담 없는 가격에 곁에 둘 수 있어요." },
     { month:8,  primary:"peridot",  second:"sardonyx",     basis:"GIA가 소개하는 8월의 가장 오래된 탄생석", accent:"#7c9a1e",
       // TODO(임시 대체, 교체 예정): 조달처 사도닉스 재고 1개·진위 불확실로 인디언아게이트로 임시 대체.
       // 진위 확인된 사도닉스 확보 시 unveilPick을 "sardonyx"로 교체하세요.
-      unveilPick:"indianAgate", unveilPrice:19900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */,
+      unveilPick:"indianAgate", unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */,
       unveilReason:"층층이 쌓인 자연의 줄무늬가 하나하나 다르게 새겨진 인디언아게이트예요. 페리도트의 산뜻한 빛깔을 이으면서, 진위가 확인된 원석만 골라 담았어요." },
     { month:9,  primary:"sapphire", second:"lapis",        basis:"Jewelers of America가 인정한 대체 탄생석",           accent:"#0f3f8f",
-      unveilPick:"lapis", unveilPrice:19900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */,
+      unveilPick:"lapis", unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */,
       unveilReason:"투탕카멘의 황금 마스크에도 쓰였던 라피스라줄리예요. 밤하늘을 닮은 짙은 푸른빛을 사파이어와 함께 매일 곁에 둘 수 있어요." },
     { month:10, primary:"opal",     second:"pinkTourmaline", basis:"GIA·Jewelers of America가 함께 인정한 10월의 탄생석", accent:"#c96a9e",
-      // TODO(임시 대체, 교체 예정): 핑크 토르말린 8mm 비즈 단가가 높아 라브라도라이트로 임시 대체.
+      // TODO(임시 대체, 교체 예정): 핑크 토르말린 8밀리 비즈 단가가 높아 라브라도라이트로 임시 대체.
       // 단가가 맞는 핑크 토르말린 확보 시 unveilPick을 "pinkTourmaline"으로 교체하세요.
-      unveilPick:"labradorite", unveilPrice:19900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */,
+      unveilPick:"labradorite", unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */,
       unveilReason:"각도에 따라 푸른빛과 초록빛이 번쩍이는 라브라도라이트예요. 오팔의 신비로운 빛깔을 닮으면서도 합리적인 가격에 즐길 수 있어요." },
     { month:11, primary:"topaz",    second:"citrine",      basis:"GIA·Jewelers of America가 함께 인정한 11월의 탄생석", accent:"#c98a2e",
-      unveilPick:"citrine", unveilPrice:24900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */,
+      unveilPick:"citrine", unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */,
       unveilReason:"상인들이 풍요를 부른다 여겨 즐겨 지녔던 시트린이에요. 토파즈와 함께 공인된 11월의 탄생석이라 밝은 황금빛을 매일 곁에 둘 수 있어요." },
     { month:12, primary:"turquoise", second:"zircon",       basis:"GIA가 공인한 12월의 탄생석",         accent:"#1f9e93",
       // TODO(임시 대체, 최우선 교체 대상): 유통 터키석 다수가 염색 하울라이트·재구성품이라 검증된 재고가 없어
       // 3월과 동일한 아쿠아마린으로 임시 대체(청록 계열 부재, 3월과 원석 중복). 안정화 처리된 천연 터키석
-      // 확보 시 unveilPick을 "turquoise"로 교체하고 unveilPrice/unveilImage/unveilUrl도 갱신하세요.
-      unveilPick:"aquamarine", unveilPrice:19900, unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */,
+      // 확보 시 unveilPick을 "turquoise"로 교체하고 unveilImage/unveilUrl도 갱신하세요.
+      unveilPick:"aquamarine", unveilImage:null /* TODO: 상품 사진 */, unveilUrl:null /* TODO: 구매 링크 */,
       unveilReason:"옛 뱃사람들이 무사 항해를 빌며 지녔던 아쿠아마린이에요. 터키석의 청록빛 결을 이으며, 검증된 원석으로 매일 곁에 둘 수 있어요." }
   ];
 
