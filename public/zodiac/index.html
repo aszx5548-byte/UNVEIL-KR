@@ -1161,7 +1161,8 @@
         (hasBatchim(sumMain) ? '과' : '와') + ' <b>' + z.rec + '</b>' +
         josa(z.rec, '이에요.', '예요.') + '</p>';
 
-    document.getElementById('gemIntro').textContent = z.desc;
+    /* 첫 카드가 UNVEIL 대표 원석이므로 안내문도 그 원석 기준으로 맞춘다 */
+    document.getElementById('gemIntro').textContent = z.main ? z.mainDesc : z.desc;
 
     function gemCard(tierClass, badge, name, desc, showReason){
       var reason = '';
@@ -1181,17 +1182,18 @@
     }
     var html;
     if(z.main){
-      /* 전통석과 UNVEIL 대표석이 다른 별자리 — 전통석은 파는 물건이 아니라
-         정보이므로 구매 이유를 붙이지 않는다 */
-      html  = gemCard('tier-premium', '전통 대표석', z.trad, z.desc, false);
-      html += gemCard('tier-main', '대표 원석', z.main, z.mainDesc, true);
+      /* 파는 원석을 먼저, 팔지 않는 전통석은 참고 정보로 맨 아래에 둔다 */
+      html  = gemCard('tier-main', '대표 원석', z.main, z.mainDesc, true);
+      html += gemCard('tier-main', '추천 원석', z.rec, z.recDesc, true);
+      html += gemCard('tier-premium', '전통 대표석', z.trad,
+        z.desc + ' 널리 알려진 전통 원석으로, UNVEIL에서는 취급하지 않아요.', false);
     } else {
       /* 염소·물병·물고기 — 전통석이 곧 UNVEIL 대표석이라 한 장으로 합치고,
          전통 탄생석이기도 하다는 것을 함께 알린다 */
       html  = gemCard('tier-main', '대표 원석', z.trad,
         z.desc + ' 전통적으로도 ' + z.name + '의 탄생석으로 알려진 원석이에요.', true);
+      html += gemCard('tier-main', '추천 원석', z.rec, z.recDesc, true);
     }
-    html += gemCard('tier-main', '추천 원석', z.rec, z.recDesc, true);
     document.getElementById('gemstones').innerHTML = html;
 
     document.getElementById('ctaLead').textContent = z.name + '에 어울리는 원석, 바로 만나보세요';
