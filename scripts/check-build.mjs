@@ -47,7 +47,9 @@ if (!home.includes('application/ld+json')) {
 const MUST = [
   'robots.txt', 'sitemap.xml', 'llms.txt', '404.html', 'manifest.json',
   'favicon.ico', 'favicon.svg', 'apple-touch-icon.png', 'content.css',
-  'images/og-cover.jpg',
+  // 링크 미리보기 카드. 페이지마다 다른 이미지를 씁니다.
+  'images/og-home.jpg', 'images/og-saju.jpg',
+  'images/og-zodiac.jpg', 'images/og-birthstone.jpg',
   'saju/index.html', 'zodiac/index.html', 'birthstone/index.html',
 ];
 for (const f of MUST) {
