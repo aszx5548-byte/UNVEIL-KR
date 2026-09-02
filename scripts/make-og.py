@@ -18,15 +18,31 @@
 import os
 from PIL import Image, ImageDraw
 
-SRC = 'public/images'
+# 원본은 새로 넣을 때 public/images 에 두고, 변환이 끝나면 docs/og-source 로
+# 옮겨 보관합니다(배포물에 1~2MB PNG 가 들어가지 않도록). 두 곳을 다 찾습니다.
+SRC_DIRS = ['public/images', 'docs/og-source']
 OUT = 'public/images'
+
+
+def find_src(name):
+    for d in SRC_DIRS:
+        p = os.path.join(d, name)
+        if os.path.exists(p):
+            return p
+    return None
 
 # 원본 → 내보낼 이름. 한글 파일명은 주소에 들어가면 인코딩이 지저분해져
 # 영문으로 바꿉니다.
+#
+# 처리 방식이 둘입니다.
+#   recompose  원본 비율이 많이 달라, 글자만 떼어 새 바탕에 다시 앉힙니다.
+#   fit        이미 1.9:1 에 가까워, 정확한 비율로 살짝 잘라 크기만 맞춥니다.
+#              (원본 구성을 손대지 않는 쪽이 항상 낫습니다)
 JOBS = [
-    ('무료사주음양오행.png', 'og-saju.jpg'),
-    ('무료별자리원석.png', 'og-zodiac.jpg'),
-    ('월별탄생석안내.png', 'og-birthstone.jpg'),
+    ('무료사주음양오행.png', 'og-saju.jpg', 'recompose'),
+    ('무료별자리원석.png', 'og-zodiac.jpg', 'recompose'),
+    ('월별탄생석안내.png', 'og-birthstone.jpg', 'recompose'),
+    ('og-home-원본.png', 'og-home.jpg', 'fit'),
 ]
 
 W, H = 1200, 630
@@ -83,14 +99,39 @@ def gradient(top, bottom):
     return g.resize((W, H), Image.BICUBIC)
 
 
-for src_name, out_name in JOBS:
-    src = os.path.join(SRC, src_name)
-    if not os.path.exists(src):
-        print('  건너뜀 (없음): %s' % src_name)
+def save(canvas, out_name, src):
+    dst = os.path.join(OUT, out_name)
+    # 어두운 네이비 그라데이션은 JPEG 품질이 낮으면 띠가 보입니다.
+    canvas.save(dst, 'JPEG', quality=92, optimize=True, progressive=True,
+                subsampling=0)
+    print('  %-46s -> %-20s %dx%d  %d KB (원본 %d KB)'
+          % (src_name, out_name, canvas.width, canvas.height,
+             os.path.getsize(dst) // 1024, os.path.getsize(src) // 1024))
+
+
+for src_name, out_name, mode in JOBS:
+    src = find_src(src_name)
+    if not src:
+        print('  건너뜀 (원본 없음): %s' % src_name)
         continue
 
     im = Image.open(src).convert('RGB')
     ow, oh = im.size
+
+    if mode == 'fit':
+        # 목표 비율에 맞춰 가운데를 기준으로 아주 조금만 잘라낸 뒤 축소합니다.
+        # 억지로 늘이면 글자가 미세하게 일그러지므로 자르는 쪽을 택합니다.
+        target = W / H
+        if ow / oh > target:
+            nw = int(round(oh * target)); nh = oh
+        else:
+            nw = ow; nh = int(round(ow / target))
+        left = (ow - nw) // 2
+        top = (oh - nh) // 2
+        cropped = im.crop((left, top, left + nw, top + nh))
+        save(cropped.resize((W, H), Image.LANCZOS), out_name, src)
+        continue
+
     px = im.load()
 
     inset = frame_inset_of(im)
@@ -140,8 +181,4 @@ for src_name, out_name in JOBS:
         radius=FRAME_RADIUS, outline=gold, width=FRAME_WIDTH,
     )
 
-    dst = os.path.join(OUT, out_name)
-    canvas.save(dst, 'JPEG', quality=90, optimize=True, progressive=True)
-    print('  %-22s -> %-20s %dx%d  %d KB (원본 %d KB)'
-          % (src_name, out_name, W, H,
-             os.path.getsize(dst) // 1024, os.path.getsize(src) // 1024))
+    save(canvas, out_name, src)
