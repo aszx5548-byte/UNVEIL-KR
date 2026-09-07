@@ -9,11 +9,13 @@ export default function Hero() {
         <div className="hero-copy">
           <p className="hero-hook">나는 어떤 원석과 연결되어 있을까?</p>
           <h1 className="hero-title">
-            사주오행·별자리·탄생석으로
+            사주 음양오행·궁합·별자리·탄생석으로
             <br />
             나와 연결되는 원석을 찾다.
           </h1>
-          <p className="hero-sub">가장 익숙한 기준 하나를 선택하세요.</p>
+          <p className="hero-sub">
+            가장 익숙한 기준 하나를 선택하세요. 결과에 맞는 천연 원석팔찌까지 이어집니다.
+          </p>
 
           <ul className="hero-notes">
             {TRUST_NOTES.map((note) => (
