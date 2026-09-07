@@ -1,11 +1,12 @@
 import { DISCOVERY_CARDS, type DiscoveryIcon } from '../data';
 import { trackEvent } from '../track';
-import { ArrowRight, ConstellationIcon, ElementsIcon, GemIcon } from './icons';
+import { ArrowRight, ConstellationIcon, ElementsIcon, GemIcon, PairIcon } from './icons';
 import StoreLink from './StoreLink';
 
 function CardIcon({ name }: { name: DiscoveryIcon }) {
   if (name === 'elements') return <ElementsIcon className="disc-icon" />;
   if (name === 'constellation') return <ConstellationIcon className="disc-icon" />;
+  if (name === 'pair') return <PairIcon className="disc-icon" />;
   return <GemIcon className="disc-icon" />;
 }
 

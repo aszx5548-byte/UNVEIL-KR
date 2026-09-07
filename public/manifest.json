@@ -17,6 +17,7 @@
   ],
   "shortcuts": [
     { "name": "무료 사주 음양오행", "short_name": "사주오행", "url": "/saju/" },
+    { "name": "무료 사주 궁합", "short_name": "사주궁합", "url": "/gunghap/" },
     { "name": "무료 별자리 운세", "short_name": "별자리", "url": "/zodiac/" },
     { "name": "무료 탄생석 추천", "short_name": "탄생석", "url": "/birthstone/" }
   ]

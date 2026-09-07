@@ -40,6 +40,16 @@ export function ElementsIcon({ className }: IconProps) {
   );
 }
 
+/** 궁합 — 겹쳐진 두 원. 두 사람의 기운이 만나는 자리를 뜻합니다. */
+export function PairIcon({ className }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" {...base}>
+      <circle cx="18" cy="24" r="11" />
+      <circle cx="30" cy="24" r="11" />
+    </svg>
+  );
+}
+
 /** 별자리 — 선으로 이어진 별. */
 export function ConstellationIcon({ className }: IconProps) {
   return (

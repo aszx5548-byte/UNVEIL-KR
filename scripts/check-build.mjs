@@ -50,7 +50,7 @@ const MUST = [
   // 링크 미리보기 카드. 페이지마다 다른 이미지를 씁니다.
   'images/og-home.jpg', 'images/og-saju.jpg',
   'images/og-zodiac.jpg', 'images/og-birthstone.jpg',
-  'saju/index.html', 'zodiac/index.html', 'birthstone/index.html',
+  'saju/index.html', 'gunghap/index.html', 'zodiac/index.html', 'birthstone/index.html',
 ];
 for (const f of MUST) {
   if (!existsSync(join(DIST, f))) fail.push(`파일 없음 — ${f}`);

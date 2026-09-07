@@ -1,10 +1,12 @@
-/* UNVEIL 통합 사이트 서비스워커 — 사주 / 별자리 / 탄생석 3개 앱을 하나의 스코프로 관리합니다. */
-var CACHE_NAME = 'unveil-web-v3';
+/* UNVEIL 통합 사이트 서비스워커 — 사주 / 궁합 / 별자리 / 탄생석 4개 앱을 하나의 스코프로 관리합니다. */
+var CACHE_NAME = 'unveil-web-v4';
 var ASSETS = [
   '/',
   '/index.html',
   '/saju/',
   '/saju/index.html',
+  '/gunghap/',
+  '/gunghap/index.html',
   '/zodiac/',
   '/zodiac/index.html',
   '/birthstone/',
@@ -12,6 +14,7 @@ var ASSETS = [
   '/birthstone/html2canvas.min.js',
   '/manifest.json',
   '/saju/manifest.json',
+  '/gunghap/manifest.json',
   '/favicon.svg',
   '/favicon.ico',
   '/apple-touch-icon.png',

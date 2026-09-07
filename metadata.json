@@ -1,6 +1,6 @@
 {
   "name": "UNVEIL",
-  "description": "사주오행·별자리·탄생석으로 찾는 나의 원석",
+  "description": "사주오행·궁합·별자리·탄생석으로 찾는 나의 원석",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"

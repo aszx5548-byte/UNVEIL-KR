@@ -23,6 +23,7 @@ export const APP_LINKS = {
   saju: '/saju/',
   zodiac: '/zodiac/',
   birthstone: '/birthstone/',
+  gunghap: '/gunghap/',
 } as const;
 
 /**
@@ -50,6 +51,7 @@ export type EventName =
   | 'click_saju'
   | 'click_zodiac'
   | 'click_birthstone'
+  | 'click_gunghap'
   | 'click_product'
   | 'click_collection'
   | 'click_smartstore'
@@ -78,7 +80,7 @@ export const NAV_ITEMS: NavItem[] = [
  * 세 가지 찾기 카드
  * ------------------------------------------------------------------ */
 
-export type DiscoveryIcon = 'elements' | 'constellation' | 'gem';
+export type DiscoveryIcon = 'elements' | 'constellation' | 'gem' | 'pair';
 
 export interface DiscoveryCard {
   id: string;
@@ -99,6 +101,15 @@ export const DISCOVERY_CARDS: DiscoveryCard[] = [
     cta: '오행으로 알아보기',
     href: APP_LINKS.saju,
     event: 'click_saju',
+  },
+  {
+    id: 'gunghap',
+    icon: 'pair',
+    title: '궁합으로 찾기',
+    description: '두 사람의 사주가 어떻게 맞물리는지 살펴봅니다.',
+    cta: '궁합 알아보기',
+    href: APP_LINKS.gunghap,
+    event: 'click_gunghap',
   },
   {
     id: 'zodiac',

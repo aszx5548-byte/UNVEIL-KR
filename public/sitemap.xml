@@ -26,6 +26,12 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+  <url>
+    <loc>https://unveil-kr.ai.studio/gunghap/</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
 
   <url>
     <loc>https://unveil-kr.ai.studio/zodiac/</loc>
