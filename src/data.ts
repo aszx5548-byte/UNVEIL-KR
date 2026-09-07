@@ -414,6 +414,22 @@ export const GUIDE_GROUPS: GuideGroup[] = [
     ],
   },
   {
+    /* 결과에 나오는 한자어를 몰라 막히는 사람이 많습니다.
+       앱 안에서는 눌러야 뜨는 툴팁이라 검색으로는 닿지 않아, 따로 페이지를 두었습니다. */
+    id: 'guide-terms',
+    title: '사주 용어가 어렵다면',
+    description: '원국·일간·십성·신강약처럼 결과에 나오는 말을 쉬운 뜻으로 풀었습니다.',
+    href: '/terms/',
+    items: [
+      { label: '원국 읽는 법', href: '/terms/wonguk/' },
+      { label: '십성', href: '/terms/sipseong/' },
+      { label: '신강약과 용신', href: '/terms/singang/' },
+      { label: '합충과 신살', href: '/terms/hapchung/' },
+      { label: '대운과 세운', href: '/terms/daewoon/' },
+      { label: '궁합 용어', href: '/terms/gunghap/' },
+    ],
+  },
+  {
     /* 원석 이름으로 바로 찾아오는 사람을 위한 길입니다.
        여기 걸린 다섯 종은 탄생석·사주오행·별자리 세 기준에 모두 등장하는 원석이라,
        어느 쪽으로 들어와도 같은 페이지에서 만나게 됩니다. */

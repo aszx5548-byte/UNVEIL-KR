@@ -52,6 +52,7 @@ const MUST = [
   'images/og-zodiac.jpg', 'images/og-birthstone.jpg',
   'saju/index.html', 'gunghap/index.html', 'zodiac/index.html', 'birthstone/index.html',
   'stones/index.html', 'bracelets/index.html',
+  'terms/index.html',
 ];
 for (const f of MUST) {
   if (!existsSync(join(DIST, f))) fail.push(`파일 없음 — ${f}`);
