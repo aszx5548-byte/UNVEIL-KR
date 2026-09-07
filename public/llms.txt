@@ -23,6 +23,14 @@ UNVEIL은 원석의 효능이나 건강·재물·연애·합격·운세 결과�
 - 별자리 12자리: `/zodiac/{capricorn, aquarius, pisces, aries, taurus, gemini, cancer, leo, virgo, libra, scorpio, sagittarius}/`
 - 사주 오행 5행: `/saju/{wood, fire, earth, metal, water}/` — 목=초록, 화=빨강, 토=황토, 금=흰색, 수=검정
 
+## 원석 도감
+
+취급하는 천연 원석 34종의 의미와 어울리는 순간을 원석마다 정리한 정적 페이지입니다. 원석의 의미는 세계 공통의 공식 규정이 아니라 UNVEIL이 전통적 상징을 바탕으로 큐레이션한 브랜드 언어이며, 의학적·과학적 효능이나 결과를 보장하지 않습니다.
+
+- [원석 도감 전체 34종](https://unveil-kr.ai.studio/stones/)
+- 개별 원석: `/stones/{slug}/` (예: [백수정](https://unveil-kr.ai.studio/stones/clear-quartz/), [문스톤](https://unveil-kr.ai.studio/stones/moonstone/), [자수정](https://unveil-kr.ai.studio/stones/amethyst/))
+- 34종 중 17종이 둘 이상의 기준에 등장하며, 백수정·그린아벤츄린·문스톤·카넬리안·시트린은 탄생석·사주오행·별자리 세 기준에 모두 나옵니다.
+
 ## 제품
 
 - 취급 원석: 34종 (진위 검증을 통과하고 추천 시스템에 배치된 원석만 취급)

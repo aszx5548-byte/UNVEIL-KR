@@ -413,6 +413,23 @@ export const GUIDE_GROUPS: GuideGroup[] = [
       { label: '수(水)', href: '/saju/water/' },
     ],
   },
+  {
+    /* 원석 이름으로 바로 찾아오는 사람을 위한 길입니다.
+       여기 걸린 다섯 종은 탄생석·사주오행·별자리 세 기준에 모두 등장하는 원석이라,
+       어느 쪽으로 들어와도 같은 페이지에서 만나게 됩니다. */
+    id: 'guide-stones',
+    title: '원석 이름으로 보기',
+    description: '취급하는 34종의 의미와 어울리는 순간을 원석마다 정리했습니다.',
+    href: '/stones/',
+    items: [
+      { label: '백수정', href: '/stones/clear-quartz/' },
+      { label: '그린아벤츄린', href: '/stones/green-aventurine/' },
+      { label: '문스톤', href: '/stones/moonstone/' },
+      { label: '카넬리안', href: '/stones/carnelian/' },
+      { label: '시트린', href: '/stones/citrine/' },
+      { label: '전체 34종', href: '/stones/' },
+    ],
+  },
 ];
 
 export const FOOTER_DISCLAIMER =
