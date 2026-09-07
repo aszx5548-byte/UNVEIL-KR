@@ -32,9 +32,17 @@ export default function CollectionSection() {
           ))}
         </ul>
 
+        {/* 스토어로 곧장 보내기 전에, 다섯 컬렉션을 견줘 볼 수 있는 페이지를 먼저 둡니다.
+            원석 이름을 모르고 '원석팔찌'로 찾아온 사람이 닿는 자리이기도 합니다. */}
+        <p className="section-aside">
+          <a href="/bracelets/">
+            다섯 컬렉션 비교해보기
+            <ArrowRight className="inline-arrow" />
+          </a>
+        </p>
         <p className="section-aside">
           <StoreLink event="click_smartstore">
-            모든 컬렉션 보기
+            스마트스토어에서 모든 상품 보기
             <ArrowRight className="inline-arrow" />
           </StoreLink>
         </p>
