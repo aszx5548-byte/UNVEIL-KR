@@ -329,16 +329,20 @@ section[id] {
   letter-spacing: 0.01em;
 }
 
+/* 셋째 줄 '나와 연결되는 원석을 찾다.'는 글자 크기의 약 11.9배 폭이 필요합니다.
+   4.2vw / 50px 이면 글 칸보다 늘 2~9% 넘쳐서 '찾다.'만 넷째 줄로 떨어졌습니다.
+   3.7vw / 47px 로 낮춰 데스크톱 전 구간에서 세 줄로 들어오게 맞췄습니다.
+   최소값 27px 은 좀은 창(710~760px)을 위한 값입니다. */
 .hero-title {
   margin-top: 18px;
   font-family: var(--font-serif-ko);
-  font-size: clamp(30px, 4.2vw, 50px);
+  font-size: clamp(27px, 3.7vw, 47px);
   line-height: 1.34;
   color: var(--warm-white);
 }
 
-/* 제목의 각 줄을 통째로 묶습니다.
-   묶지 않으면 가운뎃점이 줄 앞으로 넘어가거나 '찾다.'가 홀로 떨어집니다. */
+/* 첫째·둘째 줄은 통째로 묶습니다.
+   묶지 않으면 가운뎃점이 줄 앞으로 넘어가 '·별자리'처럼 끊깁니다. */
 .hero-title .nb {
   white-space: nowrap;
 }
@@ -352,27 +356,27 @@ section[id] {
 .hero-notes {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 18px;
+  gap: 8px 16px;
   margin-top: 30px;
 }
 .hero-notes li {
   position: relative;
+  padding-left: 12px;
   font-size: 12.5px;
   letter-spacing: 0.02em;
   color: rgba(236, 230, 218, 0.46);
 }
-.hero-notes li + li {
-  padding-left: 19px;
-}
-.hero-notes li + li::before {
+/* 항목과 항목 사이에 선을 그으면, 줄이 바뀔 때 그 선이 새 줄 맨 앞에 홀로 남습니다.
+   대신 각 항목 앞에 점을 붙입니다. 점은 언제나 바로 뒤 문구의 것이라 줄이 어디서 바뀌어도 어색하지 않습니다. */
+.hero-notes li::before {
   content: '';
   position: absolute;
   left: 0;
-  top: 50%;
-  width: 1px;
-  height: 11px;
-  transform: translateY(-50%);
-  background: var(--line-on-dark);
+  top: 0.62em;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: currentColor;
 }
 
 .hero-media .media {
@@ -1192,10 +1196,10 @@ section[id] {
     font-size: clamp(27px, 7.4vw, 34px);
   }
   .hero-notes {
-    gap: 6px 14px;
+    gap: 6px 13px;
   }
-  .hero-notes li + li {
-    padding-left: 15px;
+  .hero-notes li {
+    padding-left: 11px;
   }
 
   .discovery {
