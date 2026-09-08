@@ -337,6 +337,12 @@ section[id] {
   color: var(--warm-white);
 }
 
+/* 제목의 각 줄을 통째로 묶습니다.
+   묶지 않으면 가운뎃점이 줄 앞으로 넘어가거나 '찾다.'가 홀로 떨어집니다. */
+.hero-title .nb {
+  white-space: nowrap;
+}
+
 .hero-sub {
   margin-top: 20px;
   font-size: 16px;
