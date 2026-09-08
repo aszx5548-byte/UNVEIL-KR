@@ -52,6 +52,8 @@ const MUST = [
   'images/og-zodiac.jpg', 'images/og-birthstone.jpg',
   'saju/index.html', 'gunghap/index.html', 'zodiac/index.html', 'birthstone/index.html',
   'stones/index.html', 'bracelets/index.html',
+  'bracelets/saju/index.html', 'bracelets/zodiac/index.html',
+  'bracelets/birthstone/index.html',
   'terms/index.html',
 ];
 for (const f of MUST) {
