@@ -9,7 +9,7 @@ export default function ProductStatement() {
         <div className="statement-media">
           <ImageWithFallback
             src="/images/product-statement.webp"
-            alt="어두운 석재 위에 놓인 여러 빛깔의 UNVEIL 천연 원석팔찌"
+            alt="어두운 석재 위에 놓인 여러 빛깔의 UNVEIL 원석팔찌"
             width={630}
             height={350}
           />
@@ -22,10 +22,10 @@ export default function ProductStatement() {
           <h2 className="section-title">
             의미를 담은
             <br />
-            천연 원석
+            원석
           </h2>
           <p className="statement-desc">
-            자연이 만든 고유한 빛과 결을
+            원석마다 다른 빛과 결을
             <br />
             직접 보고, 느끼고, 선택하세요.
           </p>

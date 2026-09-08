@@ -112,13 +112,15 @@ export function VerifyIcon({ className }: IconProps) {
 
 /* ---- 품질 기준 4가지 ---- */
 
-/** 천연 원석 사용. */
-export function StoneIcon({ className }: IconProps) {
+/** 해석 기준 공개 — 저울로 판단의 근거를 나타냅니다. */
+export function BasisIcon({ className }: IconProps) {
   return (
     <svg className={className} viewBox="0 0 48 48" {...base}>
-      <path d="M18 8h12l8 12-14 20L10 20 18 8Z" />
-      <path d="M18 8 24 20 30 8" />
-      <path d="M10 20h28" />
+      <path d="M24 9v30" />
+      <path d="M11 15h26" />
+      <path d="M6 31 13 17l7 14Z" />
+      <path d="M28 31 35 17l7 14Z" />
+      <path d="M17 39h14" />
     </svg>
   );
 }
@@ -133,13 +135,13 @@ export function CameraIcon({ className }: IconProps) {
   );
 }
 
-/** 오래 쓰도록 관리 — 되돌아오는 화살표로 수선·관리를 나타냅니다. */
-export function CareIcon({ className }: IconProps) {
+/** 말할 수 있는 것만 — 말풍선으로 전하는 범위를 나타냅니다. */
+export function PlainIcon({ className }: IconProps) {
   return (
     <svg className={className} viewBox="0 0 48 48" {...base}>
-      <path d="M38 24a14 14 0 1 1-4.1-9.9" />
-      <path d="M34 6v9h-9" />
-      <circle cx="24" cy="24" r="4.2" />
+      <path d="M40 27a3 3 0 0 1-3 3H20l-8 7v-7h-1a3 3 0 0 1-3-3V14a3 3 0 0 1 3-3h26a3 3 0 0 1 3 3Z" />
+      <path d="M17 19h14" />
+      <path d="M17 25h9" />
     </svg>
   );
 }

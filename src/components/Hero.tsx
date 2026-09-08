@@ -18,7 +18,7 @@ export default function Hero() {
             나와 연결되는 원석을 찾다.
           </h1>
           <p className="hero-sub">
-            가장 익숙한 기준 하나를 선택하세요. 결과에 맞는 천연 원석팔찌까지 이어집니다.
+            가장 익숙한 기준 하나를 선택하세요. 결과에 맞는 원석팔찌까지 이어집니다.
           </p>
 
           <ul className="hero-notes">
@@ -31,7 +31,7 @@ export default function Hero() {
         <div className="hero-media">
           <ImageWithFallback
             src="/images/hero-bracelet.webp"
-            alt="어두운 석재 위에 놓인 UNVEIL 천연 원석팔찌"
+            alt="어두운 석재 위에 놓인 UNVEIL 원석팔찌"
             width={624}
             height={575}
             loading="eager"

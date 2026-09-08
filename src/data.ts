@@ -139,7 +139,7 @@ export const DISCOVERY_CARDS: DiscoveryCard[] = [
  * 제품군을 못 박지 않습니다. (SKU 코드에도 BR=팔찌 / ST=원석 단품 자리가 있습니다)
  * ------------------------------------------------------------------ */
 
-export type TrustIcon = 'stone' | 'camera' | 'care' | 'gift';
+export type TrustIcon = 'basis' | 'camera' | 'plain' | 'gift';
 
 export interface TrustFeature {
   icon: TrustIcon;
@@ -148,11 +148,13 @@ export interface TrustFeature {
 }
 
 export const TRUST_FEATURES: TrustFeature[] = [
-  { icon: 'stone', title: '천연 원석 사용', description: '출처와 특성을 투명하게 안내합니다.' },
+  // 규격(8mm)을 브랜드 기준에 두지 않았듯, 지금 증명할 수 없는 것도 두지 않습니다.
+  //   - '천연'은 원석 검증을 마치기 전까지 쓰지 않습니다.
+  //   - 수선(AS)은 정책이 서기 전까지 약속하지 않습니다.
+  // 대신 오늘 이미 지키고 있는 것만 남겼습니다.
+  { icon: 'basis', title: '해석 기준 공개', description: '왜 이 원석인지 근거를 함께 보여드립니다.' },
   { icon: 'camera', title: '실물 검수 & 촬영', description: '자연광으로 직접 확인한 사진만 씁니다.' },
-  // 규격(8mm)은 팔찌에만 해당하는 값이라 브랜드 기준으로 두지 않습니다.
-  // 대신 제품 형태와 무관하게 계속 유효한 약속을 넣었습니다.
-  { icon: 'care', title: '오래 쓰도록 관리', description: '구매 시점과 관계없이 수선을 도와드립니다.' },
+  { icon: 'plain', title: '말할 수 있는 것만', description: '효능이나 운을 약속하지 않고 유래만 전합니다.' },
   { icon: 'gift', title: '의미 카드 & 패키지', description: '선물도, 나를 위한 다짐도 정성스럽게.' },
 ];
 
@@ -194,7 +196,7 @@ export const COLLECTIONS: Collection[] = [
     keywords: ['용기', '시작', '전환'],
     stone: '아쿠아마린',
     image: '/images/collection-new-beginning.webp',
-    alt: '맑은 청록빛 아쿠아마린 천연 원석팔찌',
+    alt: '맑은 청록빛 아쿠아마린 원석팔찌',
     href: SMARTSTORE_URL,
   },
   {
@@ -205,7 +207,7 @@ export const COLLECTIONS: Collection[] = [
     keywords: ['균형', '편안함', '치유'],
     stone: '그린아벤츄린',
     image: '/images/collection-calm.webp',
-    alt: '차분한 초록빛 그린아벤츄린 천연 원석팔찌',
+    alt: '차분한 초록빛 그린아벤츄린 원석팔찌',
     href: SMARTSTORE_URL,
   },
   {
@@ -216,7 +218,7 @@ export const COLLECTIONS: Collection[] = [
     keywords: ['사랑', '이해', '관계'],
     stone: '로즈쿼츠',
     image: '/images/collection-love.webp',
-    alt: '부드러운 분홍빛 로즈쿼츠 천연 원석팔찌',
+    alt: '부드러운 분홍빛 로즈쿼츠 원석팔찌',
     href: SMARTSTORE_URL,
   },
   {
@@ -227,7 +229,7 @@ export const COLLECTIONS: Collection[] = [
     keywords: ['성장', '자신감', '풍요'],
     stone: '타이거아이',
     image: '/images/collection-success.webp',
-    alt: '금갈색 광택이 흐르는 타이거아이 천연 원석팔찌',
+    alt: '금갈색 광택이 흐르는 타이거아이 원석팔찌',
     href: SMARTSTORE_URL,
   },
   {
@@ -238,7 +240,7 @@ export const COLLECTIONS: Collection[] = [
     keywords: ['보호', '회복', '에너지'],
     stone: '실버흑요석',
     image: '/images/collection-protection.webp',
-    alt: '깊은 검정빛 실버흑요석 천연 원석팔찌',
+    alt: '깊은 검정빛 실버흑요석 원석팔찌',
     href: SMARTSTORE_URL,
   },
 ];
@@ -317,9 +319,9 @@ export const FAQ_ITEMS: FaqItem[] = [
   },
   {
     id: 'faq-4',
-    question: '천연석은 사진과 색이 모두 같은가요?',
+    question: '원석은 사진과 색이 모두 같은가요?',
     answer:
-      '천연석은 원석마다 색, 무늬, 투명도와 내포물에 차이가 있습니다. 상품 페이지에서 실제 촬영 사진과 개체 차이 안내를 확인할 수 있습니다.',
+      '원석은 개체마다 색, 무늬, 투명도와 내포물에 차이가 있습니다. 상품 페이지에서 실제 촬영 사진과 개체 차이 안내를 확인할 수 있습니다.',
   },
 ];
 
