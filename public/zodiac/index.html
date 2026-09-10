@@ -557,6 +557,14 @@
     .submit-btn:hover, .submit-btn:active{ transform:none; }
     .cta-primary:hover .cta-primary-arrow{ transform:none; }
   }
+
+  /* 푸터 링크 모음. 구매 버튼 옆에 있던 외부 링크를 여기로 내렸습니다.
+     구매 흐름을 가로채지 않으면서 채널로 가는 길은 남깁니다. */
+  .footer-links{
+    display:block; margin-top:14px; font-family:var(--sans); font-size:12px;
+  }
+  .footer-links a{ color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold-line); }
+  .footer-links a:hover{ border-bottom-color:var(--gold); color:var(--gold-bright); }
 </style>
 
 <canvas id="stars"></canvas>
@@ -623,15 +631,19 @@
         <span class="cta-primary-arrow" aria-hidden="true">→</span>
       </a>
       <div class="contact-box">
-        <a class="contact-link" href="https://litt.ly/unveil" target="_blank" rel="noopener noreferrer">
+        <!-- 구매 버튼 바로 아래 자리입니다. 여기를 누르는 사람은 '살까 말까 더
+             알아보려는' 층이라 밖으로 내보내면 대부분 돌아오지 않습니다.
+             예전에는 litt.ly(외부 링크 모음)로 나갔는데, 안내할 내용은 이미
+             우리 사이트에 있어 내부로 돌립니다. (litt.ly 는 푸터에 남겨둡니다) -->
+        <a class="contact-link" href="/bracelets/zodiac/">
           <span class="contact-icon contact-icon-link" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></span>
           <span class="contact-text">
-            <span class="contact-label">원석 큐레이션 페이지 보기</span>
-            <span class="contact-desc">별자리별 원석의 의미와 선택 방법을 확인해보세요.</span>
+            <span class="contact-label">별자리별 원석 가이드 보기</span>
+            <span class="contact-desc">12별자리의 전통 대표석과 UNVEIL이 취급하는 원석을 나란히 정리해 두었습니다.</span>
           </span>
           <span class="contact-right">
-            <span class="contact-url-mini">litt.ly/unveil</span>
-            <span class="contact-arrow" aria-hidden="true">↗</span>
+            <span class="contact-url-mini">별자리 원석팔찌</span>
+            <span class="contact-arrow" aria-hidden="true">→</span>
           </span>
         </a>
       </div>
@@ -713,6 +725,7 @@
     이 콘텐츠는 서양 점성술의 탄생석 전승과 상징적 의미를 참고용으로 재구성한 내용입니다.<br/>
     원석의 가격·구성은 판매 시점과 옵션에 따라 달라질 수 있으며, 의학·재정적 판단의 근거로 사용하지 마세요.<br/>
     ※ 위 의미는 UNVEIL 자체 큐레이션 언어이며 원석의 의학적·과학적 효능 또는 결과를 보장하는 설명이 아닙니다.
+    <span class="footer-links"><a href="/">UNVEIL 홈</a> · <a href="/stones/">원석 도감</a> · <a href="https://litt.ly/unveil" target="_blank" rel="noopener noreferrer">인스타그램 · 링크 모음</a></span>
   </footer>
 </div>
 
