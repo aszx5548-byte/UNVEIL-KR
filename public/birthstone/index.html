@@ -297,6 +297,24 @@
     .guide-nav th, .guide-nav td{ padding:8px 5px; font-size:11.5px; }
   }
 
+
+  /* ===== 결과 맨 아래 CTA =====
+     위쪽 CTA 는 결과 앞부분에 있어, 읽으러 온 것을 다 읽은 시점에는
+     화면에 아무 제안도 없었습니다. 그 자리를 채우는 블록입니다.
+     끝이라는 신호를 주려고 위에 구분선을 둡니다. */
+  .cta-wrap-end{
+    margin-top:34px; padding-top:26px;
+    border-top:1px solid var(--gold-line);
+  }
+  .cta-lead, .cta-lead-end{
+    margin:0 0 12px; font-family:var(--serif); font-size:15px;
+    color:var(--gold-bright); letter-spacing:.02em;
+  }
+  .cta-end-note{
+    margin:12px 0 0; font-family:var(--sans); font-size:12.5px;
+    line-height:1.75; color:var(--text-muted); word-break:keep-all;
+  }
+  .cta-end-note a{ color:var(--gold-bright); text-decoration:underline; text-underline-offset:3px; }
 </style>
 
 <!-- 구조화 데이터
@@ -463,6 +481,15 @@
     </div>
 
     <button type="button" class="ghost-btn" id="detailToAlmanacBtn">12개월 도감 보기</button>
+
+    <!-- 결과 맨 아래 CTA.
+         위쪽 CTA 는 20% 지점에서 버튼 6개와 나란히 놓여 있습니다.
+         결과를 다 본 시점에는 아무 제안도 없었습니다. 그 자리를 채웁니다. -->
+    <div class="cta-wrap-end">
+      <p class="cta-lead-end">여기까지 보셨다면</p>
+      <a class="submit-btn" href="https://smartstore.naver.com/unveil_store" target="_blank" rel="noopener noreferrer">추천받은 원석 보러 가기</a>
+      <p class="cta-end-note">네이버 스마트스토어에서 실물 사진과 가격을 확인하실 수 있습니다. 더 보고 싶다면 <a href="/bracelets/birthstone/">탄생석 팔찌</a>와 <a href="/stones/">원석 도감 34종</a>이 있습니다.</p>
+    </div>
     <button type="button" class="reset-link" data-reset>← 처음부터 다시</button>
   </section>
 

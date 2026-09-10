@@ -474,6 +474,24 @@
   @media (max-width:420px){
     .guide-nav th, .guide-nav td{ padding:8px 4px; font-size:12.5px; }
   }
+
+  /* ===== 결과 맨 아래 CTA =====
+     위쪽 CTA 는 결과 앞부분에 있어, 읽으러 온 것을 다 읽은 시점에는
+     화면에 아무 제안도 없었습니다. 그 자리를 채우는 블록입니다.
+     끝이라는 신호를 주려고 위에 구분선을 둡니다. */
+  .cta-wrap-end{
+    margin-top:34px; padding-top:26px;
+    border-top:1px solid var(--gold-line);
+  }
+  .cta-lead-end{
+    margin:0 0 12px; font-family:var(--serif); font-size:15px;
+    color:var(--gold-bright); letter-spacing:.02em;
+  }
+  .cta-end-note{
+    margin:12px 0 0; font-family:var(--sans); font-size:12.5px;
+    line-height:1.75; color:var(--text-muted); word-break:keep-all;
+  }
+  .cta-end-note a{ color:var(--gold-bright); text-decoration:underline; text-underline-offset:3px; }
 </style>
 
 <canvas id="stars"></canvas>
@@ -575,7 +593,23 @@
       </div>
     </div>
 
-    <button type="button" class="reset-link" id="resetBtn">← 다시 찾아보기</button>
+    <!-- 결과 맨 아래 CTA.
+       위쪽 CTA 는 39% 지점에 있고, 그 뒤에 '별자리 기질'과 '오늘의 운세' —
+       정작 보러 온 것들이 옵니다. 다 읽은 시점에는 아무 제안도 없었습니다. -->
+  <div class="cta-wrap cta-wrap-end">
+    <p class="cta-lead">여기까지 읽으셨다면</p>
+    <a class="cta-primary" href="https://smartstore.naver.com/unveil_store" target="_blank" rel="noopener noreferrer">
+      <span class="cta-primary-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg></span>
+      <span class="cta-primary-text">
+        <span class="cta-primary-label">추천받은 원석 보러 가기</span>
+        <span class="cta-primary-desc">네이버 스마트스토어에서 실물 사진과 가격을 확인하실 수 있습니다</span>
+      </span>
+      <span class="cta-primary-arrow" aria-hidden="true">→</span>
+    </a>
+    <p class="cta-end-note">바로 사기 전에 더 보고 싶다면 <a href="/bracelets/zodiac/">별자리 원석팔찌</a>와 <a href="/stones/">원석 도감 34종</a>이 있습니다.</p>
+  </div>
+
+  <button type="button" class="reset-link" id="resetBtn">← 다시 찾아보기</button>
   </section>
 
   <nav class="guide-nav" aria-label="별자리별 원석 안내">
