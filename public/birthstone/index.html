@@ -388,6 +388,12 @@
   }
   .footer-links a{ color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold-line); }
   .footer-links a:hover{ border-bottom-color:var(--gold); color:var(--gold-bright); }
+
+  /* 다른 도구 안내. 구매 제안 뒤에 오므로 조용하게 둡니다. */
+  .other-tools-lead{
+    margin:26px 0 10px; font-family:var(--sans); font-size:12.5px;
+    color:var(--text-muted); text-align:center;
+  }
 </style>
 
 <!-- 구조화 데이터
@@ -548,15 +554,6 @@
     <a class="family-link" href="/bracelets/birthstone/" style="margin-top:12px;">
       <span>탄생석 원석 가이드 보기</span><span>→</span>
     </a>
-    <div class="family-links">
-      <a class="family-link" href="/saju/">
-        <span>사주 오행으로 원석 찾기</span><span>↗</span>
-      </a>
-      <a class="family-link" href="/zodiac/">
-        <span>별자리로 원석 찾기</span><span>↗</span>
-      </a>
-    </div>
-
     <button type="button" class="ghost-btn" id="detailToAlmanacBtn">12개월 도감 보기</button>
 
     <!-- 결과 맨 아래 CTA.
@@ -567,6 +564,21 @@
       <a class="submit-btn" href="https://smartstore.naver.com/unveil_store" target="_blank" rel="noopener noreferrer">추천받은 원석 보러 가기</a>
       <p class="cta-end-note">네이버 스마트스토어에서 실물 사진과 가격을 확인하실 수 있습니다. 더 보고 싶다면 <a href="/bracelets/birthstone/">탄생석 팔찌</a>와 <a href="/stones/">원석 도감 34종</a>이 있습니다.</p>
     </div>
+
+    <!-- 다른 도구로 가는 길은 구매 제안 뒤에 둡니다.
+         결과 바로 아래에 있으면, 방금 답을 받은 사람을 또 다른 무료 도구로
+         돌려보내 구매에서 멀어집니다. 다 보고 나서 '다른 것도 해볼까' 하는
+         사람만 만나면 충분합니다. -->
+    <p class="other-tools-lead">다른 기준으로도 찾아보시겠어요?</p>
+    <div class="family-links">
+      <a class="family-link" href="/saju/">
+        <span>사주 오행으로 원석 찾기</span><span>→</span>
+      </a>
+      <a class="family-link" href="/zodiac/">
+        <span>별자리로 원석 찾기</span><span>→</span>
+      </a>
+    </div>
+
     <button type="button" class="reset-link" data-reset>← 처음부터 다시</button>
   </section>
 
