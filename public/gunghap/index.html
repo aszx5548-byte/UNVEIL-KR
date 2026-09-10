@@ -462,6 +462,13 @@
     margin:0 0 6px; font-family:var(--serif); font-size:15px;
     font-weight:600; color:var(--gold-bright); letter-spacing:.02em;
   }
+  /* FAQ 질문. h2 가 금색 라벨(15px)이라 질문은 그보다 작게 두어야
+     위계가 뒤집히지 않습니다. */
+  .guide-nav h3{
+    margin:14px 0 4px; font-family:var(--sans); font-size:13.5px;
+    font-weight:600; color:var(--text); letter-spacing:0;
+  }
+  .guide-nav h3:first-of-type{ margin-top:10px; }
   .guide-nav p{
     margin:0 0 14px; font-family:var(--sans); font-size:14px;
     line-height:1.7; color:var(--text-muted); word-break:keep-all;
@@ -1135,6 +1142,18 @@
       <tr><td>띠 관계</td><td>흔히 말하는 띠 궁합</td><td>가볍게 볼 때</td></tr>
     </table>
   </nav>
+
+    <section class="guide-nav" aria-label="자주 묻는 질문">
+      <h2>자주 묻는 질문</h2>
+      <h3>사주 궁합은 어떻게 보나요?</h3>
+      <p>두 사람의 생년월일로 각자 사주 원국을 세운 뒤, 서로의 기운이 어떻게 맞물리는지를 봅니다. UNVEIL은 오행 상보, 일간 관계, 일지 관계, 신강약 조합, 띠 관계 다섯 가지 축으로 나누어 계산하며 가입 없이 무료로 이용할 수 있습니다.</p>
+      <h3>태어난 시간을 몰라도 궁합을 볼 수 있나요?</h3>
+      <p>볼 수 있습니다. 궁합에서 가장 비중이 큰 일지(日支)는 태어난 날짜만 알면 나오기 때문에, 시간을 모르면 시주 두 글자만 비고 나머지 축은 그대로 계산됩니다.</p>
+      <h3>궁합 점수가 낮으면 안 좋은 사이인가요?</h3>
+      <p>아닙니다. UNVEIL이 보여주는 숫자는 관계의 좋고 나쁨이 아니라 두 사주의 기운이 얼마나 맞물리는지를 나타냅니다. 맞물림이 적은 것은 서로 독립적인 결을 가졌다는 뜻이며, 명리학에서도 어떤 조합이든 맞물리는 축과 어긋나는 축이 함께 있다고 봅니다.</p>
+      <h3>상대방의 생년월일을 몰라도 되나요?</h3>
+      <p>내 정보만 입력한 뒤 링크를 만들어 상대에게 보내면, 상대가 직접 자신의 생년월일을 넣고 결과를 함께 볼 수 있습니다. 상대의 정보를 대신 입력하지 않아도 됩니다.</p>
+    </section>
 
   <footer class="disclaimer">
     이 콘텐츠는 전통 명리학 이론과 태양 황경(절기) 기반 근사 천문 계산을 활용한 참고용 결과입니다.<br/>
