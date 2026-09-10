@@ -804,6 +804,20 @@
   }
   .footer-links a{ color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold-line); }
   .footer-links a:hover{ border-bottom-color:var(--gold); color:var(--gold-bright); }
+
+  /* 원석 카드의 개별 구매 링크. 아래 큰 버튼과 경쟁하지 않도록 작게 둔다. */
+  .stone-buy{
+    display:inline-flex; align-items:center; gap:5px; margin-top:10px;
+    font-family:var(--sans); font-size:13px; font-weight:600;
+    color:var(--gold-bright); text-decoration:none;
+    border:1px solid var(--gold-line); border-radius:999px; padding:7px 14px;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .stone-buy:hover{ border-color:var(--gold); background:var(--gold-soft); }
+  .stone-buy:focus-visible{ outline:2px solid var(--gold-bright); outline-offset:2px; }
+
+  /* 선택지 원석의 구매 링크. 대표 원석 것보다 한 단계 작게. */
+  .stone-buy-sm{ font-size:12px; padding:6px 12px; margin-top:8px; }
 </style>
 
 <canvas id="stars"></canvas>
@@ -3146,7 +3160,12 @@
       var mainHtml = '<div class="stone-row">' +
         '<div class="orb" style="background:radial-gradient(circle at 32% 28%, '+main.c2+', '+main.c1+' 70%); box-shadow:0 0 22px -4px '+main.c2+'88;"></div>' +
         '<div><span class="gem-tier '+mainTierClass+'">'+main.tier+'</span><p class="gem-name">'+main.name+'</p>' +
-        '<p class="gem-desc">'+main.desc+'</p>' + (fit ? '<p class="gem-fit">'+fit+'</p>' : '') + originHtml(main) + '</div>' +
+        '<p class="gem-desc">'+main.desc+'</p>' + (fit ? '<p class="gem-fit">'+fit+'</p>' : '') + originHtml(main) +
+        /* 추천 원석이 여럿일 때 아래 큰 버튼 하나로는 1순위밖에 갈 수 없다.
+           원석마다 자기 링크를 두어 어느 것이든 바로 보게 한다. */
+        '<a class="stone-buy" href="'+storeUrlFor(main.name)+'" target="_blank" rel="noopener noreferrer">'+
+          main.name+' 보러 가기 <span aria-hidden="true">→</span></a>' +
+        '</div>' +
         '</div>';
 
       var altsHtml = '';
@@ -3155,7 +3174,10 @@
           return '<div class="stone-mini">' +
             '<div class="orb orb-sm" style="background:radial-gradient(circle at 32% 28%, '+g.c2+', '+g.c1+' 70%); box-shadow:0 0 14px -4px '+g.c2+'88;"></div>' +
             '<div><p class="gem-name-sm">'+g.name+'</p><p class="gem-desc-sm">'+g.desc+'</p>' +
-            (fit ? '<p class="gem-fit-sm">'+fit+'</p>' : '') + originHtml(g) + '</div>' +
+            (fit ? '<p class="gem-fit-sm">'+fit+'</p>' : '') + originHtml(g) +
+            '<a class="stone-buy stone-buy-sm" href="'+storeUrlFor(g.name)+'" target="_blank" rel="noopener noreferrer">'+
+              g.name+' 보러 가기 <span aria-hidden="true">→</span></a>' +
+            '</div>' +
             '</div>';
         }).join('');
         altsHtml = '<details class="gem-alts"><summary>다른 선택지 더 보기 · '+picked.length+'개</summary>' +
@@ -3190,6 +3212,13 @@
      상품명에 이름을 넣으면 이 목록에서 빼면 된다.
      (2026-09-10 확인: 셰브론자수정·인디언아게이트는 정상 검색됨) */
   var STORE_SEARCH_MISS = ['핑크제브라재스퍼'];
+  var STORE_HOME = 'https://smartstore.naver.com/unveil_store';
+
+  /* 원석 하나의 스토어 주소. 검색이 비는 원석은 첫 화면으로 돌린다. */
+  function storeUrlFor(stoneName){
+    if(!stoneName || STORE_SEARCH_MISS.indexOf(stoneName) !== -1) return STORE_HOME;
+    return STORE_HOME + '/search?q=' + encodeURIComponent(stoneName);
+  }
 
   function linkStoreToStone(stoneName){
     if(!stoneName) return;
