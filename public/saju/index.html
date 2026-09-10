@@ -817,7 +817,41 @@
   .stone-buy:focus-visible{ outline:2px solid var(--gold-bright); outline-offset:2px; }
 
   /* 선택지 원석의 구매 링크. 대표 원석 것보다 한 단계 작게. */
-  .stone-buy-sm{ font-size:12px; padding:6px 12px; margin-top:8px; }
+  .stone-buy-sm{ font-size:12px; padding:6px 12px; margin-top:8px; word-break:keep-all; }
+
+  /* 대표 원석의 구매 링크를 원석 이름 오른쪽(용신 배지 아래)에 띄운다.
+     float 이라 설명 글이 버튼을 감싸고 흘러 빈 공간이 생기지 않는다. */
+  .stone-row > div > .stone-buy{ float:right; margin:0 0 10px 14px; }
+  @media (max-width:420px){
+    /* 좁은 화면에서는 글이 눌리므로 띄우지 않고 아래로 내린다.
+       링크가 DOM 상 글보다 앞에 있어 그냥 두면 원석 이름 위에 뜬다.
+       세로 정렬로 바꾸고 순서를 맨 뒤로 보낸다. */
+    /* align-items:flex-start 를 주면 글까지 내용 폭으로 줄어든다.
+       늘어나는 기본값(stretch)을 두고, 링크만 따로 왼쪽에 붙인다. */
+    .stone-row > div{ display:flex; flex-direction:column; }
+    .stone-row > div > .stone-buy{
+      float:none; margin:12px 0 0; order:99;
+      /* 칸이 좁아 글자가 단어 중간에서 잘렸다(실버흑요석 보 / 러 가기).
+         칸 전체를 쓰고 가운데 정렬하며, 한글은 단어 단위로만 끊는다. */
+      align-self:stretch; justify-content:center; text-align:center;
+      word-break:keep-all;
+    }
+  }
+
+  /* CTA 글자는 단어 단위로만 끊는다.
+     라벨을 19px 로 키운 뒤 좁은 칸에서 '네이버 스마 / 트스토어에서' 처럼
+     단어 중간이 잘렸다. keep-all 이면 띄어쓰기에서만 줄이 바뀐다. */
+  .cta-primary-label, .cta-primary-desc, .submit-btn,
+  .cta-lead, .cta-lead-end, .cta-end-note{ word-break:keep-all; }
+
+  /* 좁은 화면에서 오른쪽 보조 문구가 본문 폭을 잡아먹어
+     설명이 한 줄에 두세 글자씩 끊긴다. 왼쪽 제목만으로 충분하므로 숨긴다.
+     (화살표는 남겨 눌리는 것임을 보인다) */
+  @media (max-width:420px){
+    .contact-url-mini{ display:none; }
+    .contact-text{ min-width:0; }
+    .contact-desc{ word-break:keep-all; }
+  }
 </style>
 
 <canvas id="stars"></canvas>
@@ -3159,12 +3193,15 @@
       var badge = '<div class="rank-badge '+badgeClasses[i]+'">'+labels[i]+'</div>';
       var mainHtml = '<div class="stone-row">' +
         '<div class="orb" style="background:radial-gradient(circle at 32% 28%, '+main.c2+', '+main.c1+' 70%); box-shadow:0 0 22px -4px '+main.c2+'88;"></div>' +
-        '<div><span class="gem-tier '+mainTierClass+'">'+main.tier+'</span><p class="gem-name">'+main.name+'</p>' +
-        '<p class="gem-desc">'+main.desc+'</p>' + (fit ? '<p class="gem-fit">'+fit+'</p>' : '') + originHtml(main) +
+        '<div>' +
         /* 추천 원석이 여럿일 때 아래 큰 버튼 하나로는 1순위밖에 갈 수 없다.
-           원석마다 자기 링크를 두어 어느 것이든 바로 보게 한다. */
+           원석마다 자기 링크를 두어 어느 것이든 바로 보게 한다.
+           글보다 앞에 두고 오른쪽으로 띄우면(float) 설명이 버튼을 감싸고 흘러,
+           원석 이름 오른쪽·용신 배지 아래에 자리가 잡힌다. */
         '<a class="stone-buy" href="'+storeUrlFor(main.name)+'" target="_blank" rel="noopener noreferrer">'+
           main.name+' 보러 가기 <span aria-hidden="true">→</span></a>' +
+        '<span class="gem-tier '+mainTierClass+'">'+main.tier+'</span><p class="gem-name">'+main.name+'</p>' +
+        '<p class="gem-desc">'+main.desc+'</p>' + (fit ? '<p class="gem-fit">'+fit+'</p>' : '') + originHtml(main) +
         '</div>' +
         '</div>';
 

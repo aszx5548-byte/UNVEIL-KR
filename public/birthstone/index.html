@@ -394,6 +394,12 @@
     margin:26px 0 10px; font-family:var(--sans); font-size:12.5px;
     color:var(--text-muted); text-align:center;
   }
+
+  /* 한글은 단어 단위로만 끊는다.
+     라벨을 19px 로 키운 뒤 좁은 칸에서 '네이버 스마 / 트스토어에서' 처럼
+     단어 중간이 잘렸다. keep-all 이면 띄어쓰기에서만 줄이 바뀐다. */
+  .cta-primary-label, .cta-primary-desc, .submit-btn,
+  .cta-lead, .cta-lead-end, .cta-end-note{ word-break:keep-all; }
 </style>
 
 <!-- 구조화 데이터

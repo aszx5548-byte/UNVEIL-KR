@@ -565,6 +565,21 @@
   }
   .footer-links a{ color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold-line); }
   .footer-links a:hover{ border-bottom-color:var(--gold); color:var(--gold-bright); }
+
+  /* 한글은 단어 단위로만 끊는다.
+     라벨을 19px 로 키운 뒤 좁은 칸에서 '네이버 스마 / 트스토어에서' 처럼
+     단어 중간이 잘렸다. keep-all 이면 띄어쓰기에서만 줄이 바뀐다. */
+  .cta-primary-label, .cta-primary-desc, .submit-btn,
+  .cta-lead, .cta-lead-end, .cta-end-note{ word-break:keep-all; }
+
+  /* 좁은 화면에서 오른쪽 보조 문구가 본문 폭을 잡아먹어
+     설명이 한 줄에 두세 글자씩 끊긴다. 왼쪽 제목만으로 충분하므로 숨긴다.
+     (화살표는 남겨 눌리는 것임을 보인다) */
+  @media (max-width:420px){
+    .contact-url-mini{ display:none; }
+    .contact-text{ min-width:0; }
+    .contact-desc{ word-break:keep-all; }
+  }
 </style>
 
 <canvas id="stars"></canvas>
