@@ -580,6 +580,13 @@
     .contact-text{ min-width:0; }
     .contact-desc{ word-break:keep-all; }
   }
+
+  /* ===== 한글 줄바꿈을 한 곳에서 정한다 =====
+     keep-all 이 다섯 곳에만 붙어 있어, 나머지 문단은 좁은 화면에서
+     단어 중간이 잘렸습니다. word-break 는 물려받는 성질이라
+     body 에 한 번만 걸면 전부에 닿습니다. break-word 는 띄어쓰기가 없는
+     긴 주소 같은 것이 칸을 넘지 않게 하는 안전장치입니다. */
+  body{ word-break:keep-all; overflow-wrap:break-word; }
 </style>
 
 <canvas id="stars"></canvas>

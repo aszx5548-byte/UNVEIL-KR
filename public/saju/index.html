@@ -900,6 +900,36 @@
     .stone-buy:hover::after{ transform:translateX(-130%); }
     .stone-buy:hover .stone-buy-arrow{ transform:none; }
   }
+
+  /* ===== 좁은 화면 여백 정리 =====
+     375px 에서 .app(20) → .panel(24) → .summary-teaser(20) → .gem-card(16)
+     네 겹의 좌우 여백이 160px 를 먹어, 글자 칸이 141px 밖에 남지 않았습니다.
+     한 줄에 열 글자 남짓이라 읽기 어려웠습니다. 겹치는 여백을 줄입니다. */
+  @media (max-width:420px){
+    .app{ padding-left:14px; padding-right:14px; }
+    .panel{ padding-left:14px; padding-right:14px; }
+    .summary-teaser{ padding-left:12px; padding-right:12px; }
+    .gem-card{ padding:13px; }
+    .stone-row{ gap:12px; }
+    .orb{ width:44px; height:44px; }
+    .stone-mini .orb-sm{ width:34px; height:34px; }
+  }
+
+  /* ===== 한글 줄바꿈을 한 곳에서 정한다 =====
+     지금까지 word-break:keep-all 을 규칙마다 하나씩 붙여 왔습니다.
+     스물여덟 곳은 붙었고 스물여덟 곳은 빠져, 같은 화면 안에서
+     어떤 문단은 띄어쓰기에서 끊기고 어떤 문단은 단어 중간이 잘렸습니다.
+     그 들쭉날쭉함이 '글씨 배열이 이상하다'의 정체였습니다.
+
+     word-break 는 물려받는 성질이라 body 에 한 번만 걸면 전부에 닿습니다.
+     break-word 는 띄어쓰기가 없는 긴 주소 같은 것이 칸을 넘지 않게 하는
+     안전장치입니다. 위쪽의 개별 선언들은 같은 값이라 그대로 두어도
+     충돌하지 않습니다. */
+  body{ word-break:keep-all; overflow-wrap:break-word; }
+
+  /* 한자와 여는 괄호 사이는 keep-all 이 막지 못해
+     '木 / (목)이에요' 처럼 갈라졌습니다. 짧은 조각이라 통째로 묶습니다. */
+  .summary-teaser-main b{ white-space:nowrap; }
 </style>
 
 <canvas id="stars"></canvas>
