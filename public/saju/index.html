@@ -924,11 +924,11 @@
     <div class="gemstones" id="gemstones"></div>
 
     <div class="cta-wrap">
-      <a class="cta-primary" href="https://smartstore.naver.com/unveil_store" target="_blank" rel="noopener noreferrer">
+      <a class="cta-primary" id="ctaStoreTop" href="https://smartstore.naver.com/unveil_store" target="_blank" rel="noopener noreferrer">
         <span class="cta-primary-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg></span>
         <span class="cta-primary-text">
           <span class="cta-primary-label">네이버 스마트스토어에서 구매하기</span>
-          <span class="cta-primary-desc" id="ctaPrimaryDesc">추천받은 원석의 팔찌·목걸이 상품을 확인해보세요</span>
+          <span class="cta-primary-desc" id="ctaPrimaryDesc">추천받은 원석의 상품을 스마트스토어에서 확인하실 수 있습니다</span>
         </span>
         <span class="cta-primary-arrow" aria-hidden="true">→</span>
       </a>
@@ -1085,7 +1085,7 @@
        마음이 움직이는 시점에는 화면에 아무 제안도 없었습니다. 그 자리를 채웁니다. -->
   <div class="cta-wrap cta-wrap-end">
     <p class="cta-lead">여기까지 읽으셨다면</p>
-    <a class="cta-primary" href="https://smartstore.naver.com/unveil_store" target="_blank" rel="noopener noreferrer">
+    <a class="cta-primary" id="ctaStoreEnd" href="https://smartstore.naver.com/unveil_store" target="_blank" rel="noopener noreferrer">
       <span class="cta-primary-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg></span>
       <span class="cta-primary-text">
         <span class="cta-primary-label">추천받은 원석 보러 가기</span>
@@ -3175,6 +3175,27 @@
       return {el:k, label:labels[i], stone:main};
     });
 
+    /* 스토어 버튼을 추천 원석 검색 결과로 보낸다.
+       첫 화면으로 보내면 "그린아벤츄린이 필요합니다" 라고 알려준 뒤
+       상품을 직접 찾게 만드는 셈이라, 그 한 단계에서 많이 빠진다. */
+    linkStoreToStone(currentShareGems[0] && currentShareGems[0].stone && currentShareGems[0].stone.name);
+
+  }
+
+  /* 스토어 버튼 두 개(결과 앞·맨 아래)의 주소와 설명을 추천 원석에 맞춘다.
+     원석 이름을 못 구하면 손대지 않는다 — 첫 화면으로 가는 편이
+     검색 결과가 비어 보이는 것보다 낫다. */
+  function linkStoreToStone(stoneName){
+    if(!stoneName) return;
+    var url = 'https://smartstore.naver.com/unveil_store/search?q=' + encodeURIComponent(stoneName);
+    ['ctaStoreTop','ctaStoreEnd'].forEach(function(id){
+      var a = document.getElementById(id);
+      if(a) a.href = url;
+    });
+    var top = document.getElementById('ctaPrimaryDesc');
+    if(top) top.textContent = stoneName + ' 상품을 스마트스토어에서 확인하실 수 있습니다';
+    var end = document.getElementById('ctaEndDesc');
+    if(end) end.textContent = stoneName + ' 실물 사진과 가격을 스마트스토어에서 확인하실 수 있습니다';
   }
 
   /* ================= 공유 이미지 (캔버스로 직접 그림 · 외부 라이브러리 없음) ================= */

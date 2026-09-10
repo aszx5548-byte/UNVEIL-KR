@@ -539,7 +539,7 @@
       </div>
     </div>
 
-    <a class="submit-btn" href="https://smartstore.naver.com/unveil_store" target="_blank" rel="noopener noreferrer">네이버 스마트스토어에서 구매하기</a>
+    <a class="submit-btn" id="ctaStoreTop" href="https://smartstore.naver.com/unveil_store" target="_blank" rel="noopener noreferrer">네이버 스마트스토어에서 구매하기</a>
 
     <h2 class="section-label" style="margin-top:26px;">대체 탄생석</h2>
     <div class="info-card" id="secondCard"></div>
@@ -561,8 +561,8 @@
          결과를 다 본 시점에는 아무 제안도 없었습니다. 그 자리를 채웁니다. -->
     <div class="cta-wrap-end">
       <p class="cta-lead-end">여기까지 보셨다면</p>
-      <a class="submit-btn" href="https://smartstore.naver.com/unveil_store" target="_blank" rel="noopener noreferrer">추천받은 원석 보러 가기</a>
-      <p class="cta-end-note">네이버 스마트스토어에서 실물 사진과 가격을 확인하실 수 있습니다. 더 보고 싶다면 <a href="/bracelets/birthstone/">탄생석 팔찌</a>와 <a href="/stones/">원석 도감 34종</a>이 있습니다.</p>
+      <a class="submit-btn" id="ctaStoreEnd" href="https://smartstore.naver.com/unveil_store" target="_blank" rel="noopener noreferrer">추천받은 원석 보러 가기</a>
+      <p class="cta-end-note" id="ctaEndDesc">네이버 스마트스토어에서 실물 사진과 가격을 확인하실 수 있습니다. 더 보고 싶다면 <a href="/bracelets/birthstone/">탄생석 팔찌</a>와 <a href="/stones/">원석 도감 34종</a>이 있습니다.</p>
     </div>
 
     <!-- 다른 도구로 가는 길은 구매 제안 뒤에 둡니다.
@@ -898,6 +898,21 @@
     "{stone}처럼 단단하고 고유한 빛을 지녔어요."
   ];
 
+  /* 스토어 버튼 두 개(결과 앞·맨 아래)의 주소를 추천 원석 검색으로 맞춘다.
+     원석 이름을 못 구하면 손대지 않는다 — 첫 화면으로 가는 편이
+     검색 결과가 비어 보이는 것보다 낫다. */
+  function linkStoreToStone(stoneName){
+    if(!stoneName) return;
+    var url = "https://smartstore.naver.com/unveil_store/search?q=" + encodeURIComponent(stoneName);
+    ["ctaStoreTop","ctaStoreEnd"].forEach(function(id){
+      var a = document.getElementById(id);
+      if(a) a.href = url;
+    });
+    var end = document.getElementById("ctaEndDesc");
+    if(end) end.firstChild && (end.firstChild.textContent =
+      stoneName + " 실물 사진과 가격을 스마트스토어에서 확인하실 수 있습니다. 더 보고 싶다면 ");
+  }
+
   function doReveal(){
     var parsed = parseDateDigits(document.getElementById("birthDateText").value);
     if(!parsed || validateYMD(parsed)) return;
@@ -913,6 +928,11 @@
     document.getElementById("revealNameEn").textContent = stone.en.toUpperCase();
     document.getElementById("revealMonthPill").textContent = state.month + "월 UNVEIL 추천";
     document.getElementById("revealOrb").style.cssText = orbStyle(stone);
+
+    /* 스토어 버튼을 추천 원석 검색 결과로 보낸다.
+       첫 화면으로 보내면 원석 이름을 알려준 뒤 직접 찾게 만드는 셈이라,
+       그 한 단계에서 많이 빠진다. */
+    linkStoreToStone(stone.name);
 
     var seed = hashString(state.year + "-" + state.month + "-" + state.day);
     var lineTpl = REVEAL_LINES[seed % REVEAL_LINES.length];
