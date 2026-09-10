@@ -901,8 +901,15 @@
   /* 스토어 버튼 두 개(결과 앞·맨 아래)의 주소를 추천 원석 검색으로 맞춘다.
      원석 이름을 못 구하면 손대지 않는다 — 첫 화면으로 가는 편이
      검색 결과가 비어 보이는 것보다 낫다. */
+  /* 스토어 상품명에 이 이름이 그대로 들어 있지 않아 검색이 비는 원석.
+     빈 검색 결과는 첫 화면보다 나쁘므로, 이 원석은 첫 화면으로 보낸다.
+     상품명에 이름을 넣으면 이 목록에서 빼면 된다.
+     (2026-09-10 확인: 셰브론자수정·인디언아게이트는 정상 검색됨) */
+  var STORE_SEARCH_MISS = ["핑크제브라재스퍼"];
+
   function linkStoreToStone(stoneName){
     if(!stoneName) return;
+    if(STORE_SEARCH_MISS.indexOf(stoneName) !== -1) return;
     var url = "https://smartstore.naver.com/unveil_store/search?q=" + encodeURIComponent(stoneName);
     ["ctaStoreTop","ctaStoreEnd"].forEach(function(id){
       var a = document.getElementById(id);
