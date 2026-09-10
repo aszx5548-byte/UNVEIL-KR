@@ -805,19 +805,7 @@
   .footer-links a{ color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold-line); }
   .footer-links a:hover{ border-bottom-color:var(--gold); color:var(--gold-bright); }
 
-  /* 원석 카드의 개별 구매 링크. 아래 큰 버튼과 경쟁하지 않도록 작게 둔다. */
-  .stone-buy{
-    display:inline-flex; align-items:center; gap:5px; margin-top:10px;
-    font-family:var(--sans); font-size:13px; font-weight:600;
-    color:var(--gold-bright); text-decoration:none;
-    border:1px solid var(--gold-line); border-radius:999px; padding:7px 14px;
-    transition:border-color .15s ease, background .15s ease;
-  }
-  .stone-buy:hover{ border-color:var(--gold); background:var(--gold-soft); }
-  .stone-buy:focus-visible{ outline:2px solid var(--gold-bright); outline-offset:2px; }
 
-  /* 선택지 원석의 구매 링크. 대표 원석 것보다 한 단계 작게. */
-  .stone-buy-sm{ font-size:12px; padding:6px 12px; margin-top:8px; word-break:keep-all; }
 
   /* 대표 원석의 구매 링크를 원석 이름 오른쪽(용신 배지 아래)에 띄운다.
      float 이라 설명 글이 버튼을 감싸고 흘러 빈 공간이 생기지 않는다. */
@@ -831,11 +819,20 @@
     .stone-row > div{ display:flex; flex-direction:column; }
     .stone-row > div > .stone-buy{
       float:none; margin:12px 0 0; order:99;
-      /* 칸이 좁아 글자가 단어 중간에서 잘렸다(실버흑요석 보 / 러 가기).
-         칸 전체를 쓰고 가운데 정렬하며, 한글은 단어 단위로만 끊는다. */
+      /* 칸 전체를 쓰고 가운데 정렬한다. nowrap 을 풀지 않으면 버튼이
+         카드 밖으로 삐져나온다(칸 141px 인데 버튼 212px). 한글은 단어
+         단위로만 끊어 '실버흑요석 보 / 러 가기' 처럼 잘리지 않게 한다. */
       align-self:stretch; justify-content:center; text-align:center;
-      word-break:keep-all;
+      white-space:normal; word-break:keep-all;
     }
+    /* 선택지 버튼도 같은 이유로 풀어준다. */
+    .stone-mini .stone-buy{ white-space:normal; word-break:keep-all; }
+
+    /* 칸이 141px 로 좁아 아이콘(16px)+화살표+여백까지 넣으면 몇 px 넘친다.
+       아이콘은 장식이라 좁은 화면에서는 뺀다. 글자는 줄어들 수 있게 둔다. */
+    .stone-buy .stone-buy-icon{ display:none; }
+    .stone-buy{ padding-left:13px; padding-right:13px; gap:6px; }
+    .stone-buy .stone-buy-label{ flex:1 1 auto; min-width:0; }
   }
 
   /* CTA 글자는 단어 단위로만 끊는다.
@@ -851,6 +848,57 @@
     .contact-url-mini{ display:none; }
     .contact-text{ min-width:0; }
     .contact-desc{ word-break:keep-all; }
+  }
+
+  /* ===== 원석별 구매 버튼 =====
+     테두리만 있던 때는 눈에 잘 안 띄어 그냥 지나쳤습니다.
+     금색을 채우고 빛이 스쳐 지나가게 해 '눌러보고 싶은' 물건으로 만듭니다.
+     아래 큰 CTA 와는 크기로 위계를 지킵니다(87px vs 40px). */
+  .stone-buy{
+    position:relative; overflow:hidden;
+    display:inline-flex; align-items:center; gap:8px;
+    padding:11px 16px; border-radius:999px; border:none;
+    background:linear-gradient(180deg, var(--gold-bright), var(--gold));
+    color:#241a08; font-family:var(--sans); font-size:13.5px; font-weight:700;
+    letter-spacing:.01em; text-decoration:none; white-space:nowrap;
+    box-shadow:0 10px 24px -10px rgba(200,162,74,.85),
+               inset 0 1px 0 rgba(255,255,255,.5);
+    transition:transform .16s ease, box-shadow .16s ease, filter .16s ease;
+  }
+  .stone-buy-icon{ width:16px; height:16px; flex:none; opacity:.85; }
+  .stone-buy-arrow{ font-size:15px; transition:transform .16s ease; }
+
+  /* 빛이 왼쪽에서 오른쪽으로 한 번 스친다. */
+  .stone-buy::after{
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(105deg, transparent 32%, rgba(255,255,255,.6) 46%, transparent 62%);
+    transform:translateX(-130%);
+    transition:transform .6s ease;
+    pointer-events:none;
+  }
+  .stone-buy:hover::after{ transform:translateX(130%); }
+  .stone-buy:hover{
+    transform:translateY(-2px); filter:brightness(1.05);
+    box-shadow:0 16px 32px -10px rgba(200,162,74,.95),
+               inset 0 1px 0 rgba(255,255,255,.6);
+  }
+  .stone-buy:hover .stone-buy-arrow{ transform:translateX(3px); }
+  .stone-buy:active{
+    transform:translateY(1px);
+    box-shadow:0 6px 14px -8px rgba(200,162,74,.8),
+               inset 0 1px 0 rgba(255,255,255,.3);
+  }
+  .stone-buy:focus-visible{ outline:3px solid var(--gold-bright); outline-offset:3px; }
+
+  /* 선택지 원석은 한 단계 작게 — 대표가 먼저 보여야 합니다. */
+  .stone-buy-sm{ font-size:12.5px; padding:9px 14px; margin-top:8px; }
+  .stone-buy-sm .stone-buy-icon{ width:14px; height:14px; }
+
+  @media (prefers-reduced-motion: reduce){
+    .stone-buy, .stone-buy-arrow, .stone-buy::after{ transition:none; }
+    .stone-buy:hover, .stone-buy:active{ transform:none; }
+    .stone-buy:hover::after{ transform:translateX(-130%); }
+    .stone-buy:hover .stone-buy-arrow{ transform:none; }
   }
 </style>
 
@@ -3199,7 +3247,8 @@
            글보다 앞에 두고 오른쪽으로 띄우면(float) 설명이 버튼을 감싸고 흘러,
            원석 이름 오른쪽·용신 배지 아래에 자리가 잡힌다. */
         '<a class="stone-buy" href="'+storeUrlFor(main.name)+'" target="_blank" rel="noopener noreferrer">'+
-          main.name+' 보러 가기 <span aria-hidden="true">→</span></a>' +
+          BAG_ICON + '<span class="stone-buy-label">'+main.name+' 보러 가기</span>'+
+          '<span class="stone-buy-arrow" aria-hidden="true">&#8594;</span></a>' +
         '<span class="gem-tier '+mainTierClass+'">'+main.tier+'</span><p class="gem-name">'+main.name+'</p>' +
         '<p class="gem-desc">'+main.desc+'</p>' + (fit ? '<p class="gem-fit">'+fit+'</p>' : '') + originHtml(main) +
         '</div>' +
@@ -3213,7 +3262,8 @@
             '<div><p class="gem-name-sm">'+g.name+'</p><p class="gem-desc-sm">'+g.desc+'</p>' +
             (fit ? '<p class="gem-fit-sm">'+fit+'</p>' : '') + originHtml(g) +
             '<a class="stone-buy stone-buy-sm" href="'+storeUrlFor(g.name)+'" target="_blank" rel="noopener noreferrer">'+
-              g.name+' 보러 가기 <span aria-hidden="true">→</span></a>' +
+              BAG_ICON + '<span class="stone-buy-label">'+g.name+' 보러 가기</span>'+
+              '<span class="stone-buy-arrow" aria-hidden="true">&#8594;</span></a>' +
             '</div>' +
             '</div>';
         }).join('');
@@ -3248,6 +3298,12 @@
      빈 검색 결과는 첫 화면보다 나쁘므로, 이 원석은 첫 화면으로 보낸다.
      상품명에 이름을 넣으면 이 목록에서 빼면 된다.
      (2026-09-10 확인: 셰브론자수정·인디언아게이트는 정상 검색됨) */
+  /* 구매 버튼 아이콘. 문자열로 여러 번 쓰이므로 한 번만 정의한다. */
+  var BAG_ICON = '<svg class="stone-buy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+    'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>' +
+    '<path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg>';
+
   var STORE_SEARCH_MISS = ['핑크제브라재스퍼'];
   var STORE_HOME = 'https://smartstore.naver.com/unveil_store';
 
