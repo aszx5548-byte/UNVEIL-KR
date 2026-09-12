@@ -812,7 +812,10 @@
   function validateYMD(p){
     var today = new Date();
     if(!p) return "생년월일 8자리를 입력해주세요 (예: 19970407)";
-    if(p.y < 1930 || p.y > today.getFullYear()) return "1930~"+today.getFullYear()+"년 사이로 입력해주세요";
+    // 사주·궁합·별자리는 1900 부터인데 여기만 1930 이었습니다. 탄생석은 태어난
+    // 달만 쓰고 연도는 화면에 적어주는 용도라 하한을 둘 이유가 없었습니다.
+    // 1900~1929년생은 이 앱에서만 결과를 못 봤습니다.
+    if(p.y < 1900 || p.y > today.getFullYear()) return "1900~"+today.getFullYear()+"년 사이로 입력해주세요";
     if(p.m < 1 || p.m > 12) return "존재하지 않는 월이에요";
     if(p.d < 1 || p.d > daysInMonth(p.y, p.m)) return "존재하지 않는 날짜예요";
     var inputDate = new Date(p.y, p.m - 1, p.d);
