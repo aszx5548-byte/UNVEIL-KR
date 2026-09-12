@@ -70,9 +70,24 @@ const KNOWN_ORIGINS = ['https://unveil.ai.studio', 'https://unveil-kr.ai.studio'
 const REWRITE_EXT = new Set(['.html', '.xml', '.txt', '.json', '.webmanifest']);
 
 // Host 헤더는 요청하는 쪽이 마음대로 적을 수 있습니다. 아무 값이나 믿으면
-// 공격자가 canonical 을 자기 주소로 바꿔치기할 수 있으므로(캐노니컬 포이즈닝),
-// 우리가 실제로 쓰는 호스팅 형태만 허용합니다.
-const TRUSTED_HOST = /(^|\.)(ai\.studio|pages\.dev|run\.app|vercel\.app)$|^(localhost|127\.0\.0\.1)$/i;
+// 공격자가 canonical 을 자기 주소로 바꿔치기할 수 있습니다(캐노니컬 포이즈닝).
+//
+// 전에는 ai.studio·pages.dev·run.app·vercel.app 을 도메인 형태로 허용했는데,
+// 이 넷은 누구나 하위 도메인을 무료로 만들 수 있는 곳입니다. 즉
+// X-Forwarded-Host: evil.pages.dev 한 줄로 우리 canonical 이 남의 주소가 됐습니다.
+// 막으려던 공격에 그대로 열려 있었습니다.
+//
+// 그래서 형태가 아니라 주소 자체를 적어둡니다. 도메인을 옮길 때는 이 목록에
+// 추가하거나, 더 간단하게 SITE_ORIGIN 환경변수를 지정하면 됩니다.
+const TRUSTED_HOSTS = new Set([
+  'unveil-kr.ai.studio',
+  'unveil.ai.studio',
+  'localhost',
+  '127.0.0.1',
+]);
+
+// http / https 외의 스킴은 주소가 아니라 주입입니다.
+const SAFE_SCHEME = /^https?$/i;
 
 function liveOrigin(req) {
   // 명시적으로 지정했으면 그것이 우선입니다. 가장 안전한 방법입니다.
@@ -81,10 +96,14 @@ function liveOrigin(req) {
   const raw = String(req.headers['x-forwarded-host'] ?? req.headers.host ?? '');
   const host = raw.split(',')[0].trim();
   if (!/^[a-z0-9.-]+(:\d+)?$/i.test(host)) return null;
-  if (!TRUSTED_HOST.test(host.replace(/:\d+$/, ''))) return null;
+  if (!TRUSTED_HOSTS.has(host.replace(/:\d+$/, '').toLowerCase())) return null;
 
+  // 이 값도 요청하는 쪽이 적습니다. 검사 없이 주소에 끼워 넣으면 HTML 안으로
+  // 그대로 들어갑니다. `"><script>...` 를 보내면 canonical 이 닫히면서
+  // 페이지에 스크립트 태그가 생깁니다. 실제로 재현됐습니다.
   const proto = String(req.headers['x-forwarded-proto'] ?? '').split(',')[0].trim();
-  const scheme = proto || (host.startsWith('localhost') || host.startsWith('127.') ? 'http' : 'https');
+  const local = host.startsWith('localhost') || host.startsWith('127.');
+  const scheme = SAFE_SCHEME.test(proto) ? proto.toLowerCase() : local ? 'http' : 'https';
   return `${scheme}://${host}`;
 }
 
@@ -96,7 +115,20 @@ function rewriteOrigins(text, origin) {
   return out;
 }
 
-function cacheFor(pathname) {
+function cacheFor(rawPathname) {
+  // 접두사를 보기 전에 주소를 먼저 펴야 합니다.
+  // 전에는 원본 문자열의 앞글자만 봤더니 /assets/..%2findex.html 이
+  // "/assets/ 로 시작하니 1년 영구 캐시" 로 판정됐습니다. 실제로 나가는 파일은
+  // index.html 이라, 한 번 연 브라우저는 1년 동안 옛 홈페이지에 갇혔습니다.
+  let pathname = rawPathname;
+  try {
+    pathname = normalize(decodeURIComponent(rawPathname)).replace(/\\/g, '/');
+  } catch {
+    // 디코딩이 안 되는 주소는 어차피 safeJoin 에서 걸러집니다.
+    // 여기서는 가장 짧은 캐시를 줍니다.
+    return 'public, max-age=300';
+  }
+
   // 파일명에 해시가 붙는 자산은 영구 캐시가 안전합니다.
   if (pathname.startsWith('/assets/')) return 'public, max-age=31536000, immutable';
   if (pathname.startsWith('/images/')) return 'public, max-age=86400, stale-while-revalidate=604800';
@@ -185,8 +217,19 @@ async function handle(req, res) {
   const pathname = (req.url ?? '/').split('?')[0].split('#')[0];
 
   if (pathname === '/healthz') {
-    res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+    // 여기만 보안 헤더가 빠져 있었습니다. 내용은 "ok" 한 줄이라 위험하진 않지만,
+    // 한 군데만 규칙이 다르면 나중에 그게 기준인 줄 알게 됩니다.
+    res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8', ...SECURITY });
     res.end('ok\n');
+    return;
+  }
+
+  // _headers 와 _redirects 는 Cloudflare·Netlify 가 읽는 설정 파일입니다.
+  // Cloud Run 에서는 아무 일도 하지 않으면서 그대로 공개됩니다.
+  // dist 에는 남겨두고(다른 호스팅으로 옮길 때 필요) 내보내지만 않습니다.
+  if (pathname === '/_headers' || pathname === '/_redirects') {
+    res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8', ...SECURITY });
+    res.end('Not Found\n');
     return;
   }
 

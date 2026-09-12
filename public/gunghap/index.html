@@ -2133,7 +2133,19 @@
   var currentA = null, currentB = null, currentRel = 'love', currentMatch = null, currentType = null;
   var currentGems = null;
 
-  function nameOf(p, fallback){ return (p && p.name) ? p.name : fallback; }
+  /* 이름은 공유 주소(?an=·?bn=)로도 들어옵니다. 즉 우리가 만든 값이 아니라
+     링크를 만든 쪽이 적은 값입니다. 그대로 innerHTML 에 붙이면 글자가 아니라
+     태그로 읽힙니다. 지금은 열 글자 제한 덕에 실행까지는 못 가지만,
+     그 제한은 입력칸 길이지 보안 장치가 아닙니다. 여기서 한 번 막아둡니다. */
+  var ESC_MAP = { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' };
+  function escapeHtml(s){ return String(s).replace(/[&<>"']/g, function(m){ return ESC_MAP[m]; }); }
+
+  /* 화면(HTML)에 쓰는 이름. 아래 열두 곳이 전부 이 함수를 지납니다. */
+  function nameOf(p, fallback){ return escapeHtml((p && p.name) ? p.name : fallback); }
+
+  /* 캔버스 fillText 처럼 HTML 이 아닌 곳에는 원래 글자가 필요합니다.
+     여기에 이스케이프한 값을 넣으면 이미지에 &amp; 가 그대로 찍힙니다. */
+  function rawNameOf(p, fallback){ return (p && p.name) ? p.name : fallback; }
 
   /* ================= 공유 주소 ================= */
   /* 한 사람만 담으면 '초대 링크', 두 사람을 담으면 '결과 링크'가 됩니다. */
@@ -2872,7 +2884,8 @@
     cv.width = W; cv.height = H;
     var g = cv.getContext('2d');
     var cx = W / 2;
-    var an = nameOf(currentA, '나'), bn = nameOf(currentB, '상대');
+    /* 아래는 전부 canvas fillText 라 HTML 이 아닙니다. 원래 글자를 씁니다. */
+    var an = rawNameOf(currentA, '나'), bn = rawNameOf(currentB, '상대');
 
     g.fillStyle = '#0b0912'; g.fillRect(0, 0, W, H);
     var glow = g.createRadialGradient(cx, 130, 0, cx, 130, 720);
@@ -3320,7 +3333,7 @@
         var who = state.a.name || '상대방';
         document.getElementById('panelBLabel').textContent = who + '님이 기다리고 있어요';
         document.getElementById('consentNote').innerHTML =
-          '<b>' + who + '</b>님이 ' + REL_INFO[state.rel].label + ' 궁합을 보려고 링크를 보냈어요. ' +
+          '<b>' + escapeHtml(who) + '</b>님이 ' + REL_INFO[state.rel].label + ' 궁합을 보려고 링크를 보냈어요. ' +
           '생년월일을 넣으면 두 분의 결과가 함께 나와요. 넣은 정보는 이 브라우저 안에서만 계산되고 저장되지 않아요.';
         document.getElementById('routeTabs').hidden = true;
         document.getElementById('backToA').hidden = true;
