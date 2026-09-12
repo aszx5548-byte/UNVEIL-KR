@@ -836,6 +836,17 @@
   @media (prefers-reduced-motion: reduce){
     .rel-picker label, .route-tabs label{ transition:none; }
   }
+
+  /* ===== 좁은 화면에서 읽기 편하게 =====
+     사주 앱과 같은 이유입니다. 가운데 정렬한 설명문이 375px 에서는 여러 줄로
+     흘러, 줄이 바뀔 때마다 시작 위치가 달라집니다. 짧으면 단정하지만
+     길어지면 눈이 매번 시작점을 찾아야 합니다. 좁을 때만 왼쪽으로 맞춥니다.
+     유래 문단은 분량이 본문만 한데 12.5px 이라 한 단계 키웁니다. */
+  @media (max-width:420px){
+    .pillar-intro{ text-align:left; }
+    .gem-origin p{ font-size:13.5px; line-height:1.8; }
+    .gem-desc-sm{ font-size:13px; line-height:1.7; }
+  }
 </style>
 
 <canvas id="stars"></canvas>

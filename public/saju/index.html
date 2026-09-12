@@ -930,6 +930,21 @@
   /* 한자와 여는 괄호 사이는 keep-all 이 막지 못해
      '木 / (목)이에요' 처럼 갈라졌습니다. 짧은 조각이라 통째로 묶습니다. */
   .summary-teaser-main b{ white-space:nowrap; }
+
+  /* ===== 좁은 화면에서 읽기 편하게 =====
+     설명문(.pillar-intro)은 가운데 정렬입니다. 데스크톱에서 두어 줄일 때는
+     단정해 보이지만, 375px 에서는 같은 글이 열여덟 군데에서 3~7줄로 흘러
+     모두 일흔네 줄이 됩니다. 가운데 정렬은 줄마다 시작 위치가 달라서,
+     줄을 바꿀 때마다 눈이 시작점을 다시 찾아야 합니다. 짧으면 문제가 안 되지만
+     이만큼 길어지면 그게 그대로 피로가 됩니다. 좁은 화면에서만 왼쪽으로 맞춥니다.
+
+     유래 문단은 12.5px 인데 네 군데 합쳐 700자가 넘습니다. 곁들이는 한 줄이면
+     작아도 되지만, 이 분량은 본문입니다. 한 단계 키웁니다. */
+  @media (max-width:420px){
+    .pillar-intro{ text-align:left; }
+    .gem-origin p{ font-size:13.5px; line-height:1.8; }
+    .gem-desc-sm{ font-size:13px; line-height:1.7; }
+  }
 </style>
 
 <canvas id="stars"></canvas>
